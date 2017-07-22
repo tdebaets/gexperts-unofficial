@@ -1,0 +1,312 @@
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# IDE SECTION
+# ---------------------------------------------------------------------------
+# The following section of the project makefile is managed by the BCB IDE.
+# It is recommended to use the IDE to change any of the values in this
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.04.04
+# ---------------------------------------------------------------------------
+PROJECT = GExpert4_bcb.dll
+OBJFILES = src\GX_GExperts.obj src\GX_Experts.obj src\GX_ProcedureList.obj \
+  src\GX_GenFunc.obj src\GX_About.obj src\GX_ExpertManager.obj \
+  src\GX_GrepResults.obj src\GX_Search.obj src\GX_GrepSearch.obj \
+  src\GX_GrepOptions.obj src\GX_messagedialog.obj src\GX_EditWriter.obj \
+  src\GX_Backup.obj src\GX_BackupOptions.obj src\GX_BackupConfig.obj \
+  src\GX_TabOrder.obj src\GX_CleanDirectories.obj src\GX_MenuNotifier.obj \
+  src\GX_EditReader.obj src\GX_ClipboardHistory.obj FavFiles\GX_FavFiles.obj \
+  FavFiles\GX_FavOptions.obj FavFiles\GX_FavFileProp.obj \
+  ClassBrowser\GX_ClassBrowser.obj ClassBrowser\GX_ClassOptions.obj \
+  ClassBrowser\GX_ClassReport.obj ClassBrowser\GX_ClassMethProp.obj \
+  ClassBrowser\GX_ClassProp.obj ClassBrowser\GX_ClassIdentify.obj \
+  ClassBrowser\GX_ClassParsing.obj src\GX_SourceExport.obj src\GX_CodeLib.obj \
+  src\GX_CodeNew.obj src\GX_CodeSrch.obj src\GX_CodeOpt.obj \
+  src\GX_PrinterFunc.obj src\GX_PrintPreview.obj src\GX_Progress.obj \
+  src\GX_AsciiChart.obj src\GX_PeInformation.obj src\GX_PeInfo.obj \
+  src\GX_CompReplace.obj src\GX_ComponentGrid.obj src\GX_IdeShortCuts.obj \
+  src\GX_Substitute.obj src\GX_ProjDepend.obj src\GX_ProjDependProp.obj \
+  src\GX_PerfectLayout.obj src\GX_ClipboardOptions.obj src\GX_Todo.obj \
+  src\GX_ToDoOptions.obj EditorExperts\GX_EditorExpert.obj \
+  EditorExperts\GX_eComment.obj EditorExperts\GX_eDate.obj \
+  EditorExperts\GX_eFindDelimiter.obj EditorExperts\GX_eHeader.obj \
+  src\GX_EditorShortcut.obj src\GX_ProofReaderExpert.obj src\GX_ProofReaderDM.obj \
+  src\GX_ProofReaderConfig.obj src\GX_IDEEnhance.obj src\GX_Toolbar.obj \
+  src\Gx_ToolbarButtons.obj IdeDock\WithDock\GX_FakeIdeDock.obj \
+  IdeDock\GX_ideDock.obj src\GX_PriorityBoost.obj src\Gx_ConfigurationInfo.obj \
+  src\GX_Configure.obj src\Gx_MultiLinePalette.obj src\Gx_EditorEnhancements.obj \
+  ProjOptionSets\GX_ProjOptionSets.obj ProjOptionSets\GX_ProjOptMap.obj \
+  ProjOptionSets\GX_ProjOptOptions.obj src\GX_VerDepConst.obj \
+  src\GX_MultilineHost.obj src\GX_ClassMgr.obj src\GX_DbugIntf.obj \
+  FavFiles\GX_FavNewFolder.obj Comps\RplWizInfo.obj Comps\E_StgStr.obj \
+  src\GX_CompsToCode.obj GExpert4_bcb.obj src\GX_LibIntf.obj \
+  src\GX_StandaloneExports.obj
+RESFILES = GExpert4_bcb.res
+DEFFILE =
+RESDEPEN = $(RESFILES) src\GX_ProcedureList.dfm src\GX_About.dfm src\GX_ExpertManager.dfm \
+  src\GX_GrepResults.dfm src\GX_GrepSearch.dfm src\GX_GrepOptions.dfm \
+  src\GX_messagedialog.dfm src\GX_BackupOptions.dfm src\GX_BackupConfig.dfm \
+  src\GX_TabOrder.dfm src\GX_CleanDirectories.dfm src\GX_ClipboardHistory.dfm \
+  FavFiles\GX_FavFiles.dfm FavFiles\GX_FavOptions.dfm FavFiles\GX_FavFileProp.dfm \
+  ClassBrowser\GX_ClassMethProp.dfm ClassBrowser\GX_ClassProp.dfm \
+  ClassBrowser\GX_ClassIdentify.dfm ClassBrowser\GX_ClassParsing.dfm \
+  src\GX_CodeLib.dfm src\GX_CodeNew.dfm src\GX_CodeSrch.dfm src\GX_CodeOpt.dfm \
+  src\GX_Progress.dfm src\GX_AsciiChart.dfm src\GX_PeInformation.dfm \
+  src\GX_CompReplace.dfm src\GX_ComponentGrid.dfm src\GX_IdeShortCuts.dfm \
+  src\GX_ProjDependProp.dfm src\GX_PerfectLayout.dfm src\GX_ClipboardOptions.dfm \
+  src\GX_Todo.dfm src\GX_ToDoOptions.dfm EditorExperts\GX_eComment.dfm \
+  EditorExperts\GX_eDate.dfm EditorExperts\GX_eHeader.dfm \
+  src\GX_EditorShortcut.dfm src\GX_ProofReaderDM.dfm src\GX_ProofReaderConfig.dfm \
+  IdeDock\WithDock\GX_FakeIdeDock.dfm IdeDock\GX_ideDock.dfm \
+  src\GX_PriorityBoost.dfm src\GX_Configure.dfm \
+  ProjOptionSets\GX_ProjOptionSets.dfm ProjOptionSets\GX_ProjOptOptions.dfm \
+  FavFiles\GX_FavNewFolder.dfm src\GX_CompsToCode.dfm
+LIBFILES =
+IDLGENFILES =
+IDLFILES =
+LIBRARIES = dclusr40.lib dclocx40.lib inet40.lib inetdb40.lib dss40.lib tee40.lib \
+  teedb40.lib teeui40.lib qrpt40.lib ibsmp40.lib nmfast40.lib vclmid40.lib \
+  vcljpg40.lib
+SPARELIBS = Vcl40.lib vclx40.lib vcldb40.lib vcldbx40.lib vcljpg40.lib vclmid40.lib \
+  bcbsmp40.lib nmfast40.lib ibsmp40.lib qrpt40.lib teeui40.lib teedb40.lib \
+  tee40.lib dss40.lib inetdb40.lib inet40.lib dclocx40.lib dclusr40.lib
+PACKAGES = Vcl40.bpi Vclx40.bpi Vcldb40.bpi vcldbx40.bpi bcbsmp40.bpi
+# ---------------------------------------------------------------------------
+PATHCPP = .;src
+PATHPAS = .;src;FavFiles;ClassBrowser;EditorExperts;IdeDock\WithDock;IdeDock;ProjOptionSets;Comps
+PATHASM = .;
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+SYSDEFINES = NO_STRICT;_RTLDLL;USEPACKAGES
+USERDEFINES =
+# ---------------------------------------------------------------------------
+CFLAG1 = -IProjOptionSets;FavFiles;EditorExperts;ProjOptionsSets;ClassBrowser;FavFiIles;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Borland\VCLZip;..\..\Borland\ACE\C4;..\..\Borland\mwedit \
+  -WD -O2 -Hc -H=Gx40.csm -w -Ve -Tkh30000 -a8 -d -k- -vi \
+  -D$(SYSDEFINES);$(USERDEFINES) -c -b- -w-par -w-inl -Vx -tWM
+CFLAG2 =
+CFLAG3 =
+IDLCFLAGS = -IProjOptionSets -IFavFiles -IEditorExperts -IProjOptionsSets -IClassBrowser \
+  -IFavFiIles -IIdeDock\WithDock -IIdeDock -Ieii\d4 -Icomps -IClass2 -IEditor \
+  -IFileMgr -I$(BCB)\Projects -I$(BCB)\include -I$(BCB)\include\vcl -Isrc \
+  -I..\..\Borland\VCLZip -I..\..\Borland\ACE\C4 -I..\..\Borland\mwedit \
+  -src_suffixcpp
+PFLAGS = -U..\..\borland\cbuilder4\Lib;FavFiles;EditorExperts;ProjOptionSets;ClassBrowser;FavFiIes;IdeDock\WithDock;IdeDock;eii\d4;comps;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;..\..\Borland\VCLZip;..\..\Borland\ACE\C4;..\..\Borland\mwedit;$(RELEASELIBPATH) \
+  -IProjOptionSets;FavFiles;EditorExperts;ProjOptionsSets;ClassBrowser;FavFiIles;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Borland\VCLZip;..\..\Borland\ACE\C4;..\..\Borland\mwedit \
+  -$Y- -$R -$Q -$L- -$D- -v -M -JPHNE -LUvcl40
+RFLAGS = -iProjOptionSets;FavFiles;EditorExperts;ProjOptionsSets;ClassBrowser;FavFiIles;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Borland\VCLZip;..\..\Borland\ACE\C4;..\..\Borland\mwedit
+AFLAGS = /iProjOptionSets /iFavFiles /iEditorExperts /iProjOptionsSets /iClassBrowser \
+  /iFavFiIles /iIdeDock\WithDock /iIdeDock /ieii\d4 /icomps /iClass2 /iEditor \
+  /iFileMgr /i$(BCB)\Projects /i$(BCB)\include /i$(BCB)\include\vcl /isrc \
+  /i..\..\Borland\VCLZip /i..\..\Borland\ACE\C4 /i..\..\Borland\mwedit /mx /w2 \
+  /zn /d_RTLDLL /dDLL
+LFLAGS = -L..\..\borland\cbuilder4\Lib;FavFiles;EditorExperts;ProjOptionSets;ClassBrowser;FavFiIes;IdeDock\WithDock;IdeDock;eii\d4;comps;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;..\..\Borland\VCLZip;..\..\Borland\ACE\C4;..\..\Borland\mwedit;$(RELEASELIBPATH) \
+  -aa -Tpd -x -Gn
+IFLAGS =
+# ---------------------------------------------------------------------------
+ALLOBJ = c0d32.obj Memmgr.Lib $(PACKAGES) sysinit.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=1
+Build=0
+Debug=0
+PreRelease=1
+Special=0
+Private=0
+DLL=1
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=GExperts for C++ Builder 4.0
+FileVersion=1.0.1.0
+InternalName=GExperts
+LegalCopyright=GExperts, Inc and Erik Berry
+LegalTrademarks=
+OriginalFilename=GExpert4_bcb.dll
+ProductName=GExperts
+ProductVersion=1.0.1
+Comments=Open Source
+
+[Excluded Packages]
+C:\Documents and Settings\Administrator\Desktop\tsbrowse4.bpl=Tools Services Browser
+
+[HistoryLists\hlIncludePath]
+Count=20
+Item0=ProjOptionSets;FavFiles;EditorExperts;ProjOptionsSets;ClassBrowser;FavFiIles;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Borland\VCLZip;..\..\Borland\ACE\C4;..\..\Borland\mwedit
+Item1=ProjOptionSets;FavFiles;EditorExperts;ProjOptionsSets;ClassBrowser;FavFiIles;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Borland\VCLZip;..\..\Borland\ACE\D4;..\..\Borland\mwedit
+Item2=ProjOptionSets;FavFiles;EditorExperts;ProjOptionsSets;ClassBrowser;FavFiIles;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;D:\Borland\VCLZip;D:\Borland\ACE\D4;D:\Borland\mwedit
+Item3=ProjOptionSets;FavFiles;EditorExperts;ProjOptionsSets;ClassBrowser;FavFiIles;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Delphi\Components\SyntaxMemo;..\..\Delphi\VCLZip;..\..\Delphi\ACE\D4;..\..\Delphi\mwedit
+Item4=ProjOptionSets;FavFiles;EditorExperts;ProjOptionsSets;ClassBrowser;FavFiIles;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Delphi\Components\SyntaxMemo;..\..\Delphi\VCLZip;..\..\Delphi\ACE\D4;D:\Delphi\mwedit
+Item5=EditorExperts;ProjOptionsSets;ClassBrowser;FavFiIles;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;D:\Delphi\Components\SyntaxMemo;D:\Delphi\VCLZip;D:\Delphi\ACE\D4;D:\Delphi\mwedit
+Item6=FavFilesFileMgr;FavFilFileMgr;EditorExperts;EditorExpertsc;EditorExpertsrc;EditorExpersrc;EditorEsrc;Editsrc;Esrc;ProjOptionSetspert;ProjOptionSetssExpert;ProjOptionsSets;ProjOptionsSetsExpert;ProjOptionSets;ProjOptionSetst;ProjOptionSetsrt;ProjOptionSetsert;ProjOptionSetsxpert;ProjOptionSetsExpert;ProjOptionSsExpert;ClassBrowser;FavFiileMgr;FavFIlesleMgr;FavFilileMgr;FavileMgr;FaileMgr;FavFiIles;FavFIles;FavFIlesr;FavFIlesgr;FavFIlesMgr;FavFIleseMgr;FavFIlesileMgr;FavFIleFileMgr;FavFFileMgr;FavFileMgr;FFileMgr;ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Delphi\Components\SyntaxMemo;..\..\Delphi\VCLZip;..\..\Delphi\ACE\D4
+Item7=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Delphi\Components\SyntaxMemo;..\..\Delphi\VCLZip;..\..\Delphi\ACE\D4
+Item8=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;D:\Delphi\Components\SyntaxMemo;D:\Delphi\VCLZip;D:\Delphi\ACE\D4
+Item9=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src
+Item10=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Source\ToolsAPI;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Delphi\Components\SyntaxMemo;..\..\Delphi\ACE\D4;..\..\Delphi\VCLZip
+Item11=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Source\ToolsAPI;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Delphi\Components\SyntaxMemo;..\..\Delphi\ACE\D4;D:\Delphi\VCLZip
+Item12=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Source\ToolsAPI;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Delphi\Components\SyntaxMemo;D:\Delphi\ACE\D4
+Item13=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Source\ToolsAPI;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Delphi\Components\SyntaxMemo
+Item14=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Source\ToolsAPI;$(BCB)\include;$(BCB)\include\vcl;src;D:\Delphi\Components\SyntaxMemo
+Item15=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Source\ToolsAPI;$(BCB)\include;$(BCB)\include\vcl;src
+Item16=IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Source\ToolsAPI;$(BCB)\include;$(BCB)\include\vcl;src
+Item17=eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Source\ToolsAPI;$(BCB)\include;$(BCB)\include\vcl;src
+Item18=comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Source\ToolsAPI;$(BCB)\include;$(BCB)\include\vcl;src
+Item19=$(BCB)\include;$(BCB)\include\vcl;src
+
+[HistoryLists\hlLibraryPath]
+Count=23
+Item0=..\..\borland\cbuilder4\Lib;FavFiles;EditorExperts;ProjOptionSets;ClassBrowser;FavFiIes;IdeDock\WithDock;IdeDock;eii\d4;comps;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;..\..\Borland\VCLZip;..\..\Borland\ACE\C4;..\..\Borland\mwedit
+Item1=FavFiles;EditorExperts;ProjOptionSets;ClassBrowser;FavFiIes;IdeDock\WithDock;IdeDock;eii\d4;comps;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;..\..\Borland\VCLZip;..\..\Borland\ACE\C4;..\..\Borland\mwedit
+Item2=FavFiles;EditorExperts;ProjOptionSets;ClassBrowser;FavFiIes;IdeDock\WithDock;IdeDock;eii\d4;comps;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;D:\Borland\VCLZip;D:\Borland\ACE\D4;D:\Borland\mwedit
+Item3=FavFiles;EditorExperts;ProjOptionSets;ClassBrowser;FavFiIes;IdeDock\WithDock;IdeDock;eii\d4;comps;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;..\..\Delphi\VCLZip;..\..\Delphi\ACE\D4;..\..\Delphi\Components\SyntaxMemo;..\..\Delphi\mwedit
+Item4=FavFiles;EditorExperts;ProjOptionSets;ClassBrowser;FavFiIes;IdeDock\WithDock;IdeDock;eii\d4;comps;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;$(BCB)\source\ToolsApi;..\..\Delphi\VCLZip;..\..\Delphi\ACE\D4;..\..\Delphi\Components\SyntaxMemo;D:\Delphi\mwedit
+Item5=FavFiles;EditorExperts;ProjOptionSets;ClassBrowser;FavFiIes;IdeDock\WithDock;IdeDock;eii\d4;comps;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;$(BCB)\source\ToolsApi;..\..\Delphi\VCLZip;..\..\Delphi\ACE\D4;..\..\Delphi\Components\SyntaxMemo
+Item6=EditorExperts;ProjOptionSets;ClassBrowser;FavFiIes;IdeDock\WithDock;IdeDock;eii\d4;comps;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;$(BCB)\source\ToolsApi;D:\Delphi\VCLZip;D:\Delphi\ACE\D4;D:\Delphi\Components\SyntaxMemo
+Item7=FavFilesFileMgr;FavFilFileMgr;EditorExperts;EditorExpertsc;EditorExpertsrc;EditorExpersrc;EditorEsrc;Editsrc;Esrc;ProjOptionSetspert;ProjOptionSetssExpert;ProjOptionsSets;ProjOptionsSetsExpert;ProjOptionSets;ProjOptionSetst;ProjOptionSetsrt;ProjOptionSetsert;ProjOptionSetsxpert;ProjOptionSetsExpert;ProjOptionSsExpert;ClassBrowser;FavFiileMgr;FavFIlesleMgr;FavFilileMgr;FavileMgr;FaileMgr;FavFiIles;FavFIles;FavFIlesr;FavFIlesgr;FavFIlesMgr;FavFIleseMgr;FavFIlesileMgr;FavFIleFileMgr;FavFFileMgr;FavFileMgr;FFileMgr;ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;$(BCB)\source\ToolsApi;..\..\Delphi\VCLZip;..\..\Delphi\ACE\D4;..\..\Delphi\Components\SyntaxMemo
+Item8=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;$(BCB)\source\ToolsApi;..\..\Delphi\VCLZip;..\..\Delphi\ACE\D4;..\..\Delphi\Components\SyntaxMemo
+Item9=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;$(BCB)\source\ToolsApi;D:\Delphi\VCLZip;D:\Delphi\ACE\D4;D:\Delphi\Components\SyntaxMemo
+Item10=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;$(BCB)\source\ToolsApi
+Item11=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;$(BCB)\lib\release;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;src;$(BCB)\source\ToolsApi
+Item12=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;$(BCB)\lib\release;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;src
+Item13=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;$(BCB)\lib\release;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\Source\ToolsAPI;$(BCB)\lib\obj;$(BCB)\lib;src;..\..\Delphi\Components\SyntaxMemo;..\..\Delphi\ACE\D4;..\..\Delphi\VCLZip
+Item14=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;$(BCB)\lib\release;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\Source\ToolsAPI;$(BCB)\lib\obj;$(BCB)\lib;src;..\..\Delphi\Components\SyntaxMemo;..\..\Delphi\ACE\D4;D:\Delphi\VCLZip
+Item15=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;$(BCB)\lib\release;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\Source\ToolsAPI;$(BCB)\lib\obj;$(BCB)\lib;src;..\..\Delphi\Components\SyntaxMemo;D:\Delphi\ACE\D4
+Item16=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;$(BCB)\lib\release;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\Source\ToolsAPI;$(BCB)\lib\obj;$(BCB)\lib;src;..\..\Delphi\Components\SyntaxMemo
+Item17=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;$(BCB)\lib\release;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\Source\ToolsAPI;$(BCB)\lib\obj;$(BCB)\lib;src;D:\Delphi\Components\SyntaxMemo
+Item18=ProjOptionsExpert;IdeDock\WithDock;IdeDock;eii\d4;$(BCB)\lib\release;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\Source\ToolsAPI;$(BCB)\lib\obj;$(BCB)\lib;src
+Item19=IdeDock\WithDock;IdeDock;eii\d4;$(BCB)\lib\release;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\Source\ToolsAPI;$(BCB)\lib\obj;$(BCB)\lib;src
+Item20=eii\d4;$(BCB)\lib\release;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\Source\ToolsAPI;$(BCB)\lib\obj;$(BCB)\lib;src
+Item21=$(BCB)\lib\release;comps;Class2;Editor;FileMgr;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\Source\ToolsAPI;$(BCB)\lib\obj;$(BCB)\lib;src
+Item22=$(BCB)\lib\obj;$(BCB)\lib;src
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=5
+Item0=_RTLDLL;DLL
+Item1=_RTLDLL;USEPACKAGES
+Item2=DLL
+Item3=_RTLDLL;DLL;USEPACKAGES
+Item4=_RTLDLL;USEPACKAGES;DLL
+
+[HistoryLists\hlHostApplication]
+Count=2
+Item0=D:\Borland\CBuilder4\Bin\bcb.exe
+Item1=E:\BCB4\Bin\bcb.exe
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=D:\Borland\CBuilder4\Bin\bcb.exe
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+InMemoryExe=0
+ShowInfoMsgs=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+!endif
+
+# ---------------------------------------------------------------------------
+# MAKE SECTION
+# ---------------------------------------------------------------------------
+# This section of the project file is not used by the BCB IDE.  It is for
+# the benefit of building from the command-line using the MAKE utility.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+!if !$d(DCC32)
+DCC32 = dcc32
+!endif
+
+!if !$d(TASM32)
+TASM32 = tasm32
+!endif
+
+!if !$d(LINKER)
+LINKER = ilink32
+!endif
+
+!if !$d(BRCC32)
+BRCC32 = brcc32
+!endif
+
+!if !$d(IDL2CPP)
+IDL2CPP = idl2cpp
+!endif
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+!if $d(PATHPAS)
+.PATH.PAS = $(PATHPAS)
+!endif
+
+!if $d(PATHASM)
+.PATH.ASM = $(PATHASM)
+!endif
+
+!if $d(PATHRC)
+.PATH.RC  = $(PATHRC)
+!endif
+# ---------------------------------------------------------------------------
+$(PROJECT): $(IDLGENFILES) $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES)
+!
+# ---------------------------------------------------------------------------
+.pas.hpp:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.pas.obj:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.cpp.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.c.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.asm.obj:
+    $(BCB)\BIN\$(TASM32) $(AFLAGS) $<, $@
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------

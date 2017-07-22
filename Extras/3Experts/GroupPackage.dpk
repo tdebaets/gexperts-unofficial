@@ -1,0 +1,45 @@
+package GroupPackage;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL ON}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS ON}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'Groups of Daniel''s experts'}
+{$DESIGNONLY}
+{$IMPLICITBUILD ON}
+
+requires
+  vcl40,
+  VCLSMP40,
+  VCLDB40;
+
+contains
+  GroupPackageExpertRegUnit in 'GroupPackageExpertRegUnit.pas',
+  SpaceByPixelExpertUnit in 'SpaceByPixelExpertUnit.pas',
+  GroupPackageExpertUnit in 'GroupPackageExpertUnit.pas',
+  FieldByNameExpert in 'FieldByNameExpert.pas',
+  CompNameListExpert in 'CompNameListExpert.pas',
+  ByPixelDialogUnit in 'ByPixelDialogUnit.pas',
+  CompListDlg in 'CompListDlg.pas',
+  ByNameList in 'ByNameList.pas',
+  InsertMenuItemUnit in 'InsertMenuItemUnit.pas';
+
+end.

@@ -1,0 +1,8 @@
+This freeware library is a Delphi-port of Henry Spencer V8-routins
+for working with subset of Perl Regular Expressions.
+
+Full source code in object pascal included. No DLL needed !
+
+Use TRegExpr class as powerfull tool for template-based checking of
+user input string fields (in DBMS and web-based applications),
+text substitutions & etc.

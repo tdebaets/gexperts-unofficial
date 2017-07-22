@@ -1,0 +1,137 @@
+The GExperts source code is provided under an Open Source license to
+encourage other users to contribute fixes and features.  Eventually,
+there will be some documentation to help orient new readers to the
+GExperts source code, but until then, this is all you have.  Here
+are the steps to compile GExperts from the source code:
+
+- Uncompress this Zip archive with directories (pkunzip GXSource.* -d,
+  or use WinZip to extract the file).  Note that the archive contains
+  long file names, so your unarchiver must support this.
+
+- Open:
+      GExpert5_bcb.bpr    Borland C++Builder 5.01
+      GExpert5.dpr        Borland Delphi 5.01
+      GExpert4_bcb.bpr    Borland C++Builder 4.01
+      GExpert4.dpr        Borland Delphi 4.03
+      GExpert3_bcb.bpr    Borland C++Builder 3.01
+      GExpert3.dpr        Borland Delphi 3.02
+
+  Prior versions of Delphi and C++Builder are not supported.
+
+- Add the following items to your Delphi/C++Builder library path
+  under the Environment Options:
+  - <install path>\src
+  - <install path>\Comps
+  - <install path>\EII\D[345]
+
+- In C++Builder 3.0 add the following items in Project | Options
+  -> Directories/Conditionals BOTH to the "Include path" and the
+  "Library path":
+
+    eii\d3;comps;classbrowser;editorexperts;favfiles
+
+  In C++Builder 4.0 add the following items, instead:
+
+    eii\d4;comps;classbrowser;editorexperts;favfiles
+
+  In C++Builder 5.01 add the following items, instead:
+
+    eii\d5;comps;classbrowser;editorexperts;favfiles
+
+- Open Project | Options
+  - On the Packages page, check the "Build with runtime packages"
+    item
+  - Add these packages to the project's runtime package list
+    (required to access various IDE internal units such as LibIntf):
+     Vcl50;Vclx50;Vcldb50;VclBde50;DsnIde50  Borland C++Builder 5.01
+     Vcl50;Vclx50;Vcldb50;VclBde50;DsnIde50  Borland Delphi 5.01
+     Vcl40;Vclx40;Vcldb40                    Borland C++Builder 4.01
+     Vcl40;Vclx40;Vcldb40                    Borland Delphi 4.03
+     Vcl35;Vclx35;Vcldb35                    Borland C++Builder 3.01
+     Vcl30;Vclx30;Vcldb30                    Borland Delphi 3.02
+  - On the Linker page, enter a value of $06000000 (Delphi) or
+    0x06000000 (C++Builder) for the Image Base
+    (this should allow for efficient loading of the GExperts DLL)
+  - In C++Builder, verify on the the Linker page that "Use Dynamic RTL"
+    is checked.
+
+- If you want to compile GExperts with any of VCLZip, TSyntaxMemo,
+  mwEdit, or ACE Reporter, then edit GXSource\src\GX_CondDefine.inc
+  as described there.  Some of the experts require these components.
+  You may have to adapt the global library path, as well as the
+  project specific Include and Library path (C++Builder only)
+  for successful compilation.
+
+- If you do not want to see Debug Window debugging messages, turn off
+  compiler debug information under Project Options. If you use
+  C++Builder, make sure that you modify the setting on the Pascal
+  page, too.
+
+- Build the project.  If you run into build problems with C++Builder,
+  please have a look at the file BCBNotes.txt which contains further
+  hints on building and using GExperts under C++Builder.
+
+- Install the resulting DLL into the IDE using the registry editor
+  "Regedit.exe" as described in the included Readme.txt file
+  (remove older versions of GExperts first)
+
+- To build the GExperts Debug Window, compile \DebugWin\GDebug.dpr.
+  Do the same for ExpMgr.dpr and Grep.dpr if you would like to
+  have stand-alone versions of these experts.
+
+  Please note that there are currently no project files for use
+  with C++Builder to build these projects there.
+
+NOTE: If you want to open or edit some of the forms with non-standard
+components you will have to install the components from the
+GXSource/comps directory into a design-time package (the FileView,
+FastSortTreeView, and SortGrid units contain custom components).
+You may use the GExperts packages GXComponents?.DPK and
+GXComponents?_BCB.BPK to help you install some of these components.
+
+NOTE: If, while opening forms at runtime or designtime, you get
+errors stating things like "Property XXX does not exist", you need to
+open all of the relevant GExperts forms in your IDE before compiling.
+When you get the same errors at designtime, ignore them, re-save
+the form, and then compile again.  Before opening some of the forms,
+you'll have to install the components contained on them, as described
+above.  This nuisance is caused by the fact that a subsequent version
+of the IDE you are using did not supply a default value for a newly
+added property, making the form incompatible with older IDE versions.
+
+Localization:
+
+If you wish to localize the GExperts source code for different
+international environments, refer to the IDE dodumentation under
+
+ Programming with Delphi: Creating international applications
+ Programming with C++Builder: Creating international applications
+
+as well as the relevant Borland.com newsgroups at
+nntp://forums.borland.com/ and their archive at http://www.deja.com/.
+
+Specific to the localization of GExperts are the following items:
+
+- Load the GExperts project into your IDE
+
+- Make sure that your project has been built with a detailed MAP file
+  (Project | Options --> Linker page)
+
+- Choose File | New.  In the dialog, select the item: Resource DLL Wizard
+
+  Note: some versions of Delphi and C++Builder do not ship with this wizard
+
+- Follow the steps in the wizard
+
+- Translate all items of the localization project
+
+Repeat these steps with each source code release of GExperts.
+
+--------------------------------
+
+Please tell me what your experiences are (positive or negative), and
+if you make any interesting changes, please pass them on.
+
+Thanks,
+Erik
+eberry@gexperts.org

@@ -1,0 +1,229 @@
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# IDE SECTION
+# ---------------------------------------------------------------------------
+# The following section of the project makefile is managed by the BCB IDE.
+# It is recommended to use the IDE to change any of the values in this
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.03
+# ---------------------------------------------------------------------------
+PROJECT = GExpert3_bcb.dll
+OBJFILES = src\GX_GExperts.obj src\GX_Experts.obj src\GX_ProcedureList.obj \
+  src\GX_GenFunc.obj src\GX_About.obj src\GX_ExpertManager.obj \
+  src\GX_GrepResults.obj src\GX_Search.obj src\GX_GrepSearch.obj \
+  src\GX_GrepOptions.obj src\GX_messagedialog.obj src\GX_EditWriter.obj \
+  src\GX_Backup.obj src\GX_BackupOptions.obj src\GX_BackupConfig.obj \
+  src\GX_TabOrder.obj src\GX_CleanDirectories.obj src\GX_MenuNotifier.obj \
+  src\GX_EditReader.obj src\GX_ClipboardHistory.obj FavFiles\GX_FavFiles.obj \
+  FavFiles\GX_FavOptions.obj FavFiles\GX_FavFileProp.obj \
+  ClassBrowser\GX_ClassBrowser.obj ClassBrowser\GX_ClassOptions.obj \
+  ClassBrowser\GX_ClassReport.obj ClassBrowser\GX_ClassMethProp.obj \
+  ClassBrowser\GX_ClassProp.obj ClassBrowser\GX_ClassIdentify.obj \
+  ClassBrowser\GX_ClassParsing.obj src\GX_SourceExport.obj src\GX_CodeLib.obj \
+  src\GX_CodeNew.obj src\GX_CodeSrch.obj src\GX_CodeOpt.obj \
+  src\GX_PrinterFunc.obj src\GX_PrintPreview.obj src\GX_Progress.obj \
+  src\GX_AsciiChart.obj src\GX_PeInformation.obj src\GX_PeInfo.obj \
+  src\GX_CompReplace.obj src\GX_ComponentGrid.obj src\GX_IdeShortCuts.obj \
+  src\GX_Substitute.obj src\GX_ProjDepend.obj src\GX_ProjDependProp.obj \
+  src\GX_PerfectLayout.obj src\GX_ClipboardOptions.obj src\GX_Todo.obj \
+  src\GX_ToDoOptions.obj EditorExperts\GX_EditorExpert.obj \
+  EditorExperts\GX_eComment.obj EditorExperts\GX_eDate.obj \
+  EditorExperts\GX_eFindDelimiter.obj EditorExperts\GX_eHeader.obj \
+  src\GX_EditorShortcut.obj src\GX_ProofReaderExpert.obj src\GX_ProofReaderDM.obj \
+  src\GX_ProofReaderConfig.obj src\GX_IDEEnhance.obj src\GX_Toolbar.obj \
+  src\Gx_ToolbarButtons.obj src\GX_PriorityBoost.obj src\Gx_ConfigurationInfo.obj \
+  src\GX_Configure.obj src\Gx_MultiLinePalette.obj src\Gx_EditorEnhancements.obj \
+  src\GX_VerDepConst.obj src\GX_MultilineHost.obj src\GX_ClassMgr.obj \
+  src\GX_DbugIntf.obj FavFiles\GX_FavNewFolder.obj Comps\RplWizInfo.obj \
+  Comps\E_StgStr.obj src\GX_CompsToCode.obj IdeDock\NoDock\GX_FakeIdeDock.obj \
+  GExpert3_bcb.obj src\GX_LibIntf.obj src\GX_StandaloneExports.obj
+RESFILES = GExpert4_bcb.res
+DEFFILE =
+RESDEPEN = $(RESFILES) src\GX_ProcedureList.dfm src\GX_About.dfm src\GX_ExpertManager.dfm \
+  src\GX_GrepResults.dfm src\GX_GrepSearch.dfm src\GX_GrepOptions.dfm \
+  src\GX_messagedialog.dfm src\GX_BackupOptions.dfm src\GX_BackupConfig.dfm \
+  src\GX_TabOrder.dfm src\GX_CleanDirectories.dfm src\GX_ClipboardHistory.dfm \
+  FavFiles\GX_FavFiles.dfm FavFiles\GX_FavOptions.dfm FavFiles\GX_FavFileProp.dfm \
+  ClassBrowser\GX_ClassMethProp.dfm ClassBrowser\GX_ClassProp.dfm \
+  ClassBrowser\GX_ClassIdentify.dfm ClassBrowser\GX_ClassParsing.dfm \
+  src\GX_CodeLib.dfm src\GX_CodeNew.dfm src\GX_CodeSrch.dfm src\GX_CodeOpt.dfm \
+  src\GX_Progress.dfm src\GX_AsciiChart.dfm src\GX_PeInformation.dfm \
+  src\GX_CompReplace.dfm src\GX_ComponentGrid.dfm src\GX_IdeShortCuts.dfm \
+  src\GX_ProjDependProp.dfm src\GX_PerfectLayout.dfm src\GX_ClipboardOptions.dfm \
+  src\GX_Todo.dfm src\GX_ToDoOptions.dfm EditorExperts\GX_eComment.dfm \
+  EditorExperts\GX_eDate.dfm EditorExperts\GX_eHeader.dfm \
+  src\GX_EditorShortcut.dfm src\GX_ProofReaderDM.dfm src\GX_ProofReaderConfig.dfm \
+  src\GX_PriorityBoost.dfm src\GX_Configure.dfm FavFiles\GX_FavNewFolder.dfm \
+  src\GX_CompsToCode.dfm IdeDock\NoDock\GX_FakeIdeDock.dfm
+LIBFILES =
+LIBRARIES = bcbsmp35.lib
+SPARELIBS = VCL35.lib vcldb35.lib vclx35.lib bcbsmp35.lib
+PACKAGES = vclx35.bpi VCL35.bpi vcldb35.bpi
+# ---------------------------------------------------------------------------
+PATHCPP = .;src
+PATHASM = .;src;FavFiles;ClassBrowser;EditorExperts;Comps;IdeDock\NoDock
+PATHPAS = .;
+PATHRC = .;
+DEBUGLIBPATH = $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+# ---------------------------------------------------------------------------
+CFLAG1 = -WD -Od -Hc -w -Ve -r- -d -k- -y -v -vi- -c -b- -w-par -w-inl -Vx
+CFLAG2 = -Iprojoptionsets;idedock\withdock;editorexperts;classbrowser;favfiles;projoptionsexpert;idedock;idedock\nodock;oned4all;eii\d3;comps;class2;editor;filemgr;$(BCB)\include;$(BCB)\include\vcl;src \
+  -D_RTLDLL;DLL;USEPACKAGES -H=Gx35.csm
+CFLAG3 = -Tkh30000
+PFLAGS = -Uprojoptionsets;idedock\withdock;editorexperts;classbrowser;favfiles;projoptionsexpert;idedock;idedock\nodock;oned4all;eii\d3;comps;class2;editor;filemgr;$(BCB)\lib\obj;$(BCB)\lib;src;$(RELEASELIBPATH) \
+  -Iprojoptionsets;idedock\withdock;editorexperts;classbrowser;favfiles;projoptionsexpert;idedock;idedock\nodock;oned4all;eii\d3;comps;class2;editor;filemgr;$(BCB)\include;$(BCB)\include\vcl;src \
+  -D_RTLDLL;DLL;USEPACKAGES -H -W -$Y -$R -$Q -LUdclstd35 -v -JPHN -M
+RFLAGS = -iprojoptionsets;idedock\withdock;editorexperts;classbrowser;favfiles;projoptionsexpert;idedock;idedock\nodock;oned4all;eii\d3;comps;class2;editor;filemgr;$(BCB)\include;$(BCB)\include\vcl;src \
+  -D_RTLDLL;DLL;USEPACKAGES
+AFLAGS = /iidedock /iidedock\nodock /ioned4all /ieii\d3 /icomps /iclass2 /ieditor \
+  /ifilemgr /i$(BCB)\include /i$(BCB)\include\vcl /isrc /d_RTLDLL /dDLL \
+  /dUSEPACKAGES /mx /w2 /zd
+LFLAGS = -Lprojoptionsets;idedock\withdock;editorexperts;classbrowser;favfiles;projoptionsexpert;idedock;idedock\nodock;oned4all;eii\d3;comps;class2;editor;filemgr;$(BCB)\lib\obj;$(BCB)\lib;src;$(RELEASELIBPATH) \
+  -aa -Tpd -x
+IFLAGS =
+# ---------------------------------------------------------------------------
+ALLOBJ = c0d32.obj $(PACKAGES) sysinit.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=0
+MinorVer=9
+Release=8
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=1
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=GExperts for C++Builder 3.0
+FileVersion=0.9.8.0
+InternalName=GExperts
+LegalCopyright=GExperts, Inc and Erik Berry
+LegalTrademarks=
+OriginalFilename=GExpert3_bcb.dll
+ProductName=GExperts
+ProductVersion=0.98.0
+Comments=Open Source
+
+[HistoryLists\hlIncludePath]
+Count=1
+Item0=idedock;idedock\nodock;oned4all;eii\d3;comps;class2;editor;filemgr;$(BCB)\include;$(BCB)\include\vcl;src
+
+[HistoryLists\hlLibraryPath]
+Count=1
+Item0=idedock;idedock\nodock;oned4all;eii\d3;comps;class2;editor;filemgr;$(BCB)\lib\obj;$(BCB)\lib;src
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=3
+Item0=_RTLDLL;DLL;USEPACKAGES
+Item1=_RTLDLL;USEPACKAGES;DLL
+Item2=_RTLDLL;USEPACKAGES
+
+[HistoryLists\hlHostApplication]
+Count=1
+Item0=E:\bcb3\Bin\bcb.exe
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=E:\bcb3\Bin\bcb.exe
+
+!endif
+
+# ---------------------------------------------------------------------------
+# MAKE SECTION
+# ---------------------------------------------------------------------------
+# This section of the project file is not used by the BCB IDE.  It is for
+# the benefit of building from the command-line using the MAKE utility.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+!if !$d(DCC32)
+DCC32 = dcc32
+!endif
+
+!if !$d(TASM32)
+TASM32 = tasm32
+!endif
+
+!if !$d(LINKER)
+LINKER = ilink32
+!endif
+
+!if !$d(BRCC32)
+BRCC32 = brcc32
+!endif
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+!if $d(PATHPAS)
+.PATH.PAS = $(PATHPAS)
+!endif
+
+!if $d(PATHASM)
+.PATH.ASM = $(PATHASM)
+!endif
+
+!if $d(PATHRC)
+.PATH.RC  = $(PATHRC)
+!endif
+# ---------------------------------------------------------------------------
+$(PROJECT): $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES)
+!
+# ---------------------------------------------------------------------------
+.pas.hpp:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.pas.obj:
+    $(BCB)\BIN\$(DCC32) $(PFLAGS) {$< }
+
+.cpp.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.c.obj:
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) $(CFLAG2) $(CFLAG3) -n$(@D) {$< }
+
+.asm.obj:
+    $(BCB)\BIN\$(TASM32) $(AFLAGS) $<, $@
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------

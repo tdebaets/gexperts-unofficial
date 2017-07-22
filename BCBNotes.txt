@@ -1,0 +1,179 @@
+These are release notes for the:
+
+  Borland C++Builder 3.01,
+  Borland C++Builder 4.01, and
+  Borland C++Builder 5.01
+
+source code release of GExperts, prepared
+by Stefan Hoffmeister,
+
+  Stefan.Hoffmeister@Econos.de
+  Stefan.Hoffmeister@Econos.com
+
+Please note that C++Builder support has only
+received a very limited amount of testing.
+
+The C++Builder source code might not always
+build straight out of the box; this almost
+always is due to functionality having been
+added to the Delphi version which is up to
+this time is incompatible with C++Builder.
+These issues will be resolved as soon as
+possible.
+
+**********************************
+
+Build problems?
+
+ [C++ Error] Db.hpp(285): E2109 Not an allowed type.
+
+Please check the BPR file for references to
+libraries on the
+
+  LIBRARIES =
+  SPARELIBS =
+
+lines. Remove these references and the above
+error will go away. If it does NOT go away,
+please delete *.tds, *.il*, *.csm, *.#??, and
+*.obj from all of the GExperts source directories
+and rebuild.
+
+Examples of the above-mentioned references are
+"vclmid40.lib", "inetdb40.lib" (only present in
+C++Builder 4.0 Enterprise, for instance) or
+third-party libraries.
+
+If the build still fails, click the "Release" speed
+settings button on the "Compiler" tab in the Project |
+Options... dialog, do a full build of the of the
+project and if the error still occurs, make the
+project.
+
+As a last resort, comment out the #includes for
+db.hpp and dbtables.hpp from src\GX_GenFunc.hpp
+after C++Builder has generated the file.  Then turn
+off the pre-compiled headers support to keep C++Builder
+from regenerating the *.hpp file.
+
+**********************************
+
+If you intend to compile the GExperts source
+code with C++Builder 3.0, please do take
+note of this known issue in C++Builder 3.0:
+
+  Apparently C++Builder 3.0 does not
+  tolerate Pascal conditional defines in
+  the interface-visible USES clause, as
+  in
+
+    Windows, Messages,
+    {$IFDEF GX_VER120_up}
+    ImgList,
+    {$ENDIF GX_VER120_up}
+    Forms, ...
+
+  If such a source file is opened and the
+  editor buffer is marked as modified, either
+  by editing source code or due to a changed
+  form, then C++Builder 3.0 will add the
+  static library
+
+    dclstd35.lib
+
+  to your MAKE file (.BPR).
+
+  You can reproduce this behaviour by
+  opening the file GX_MsgExp.pas in the IDE
+  editor. Choose File | Save and get the
+  "Find Static Library" box.
+
+  If this happens, you must manually edit
+  the project MAKE file (GExpert3_bcb.bpr),
+  for instance by selecting View | Project
+  Makefile, and remove the reference to
+  this static library.
+
+  If you just don't seem to be able to get
+  rid of dclstd35.lib, please shutdown the
+  C++Builder 3.0 IDE and delete the file
+  GExpert3_bcb.dsk in your GExperts source
+  folder.
+
+  Unfortunately, there is no way to get rid
+  of the Pascal conditional defines in the
+  interface-visible USES clause. The only
+  solution is to accept that dclstd35.lib is
+  added to your MAKE file and then to remove
+  it again.
+
+  It appears as if Borland C++Builder 4.0
+  does not suffer from this issue.
+
+  Another way to fix this, which AVOIDS it
+  from happening again is to run the
+  command "tlib dclstd35" in the CBuilder4\Lib
+  directory. This creates an empty library
+  file called DCLSTD35.LIB. This keeps the
+  linker happy.
+
+**********************************
+
+The following experts will work under BCB:
+
+ - IDE Menu Shortcuts
+ - PE Information Viewer
+ - Grep Search / Grep Results
+ - Message Dialog (both C++ and Object Pascal code)
+ - Expert Manager
+ - ASCII chart
+ - Clipboard history
+ - Perfect layout (with the same known problems as in Delphi 4)
+ - Replace Components
+ - Set Tab Order
+ - Clean directories
+ - Favorite Files (although one icon shows Delphi)
+ - Code Librarian (although two icons show Delphi)
+ - Source Export
+ - Code Proofreader (except compiler replacement)
+ - Single IDE
+ - Performance Booster
+ - Editor Experts
+   - Insert Date/Time
+   - Comment code
+   - Uncomment code
+   - Insert Unit header (%UNIT% macro currently not available in C++ code)
+   - Insert Procedure Header (%PROCNAME% macro not available in C++ code)
+ - IDE Enhancements
+   - Multi-line tabs
+   - Show tabs as buttons
+   - Add component tab names to popup menu
+   - Add a Windows menu
+   - Custom Object Inspector font
+   - Custom Component Palette font
+
+
+The following expert(s) will work ONLY
+for Object Pascal source code:
+
+ - Class Browser
+ - Procedure List
+ - Project Dependencies
+   (only Pascal dependencies in the project file are found)
+ - To Do List
+ - Components to Code
+ - Project Backup
+   (scanner for include files; Delphi-centric - note that this
+    expert is only of VERY limited use in C++Builder, since
+    it will not find any C(++) source file NOT referenced in
+    the project file)
+ - Editor Experts
+   - Locate matching delimiter
+   - Move to matching delimiter
+
+
+The following expert does NOT work:
+
+ - Project Options Expert
+   [C++Builder 4.00 and 4.01 crash on a required call]
+

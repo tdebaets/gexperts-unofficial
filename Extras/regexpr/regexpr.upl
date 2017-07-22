@@ -1,0 +1,38 @@
+[DSP upload]
+File Name=regexpr.zip
+Replace File=
+File Status=Freeware
+Full Source Included=Y
+Delphi 1.0x=N
+Delphi 2.0x=Y
+Delphi 3.0x=Y
+Delphi 4.0x=Y
+C++ Builder 1.0x=N
+C++ Builder 3.0x=N
+C++ Builder 4.0x=N
+Version=0.1
+count=1
+1=Perl's regular expression for checking input strings, parsing & etc.
+Note=
+Additional info=Text file ( extension txt )
+Category=Word Processing Tools
+Platform=
+Group=Component/Code
+[Versions available]
+Delphi 1.0x=
+Delphi 2.0x=
+Delphi 3.0x=
+Delphi 4.0x=
+C++ Builder 1.0x=
+C++ Builder 3.0x=
+C++ Builder 4.0x=
+[DSP Support]
+DSP Support=N
+[Uploader_1]
+Author name=Andrey Sorokin
+Contact=
+Author E-mail=anso@mail.ru
+Author URL=
+count=0
+Author Section=
+UpdateDSP=N

@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.05.03"/>
+    <PROJECT value="GExpert5_bcb.dll"/>
+    <OBJFILES value="src\GX_GExperts.obj src\GX_Experts.obj src\GX_ProcedureList.obj 
+      src\GX_GenFunc.obj src\GX_About.obj src\GX_ExpertManager.obj 
+      src\GX_GrepResults.obj src\GX_Search.obj src\GX_GrepSearch.obj 
+      src\GX_GrepOptions.obj src\GX_messagedialog.obj src\GX_EditWriter.obj 
+      src\GX_Backup.obj src\GX_BackupOptions.obj src\GX_BackupConfig.obj 
+      src\GX_TabOrder.obj src\GX_CleanDirectories.obj src\GX_MenuNotifier.obj 
+      src\GX_EditReader.obj src\GX_ClipboardHistory.obj FavFiles\GX_FavFiles.obj 
+      FavFiles\GX_FavOptions.obj FavFiles\GX_FavFileProp.obj 
+      ClassBrowser\GX_ClassBrowser.obj ClassBrowser\GX_ClassOptions.obj 
+      ClassBrowser\GX_ClassReport.obj ClassBrowser\GX_ClassMethProp.obj 
+      ClassBrowser\GX_ClassProp.obj ClassBrowser\GX_ClassIdentify.obj 
+      ClassBrowser\GX_ClassParsing.obj src\GX_SourceExport.obj 
+      src\GX_CodeLib.obj src\GX_CodeNew.obj src\GX_CodeSrch.obj 
+      src\GX_CodeOpt.obj src\GX_PrinterFunc.obj src\GX_PrintPreview.obj 
+      src\GX_Progress.obj src\GX_AsciiChart.obj src\GX_PeInformation.obj 
+      src\GX_PeInfo.obj src\GX_CompReplace.obj src\GX_ComponentGrid.obj 
+      src\GX_IdeShortCuts.obj src\GX_Substitute.obj src\GX_ProjDepend.obj 
+      src\GX_ProjDependProp.obj src\GX_PerfectLayout.obj 
+      src\GX_ClipboardOptions.obj src\GX_Todo.obj src\GX_ToDoOptions.obj 
+      EditorExperts\GX_EditorExpert.obj EditorExperts\GX_eComment.obj 
+      EditorExperts\GX_eDate.obj EditorExperts\GX_eFindDelimiter.obj 
+      EditorExperts\GX_eHeader.obj src\GX_EditorShortcut.obj 
+      src\GX_ProofReaderExpert.obj src\GX_ProofReaderDM.obj 
+      src\GX_ProofReaderConfig.obj src\GX_IDEEnhance.obj src\GX_Toolbar.obj 
+      src\Gx_ToolbarButtons.obj src\GX_PriorityBoost.obj 
+      src\Gx_ConfigurationInfo.obj src\GX_Configure.obj 
+      src\Gx_MultiLinePalette.obj src\Gx_EditorEnhancements.obj 
+      ProjOptionSets\GX_ProjOptionSets.obj ProjOptionSets\GX_ProjOptMap.obj 
+      ProjOptionSets\GX_ProjOptOptions.obj src\GX_VerDepConst.obj 
+      src\GX_MultilineHost.obj src\GX_ClassMgr.obj src\GX_DbugIntf.obj 
+      FavFiles\GX_FavNewFolder.obj Comps\RplWizInfo.obj Comps\E_StgStr.obj 
+      src\GX_CompsToCode.obj IdeDock\Native\GX_DummyIdeDock.obj 
+      IdeDock\Native\GX_IdeDock.obj GExpert5_bcb.obj src\GX_LibIntf.obj 
+      src\GX_StandaloneExports.obj"/>
+    <RESFILES value="GExpert5_bcb.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) src\GX_ProcedureList.dfm src\GX_About.dfm 
+      src\GX_ExpertManager.dfm src\GX_GrepResults.dfm src\GX_GrepSearch.dfm 
+      src\GX_GrepOptions.dfm src\GX_messagedialog.dfm src\GX_BackupOptions.dfm 
+      src\GX_BackupConfig.dfm src\GX_TabOrder.dfm src\GX_CleanDirectories.dfm 
+      src\GX_ClipboardHistory.dfm FavFiles\GX_FavFiles.dfm 
+      FavFiles\GX_FavOptions.dfm FavFiles\GX_FavFileProp.dfm 
+      ClassBrowser\GX_ClassMethProp.dfm ClassBrowser\GX_ClassProp.dfm 
+      ClassBrowser\GX_ClassIdentify.dfm ClassBrowser\GX_ClassParsing.dfm 
+      src\GX_CodeLib.dfm src\GX_CodeNew.dfm src\GX_CodeSrch.dfm 
+      src\GX_CodeOpt.dfm src\GX_Progress.dfm src\GX_AsciiChart.dfm 
+      src\GX_PeInformation.dfm src\GX_CompReplace.dfm src\GX_ComponentGrid.dfm 
+      src\GX_IdeShortCuts.dfm src\GX_ProjDependProp.dfm src\GX_PerfectLayout.dfm 
+      src\GX_ClipboardOptions.dfm src\GX_Todo.dfm src\GX_ToDoOptions.dfm 
+      EditorExperts\GX_eComment.dfm EditorExperts\GX_eDate.dfm 
+      EditorExperts\GX_eHeader.dfm src\GX_EditorShortcut.dfm 
+      src\GX_ProofReaderDM.dfm src\GX_ProofReaderConfig.dfm 
+      src\GX_PriorityBoost.dfm src\GX_Configure.dfm 
+      ProjOptionSets\GX_ProjOptionSets.dfm ProjOptionSets\GX_ProjOptOptions.dfm 
+      FavFiles\GX_FavNewFolder.dfm src\GX_CompsToCode.dfm 
+      IdeDock\Native\GX_DummyIdeDock.dfm IdeDock\Native\GX_IdeDock.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="vcl50.lib vclx50.lib vcldb50.lib vcldbx50.lib dsnide50.lib VCLBDE50.lib"/>
+    <PACKAGES value="vcl50.bpi vclx50.bpi vcldb50.bpi vcldbx50.bpi dsnide50.bpi vclbde50.bpi"/>
+    <PATHCPP value=".;src"/>
+    <PATHPAS value=".;src;FavFiles;ClassBrowser;EditorExperts;ProjOptionSets;Comps;IdeDock\Native"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="GExpert5_bcb.cpp"/>
+    <INCLUDEPATH value="ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;D:\Borland\Ace\C5\;D:\Borland\mwEdit\;&quot;D:\Borland\VCLZip\&quot;"/>
+    <LIBPATH value="ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;D:\Borland\Ace\C5\;D:\Borland\mwEdit\;&quot;D:\Borland\VCLZip\&quot;"/>
+    <WARNINGS value="-w-par -w-8027 -w-8026"/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-IClassBrowser -IEditorExperts -IFavFiles -IFileMgr -IProjOptionSets 
+      -IIdeDock\Native -IIdeDock -Ieii\d5 -Icomps -I$(BCB)\Projects 
+      -I$(BCB)\include -I$(BCB)\include\vcl -Isrc -ID:\Borland\Ace\C5\. 
+      -ID:\Borland\mwEdit\. -I&quot;D:\Borland\VCLZip\.&quot; -src_suffix cpp"/>
+    <CFLAG1 value="-WD -O2 -H=Gx50.csm -Hc -Q -w -Vx -Ve -Tkh30000 -X- -a8 -b- -d -k- -vi -c 
+      -tWM"/>
+    <PFLAGS value="-$Y- -$R -$Q -$L- -$D- -LUvcl50;dsnide50 -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpd -x"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0d32.obj $(PACKAGES) sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+  </LINKER>
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=1
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=1
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=GExperts for C++Builder 5.0
+FileVersion=1.0.1.0
+InternalName=GExperts
+LegalCopyright=GExperts, Inc and Erik Berry
+LegalTrademarks=
+OriginalFilename=GExpert5_bcb.dll
+ProductName=GExperts
+ProductVersion=1.0.1
+Comments=Open Source
+
+[Excluded Packages]
+$(BCB)\Bin\dclocx50.bpl=Borland Sample Imported ActiveX Controls
+$(BCB)\Bin\mfcwizard.bpl=MFC Wizard
+C:\WINNT\System32\ibsmp50.bpl=Borland C++ InterBase Alerter Component
+$(BCB)\Bin\dclqrt50.bpl=QuickReport Components
+$(BCB)\Bin\dcltee50.bpl=TeeChart 5.0 Components
+$(BCB)\Bin\dcldss50.bpl=Borland Decision Cube Components
+$(BCB)\Bin\applet50.bpl=Borland Control Panel Applet Package
+$(BCB)\Bin\dcltqr50.bpl=TeeChart 5.0 for QuickReport Components Design Package
+$(BCB)\Bin\DCLIB50.bpl=InterBase Data Access Components
+$(BCB)\Bin\dclmid50.bpl=Borland MIDAS Components
+$(BCB)\Bin\DBWEBXPRT.BPL=Borland Web Wizard Package
+$(BCB)\Bin\DCLNMF50.bpl=NetMasters Fastnet Tools
+$(BCB)\Bin\bcbie50.bpl=Borland C++Builder Internet Explorer 5 Components Package
+$(BCB)\Bin\dclite50.bpl=Borland Integrated Translation Environment
+
+[HistoryLists\hlIncludePath]
+Count=6
+Item0=ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;D:\Borland\Ace\C5\;D:\Borland\mwEdit\;D:\Borland\VCLZip\
+Item1=ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;D:\Borland\Ace\C5;D:\Borland\mwEdit;D:\Borland\VCLZip
+Item2=ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;D:\Delphi\Components\SyntaxMemo\;D:\Delphi\VCLZip\;D:\Delphi\ACE\D4\;D:\Delphi\mwedit\;D:\Delphi\SyntaxMemo\
+Item3=ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;D:\Delphi\Components\SyntaxMemo\;D:\Delphi\VCLZip\;D:\Delphi\ACE\D4\;D:\Delphi\mwedit\;D:\Delphi\SyntaxMemo
+Item4=ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;D:\Delphi\Components\SyntaxMemo\;D:\Delphi\VCLZip\;D:\Delphi\ACE\D4\;D:\Delphi\mwedit\
+Item5=ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\include;$(BCB)\include\vcl;src;..\..\Delphi\Components\SyntaxMemo;..\..\Delphi\VCLZip;..\..\Delphi\ACE\D4;..\..\Delphi\mwedit
+
+[HistoryLists\hlLibraryPath]
+Count=6
+Item0=ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;D:\Borland\Ace\C5\;D:\Borland\mwEdit\;D:\Borland\VCLZip\
+Item1=ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;D:\Borland\Ace\C5;D:\Borland\mwEdit;D:\Borland\VCLZip
+Item2=ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;D:\Delphi\VCLZip\;D:\Delphi\ACE\D4\;D:\Delphi\Components\SyntaxMemo\;D:\Delphi\mwedit\;D:\Delphi\SyntaxMemo\
+Item3=ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;D:\Delphi\VCLZip\;D:\Delphi\ACE\D4\;D:\Delphi\Components\SyntaxMemo\;D:\Delphi\mwedit\;D:\Delphi\SyntaxMemo
+Item4=ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;D:\Delphi\VCLZip\;D:\Delphi\ACE\D4\;D:\Delphi\Components\SyntaxMemo\;D:\Delphi\mwedit\
+Item5=ClassBrowser;EditorExperts;FavFiles;FileMgr;ProjOptionSets;IdeDock\Native;IdeDock;eii\d5;comps;$(BCB)\Projects;$(BCB)\Projects\Lib;$(BCB)\lib\release;$(BCB)\lib\obj;$(BCB)\lib;src;..\..\Delphi\VCLZip;..\..\Delphi\ACE\D4;..\..\Delphi\Components\SyntaxMemo;..\..\Delphi\mwedit
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=-ns
+HostApplication=D:\Borland\CBuilder5\Bin\bcb.exe
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+  </IDEOPTIONS>
+</PROJECT>

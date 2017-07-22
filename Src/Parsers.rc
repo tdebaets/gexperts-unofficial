@@ -1,0 +1,4 @@
+PASPARSER RCDATA "D:\Delphi\Components\SyntaxMemo\Scripts\PasScript.txt"
+HTMLPARSER RCDATA "D:\Delphi\Components\SyntaxMemo\Scripts\new_HTML.txt"
+CPARSER RCDATA "D:\Delphi\Components\SyntaxMemo\Scripts\CScript.txt"
+SQLPARSER RCDATA "D:\Delphi\Components\SyntaxMemo\Scripts\SQLScript.txt"
