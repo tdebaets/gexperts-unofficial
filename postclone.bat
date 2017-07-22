@@ -2,12 +2,17 @@
 
 setlocal
 
-echo Creating directories...
+echo Setting up repository...
 
-mkdir Output
+git config pull.rebase preserve
 if errorlevel 1 goto failed
 
-mkdir Output\DCU
+echo Creating directories...
+
+if not exist Output mkdir Output
+if errorlevel 1 goto failed
+
+if not exist Output\DCU mkdir Output\DCU
 if errorlevel 1 goto failed
 
 echo Success!
