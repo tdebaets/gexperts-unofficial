@@ -39,8 +39,8 @@ MaxStackSize=1048576
 ImageBase=100663296
 ExeDescription=
 [Directories]
-OutputDir=
-UnitOutputDir=
+OutputDir=Output
+UnitOutputDir=Output\DCU
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=
