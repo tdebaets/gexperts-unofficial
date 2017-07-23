@@ -1,0 +1,121 @@
+object fmSingleIDE: TfmSingleIDE
+  Left = 286
+  Top = 218
+  BorderStyle = bsDialog
+  Caption = 'Single IDE Instance'
+  ClientHeight = 288
+  ClientWidth = 369
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lRegistrationResults: TLabel
+    Left = 8
+    Top = 92
+    Width = 38
+    Height = 13
+    Caption = 'Results:'
+  end
+  object mRegistrationResults: TMemo
+    Left = 8
+    Top = 110
+    Width = 353
+    Height = 134
+    Color = clBtnFace
+    Lines.Strings = (
+      'mRegistrationResults')
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 0
+    WordWrap = False
+  end
+  object btnOK: TButton
+    Left = 240
+    Top = 254
+    Width = 81
+    Height = 25
+    Cancel = True
+    Caption = 'Close'
+    Default = True
+    ModalResult = 1
+    TabOrder = 3
+  end
+  object btnRegister: TButton
+    Left = 48
+    Top = 254
+    Width = 81
+    Height = 25
+    Caption = '&Register'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnClick = btnRegisterClick
+  end
+  object btnUnregister: TButton
+    Left = 144
+    Top = 254
+    Width = 81
+    Height = 25
+    Caption = '&Unregister'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    OnClick = btnUnregisterClick
+  end
+  object mPurpose: TMemo
+    Left = 16
+    Top = 19
+    Width = 337
+    Height = 62
+    TabStop = False
+    BorderStyle = bsNone
+    Color = clBtnFace
+    Lines.Strings = (
+      
+        'This expert disables a feature of Delphi 3 and C++ Builder 3 whe' +
+        'reby '
+      
+        'executing an associated file from Explorer starts a new instance' +
+        ' of the '
+      
+        'IDE instead of loading it into the current instance.  This exper' +
+        't changes '
+      'the DDE command of associated files in the registry.')
+    ReadOnly = True
+    TabOrder = 4
+  end
+  object System: TDdeServerConv
+    OnOpen = SystemOpen
+    OnClose = SystemClose
+    OnExecuteMacro = SystemExecuteMacro
+    Left = 232
+    Top = 212
+  end
+  object Open: TDdeServerItem
+    ServerConv = System
+    OnChange = OpenChange
+    OnPokeData = OpenPokeData
+    Left = 272
+    Top = 212
+  end
+  object timDdeUpdate: TTimer
+    Interval = 500
+    OnTimer = timDdeUpdateTimer
+    Left = 312
+    Top = 212
+  end
+end

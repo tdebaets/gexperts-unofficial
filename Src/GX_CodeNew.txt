@@ -1,0 +1,117 @@
+object fmCodeDBNew: TfmCodeDBNew
+  Left = 200
+  Top = 128
+  BorderStyle = bsDialog
+  Caption = 'Create New Object'
+  ClientHeight = 152
+  ClientWidth = 334
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object btnOK: TButton
+    Left = 254
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+    OnClick = btnOKClick
+  end
+  object btnCancel: TButton
+    Left = 254
+    Top = 40
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 2
+  end
+  object gbxObject: TGroupBox
+    Left = 8
+    Top = 8
+    Width = 241
+    Height = 137
+    Caption = 'Object Characteristics'
+    TabOrder = 0
+    object lblDescription: TLabel
+      Left = 8
+      Top = 111
+      Width = 53
+      Height = 13
+      Caption = 'Description'
+    end
+    object lblObjType: TLabel
+      Left = 8
+      Top = 24
+      Width = 99
+      Height = 13
+      Caption = 'New object to create'
+    end
+    object rbFolder: TRadioButton
+      Left = 32
+      Top = 58
+      Width = 185
+      Height = 17
+      Caption = 'Folder'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+    end
+    object rbCode: TRadioButton
+      Left = 32
+      Top = 76
+      Width = 185
+      Height = 17
+      Caption = 'Code snippet'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+    end
+    object edDesc: TEdit
+      Left = 72
+      Top = 108
+      Width = 161
+      Height = 21
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 3
+    end
+    object rbRoot: TRadioButton
+      Left = 32
+      Top = 40
+      Width = 185
+      Height = 17
+      Caption = 'Root folder'
+      Checked = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      TabStop = True
+    end
+  end
+end

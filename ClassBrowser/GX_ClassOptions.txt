@@ -1,0 +1,387 @@
+object fmClassOptions: TfmClassOptions
+  Left = 274
+  Top = 170
+  BorderStyle = bsDialog
+  Caption = 'Class Browser Options'
+  ClientHeight = 333
+  ClientWidth = 357
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object btnCancel: TButton
+    Left = 278
+    Top = 304
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 2
+  end
+  object btnOK: TButton
+    Left = 196
+    Top = 304
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+  end
+  object pcClassOptions: TPageControl
+    Left = 8
+    Top = 8
+    Width = 345
+    Height = 289
+    ActivePage = tshGeneric
+    TabOrder = 0
+    object tshGeneric: TTabSheet
+      Caption = 'General'
+      object gbxFonts: TGroupBox
+        Left = 8
+        Top = 72
+        Width = 321
+        Height = 105
+        Caption = 'Fonts'
+        TabOrder = 1
+        object lblTreeViewFont: TLabel
+          Left = 8
+          Top = 27
+          Width = 65
+          Height = 13
+          Caption = '&Treeview font'
+          FocusControl = cbTreeView
+        end
+        object lblListViewFont: TLabel
+          Left = 8
+          Top = 52
+          Width = 59
+          Height = 13
+          Caption = '&Listview font'
+          FocusControl = cbListView
+        end
+        object lblEditorFont: TLabel
+          Left = 8
+          Top = 76
+          Width = 48
+          Height = 13
+          Caption = '&Editor font'
+          FocusControl = cbEditor
+        end
+        object cbTreeView: TComboBox
+          Left = 88
+          Top = 24
+          Width = 180
+          Height = 21
+          Style = csDropDownList
+          ItemHeight = 13
+          TabOrder = 0
+        end
+        object cbListView: TComboBox
+          Left = 88
+          Top = 48
+          Width = 180
+          Height = 21
+          Style = csDropDownList
+          ItemHeight = 13
+          TabOrder = 2
+        end
+        object cbEditor: TComboBox
+          Left = 88
+          Top = 72
+          Width = 180
+          Height = 21
+          Style = csDropDownList
+          ItemHeight = 13
+          TabOrder = 4
+        end
+        object sTreeView: TSpinIntEdit
+          Left = 272
+          Top = 24
+          Width = 41
+          Height = 21
+          Value = 0
+          TabOrder = 1
+        end
+        object sListView: TSpinIntEdit
+          Left = 272
+          Top = 48
+          Width = 41
+          Height = 21
+          Value = 0
+          TabOrder = 3
+        end
+        object sEditor: TSpinIntEdit
+          Left = 272
+          Top = 72
+          Width = 41
+          Height = 21
+          Value = 0
+          TabOrder = 5
+        end
+      end
+      object gbxFiles: TGroupBox
+        Left = 8
+        Top = 8
+        Width = 321
+        Height = 57
+        Caption = 'Files'
+        TabOrder = 0
+        object lblStoragePath: TLabel
+          Left = 8
+          Top = 24
+          Width = 61
+          Height = 13
+          Caption = 'Storage &path'
+          FocusControl = edStorage
+        end
+        object sbStoragePath: TSpeedButton
+          Left = 296
+          Top = 20
+          Width = 21
+          Height = 21
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            0400000000000001000000000000000000001000000010000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+            5555555555555555555555555555555555555555555555555555555555555555
+            555555555555555555555555555555555555555FFFFFFFFFF555550000000000
+            55555577777777775F55500B8B8B8B8B05555775F555555575F550F0B8B8B8B8
+            B05557F75F555555575F50BF0B8B8B8B8B0557F575FFFFFFFF7F50FBF0000000
+            000557F557777777777550BFBFBFBFB0555557F555555557F55550FBFBFBFBF0
+            555557F555555FF7555550BFBFBF00055555575F555577755555550BFBF05555
+            55555575FFF75555555555700007555555555557777555555555555555555555
+            5555555555555555555555555555555555555555555555555555}
+          NumGlyphs = 2
+          OnClick = sbStoragePathClick
+        end
+        object edStorage: TEdit
+          Left = 80
+          Top = 20
+          Width = 217
+          Height = 21
+          TabOrder = 0
+          Text = 'edStorage'
+        end
+      end
+      object cbAutoHide: TCheckBox
+        Left = 16
+        Top = 200
+        Width = 317
+        Height = 17
+        Caption = '&Automatically hide class browser window'
+        TabOrder = 2
+      end
+    end
+    object tshFilters: TTabSheet
+      Caption = 'Configuration'
+      object gbxFilters: TGroupBox
+        Left = 8
+        Top = 8
+        Width = 321
+        Height = 113
+        Caption = 'Default Filters'
+        TabOrder = 0
+        object cbConstants: TCheckBox
+          Left = 8
+          Top = 24
+          Width = 169
+          Height = 17
+          Caption = 'Constants'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+        end
+        object cbMethods: TCheckBox
+          Tag = 1
+          Left = 8
+          Top = 40
+          Width = 97
+          Height = 17
+          Caption = 'Methods'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+        end
+        object cbTypes: TCheckBox
+          Tag = 2
+          Left = 8
+          Top = 56
+          Width = 97
+          Height = 17
+          Caption = 'Types'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+        end
+        object cbVariables: TCheckBox
+          Tag = 3
+          Left = 8
+          Top = 72
+          Width = 97
+          Height = 17
+          Caption = 'Variables'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 3
+        end
+        object cbProperties: TCheckBox
+          Tag = 4
+          Left = 8
+          Top = 88
+          Width = 97
+          Height = 17
+          Caption = 'Properties'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 4
+        end
+        object cbPrivate: TCheckBox
+          Tag = 5
+          Left = 184
+          Top = 24
+          Width = 97
+          Height = 17
+          Caption = 'Private'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 5
+        end
+        object cbProtected: TCheckBox
+          Tag = 6
+          Left = 184
+          Top = 40
+          Width = 97
+          Height = 17
+          Caption = 'Protected'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 6
+        end
+        object cbPublic: TCheckBox
+          Tag = 7
+          Left = 184
+          Top = 56
+          Width = 97
+          Height = 17
+          Caption = 'Public'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 7
+        end
+        object cbPublished: TCheckBox
+          Tag = 8
+          Left = 184
+          Top = 72
+          Width = 97
+          Height = 17
+          Caption = 'Published'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 8
+        end
+      end
+      object gbxDiagram: TGroupBox
+        Left = 8
+        Top = 128
+        Width = 321
+        Height = 65
+        Caption = 'Diagram Options'
+        TabOrder = 1
+        object cbTop: TCheckBox
+          Left = 8
+          Top = 24
+          Width = 305
+          Height = 17
+          Caption = 'Show most primitive class at top of diagram'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+        end
+        object cbStayInPackage: TCheckBox
+          Left = 8
+          Top = 40
+          Width = 305
+          Height = 17
+          Caption = 'Stay in source folder'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+        end
+      end
+      object gbxSearch: TGroupBox
+        Left = 8
+        Top = 200
+        Width = 321
+        Height = 49
+        Caption = 'Parse Options'
+        TabOrder = 2
+        object cbParseRecursing: TCheckBox
+          Left = 8
+          Top = 24
+          Width = 305
+          Height = 17
+          Caption = 'Parsing looks for files recursively in subfolders'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
+    end
+  end
+end

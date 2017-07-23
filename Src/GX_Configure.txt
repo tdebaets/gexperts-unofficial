@@ -1,0 +1,823 @@
+object fmConfiguration: TfmConfiguration
+  Left = 320
+  Top = 134
+  BorderStyle = bsDialog
+  Caption = 'GExperts Configuration'
+  ClientHeight = 380
+  ClientWidth = 485
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object btnOK: TButton
+    Left = 243
+    Top = 350
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    TabOrder = 1
+    OnClick = btnOKClick
+  end
+  object btnHelp: TButton
+    Left = 403
+    Top = 350
+    Width = 75
+    Height = 25
+    Caption = '&Help'
+    TabOrder = 3
+    OnClick = btnHelpClick
+  end
+  object pcConfig: TPageControl
+    Left = 7
+    Top = 4
+    Width = 470
+    Height = 341
+    ActivePage = tshExperts
+    HotTrack = True
+    MultiLine = True
+    TabOrder = 0
+    OnChange = pcConfigChange
+    object tshExperts: TTabSheet
+      Caption = 'Experts'
+      object sbxExperts: TScrollBox
+        Left = 0
+        Top = 0
+        Width = 462
+        Height = 313
+        VertScrollBar.Increment = 40
+        VertScrollBar.Range = 920
+        VertScrollBar.Tracking = True
+        Align = alClient
+        AutoScroll = False
+        TabOrder = 0
+      end
+    end
+    object tshGeneral: TTabSheet
+      Caption = 'File Locations'
+      object gbxLocations: TGroupBox
+        Left = 8
+        Top = 8
+        Width = 297
+        Height = 169
+        Caption = 'File Locations'
+        TabOrder = 0
+        object lblVCL: TLabel
+          Left = 12
+          Top = 24
+          Width = 98
+          Height = 13
+          Caption = '&VCL source directory'
+          FocusControl = edVCLPath
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object sbVCLDir: TSpeedButton
+          Left = 260
+          Top = 39
+          Width = 25
+          Height = 23
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            0400000000000001000000000000000000001000000010000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+            5555555555555555555555555555555555555555555555555555555555555555
+            555555555555555555555555555555555555555FFFFFFFFFF555550000000000
+            55555577777777775F55500B8B8B8B8B05555775F555555575F550F0B8B8B8B8
+            B05557F75F555555575F50BF0B8B8B8B8B0557F575FFFFFFFF7F50FBF0000000
+            000557F557777777777550BFBFBFBFB0555557F555555557F55550FBFBFBFBF0
+            555557F555555FF7555550BFBFBF00055555575F555577755555550BFBF05555
+            55555575FFF75555555555700007555555555557777555555555555555555555
+            5555555555555555555555555555555555555555555555555555}
+          NumGlyphs = 2
+          OnClick = sbVCLDirClick
+        end
+        object lblConfig: TLabel
+          Left = 12
+          Top = 72
+          Width = 124
+          Height = 13
+          Caption = '&GExperts storage directory'
+          FocusControl = edConfigPath
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object sbConfigDir: TSpeedButton
+          Left = 260
+          Top = 87
+          Width = 25
+          Height = 23
+          Glyph.Data = {
+            76010000424D7601000000000000760000002800000020000000100000000100
+            0400000000000001000000000000000000001000000010000000000000000000
+            800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+            5555555555555555555555555555555555555555555555555555555555555555
+            555555555555555555555555555555555555555FFFFFFFFFF555550000000000
+            55555577777777775F55500B8B8B8B8B05555775F555555575F550F0B8B8B8B8
+            B05557F75F555555575F50BF0B8B8B8B8B0557F575FFFFFFFF7F50FBF0000000
+            000557F557777777777550BFBFBFBFB0555557F555555557F55550FBFBFBFBF0
+            555557F555555FF7555550BFBFBF00055555575F555577755555550BFBF05555
+            55555575FFF75555555555700007555555555557777555555555555555555555
+            5555555555555555555555555555555555555555555555555555}
+          NumGlyphs = 2
+          OnClick = sbConfigDirClick
+        end
+        object lblHelp: TLabel
+          Left = 12
+          Top = 120
+          Width = 38
+          Height = 13
+          Caption = 'Help &file'
+          FocusControl = edHelpFile
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object sbHelpFile: TSpeedButton
+          Left = 260
+          Top = 135
+          Width = 25
+          Height = 23
+          Glyph.Data = {
+            36050000424D3605000000000000360400002800000010000000100000000100
+            0800000000000001000000000000000000000001000000010000000000004000
+            000080000000FF000000002000004020000080200000FF200000004000004040
+            000080400000FF400000006000004060000080600000FF600000008000004080
+            000080800000FF80000000A0000040A0000080A00000FFA0000000C0000040C0
+            000080C00000FFC0000000FF000040FF000080FF0000FFFF0000000020004000
+            200080002000FF002000002020004020200080202000FF202000004020004040
+            200080402000FF402000006020004060200080602000FF602000008020004080
+            200080802000FF80200000A0200040A0200080A02000FFA0200000C0200040C0
+            200080C02000FFC0200000FF200040FF200080FF2000FFFF2000000040004000
+            400080004000FF004000002040004020400080204000FF204000004040004040
+            400080404000FF404000006040004060400080604000FF604000008040004080
+            400080804000FF80400000A0400040A0400080A04000FFA0400000C0400040C0
+            400080C04000FFC0400000FF400040FF400080FF4000FFFF4000000060004000
+            600080006000FF006000002060004020600080206000FF206000004060004040
+            600080406000FF406000006060004060600080606000FF606000008060004080
+            600080806000FF80600000A0600040A0600080A06000FFA0600000C0600040C0
+            600080C06000FFC0600000FF600040FF600080FF6000FFFF6000000080004000
+            800080008000FF008000002080004020800080208000FF208000004080004040
+            800080408000FF408000006080004060800080608000FF608000008080004080
+            800080808000FF80800000A0800040A0800080A08000FFA0800000C0800040C0
+            800080C08000FFC0800000FF800040FF800080FF8000FFFF80000000A0004000
+            A0008000A000FF00A0000020A0004020A0008020A000FF20A0000040A0004040
+            A0008040A000FF40A0000060A0004060A0008060A000FF60A0000080A0004080
+            A0008080A000FF80A00000A0A00040A0A00080A0A000FFA0A00000C0A00040C0
+            A00080C0A000FFC0A00000FFA00040FFA00080FFA000FFFFA0000000C0004000
+            C0008000C000FF00C0000020C0004020C0008020C000FF20C0000040C0004040
+            C0008040C000FF40C0000060C0004060C0008060C000FF60C0000080C0004080
+            C0008080C000FF80C00000A0C00040A0C00080A0C000FFA0C00000C0C00040C0
+            C00080C0C000FFC0C00000FFC00040FFC00080FFC000FFFFC0000000FF004000
+            FF008000FF00FF00FF000020FF004020FF008020FF00FF20FF000040FF004040
+            FF008040FF00FF40FF000060FF004060FF008060FF00FF60FF000080FF004080
+            FF008080FF00FF80FF0000A0FF0040A0FF0080A0FF00FFA0FF0000C0FF0040C0
+            FF0080C0FF00FFC0FF0000FFFF0040FFFF0080FFFF00FFFFFF001F1F1F1F1F1F
+            1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F40401F1F1F1F1F1F1F1F1F1F1F1F40
+            40B748401F1F1F1F1F1F1F1F1F4040B7B7694148401F1F1F1F1F1F4040B7B76D
+            4141414848401F1F1F1F4000B76D4141414141414848401F1F1F4000694141FC
+            41414141414848401F1F4041414141416D41414141414848401F6B6141414141
+            B4FC41414141414848401F6B6141414141B4FCFCFC494141481F1F1F6B614141
+            4141414141FC4941411F1F1F1F6B61414169414141FC414141611F1F1F1F6B61
+            4169B4FCFC414141611F1F1F1F1F1F6B614141414141611F1F1F1F1F1F1F1F1F
+            6B614141611F1F1F1F1F1F1F1F1F1F1F1F6B611F1F1F1F1F1F1F}
+          OnClick = sbHelpFileClick
+        end
+        object edVCLPath: TEdit
+          Left = 12
+          Top = 40
+          Width = 249
+          Height = 21
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+        end
+        object edConfigPath: TEdit
+          Left = 12
+          Top = 88
+          Width = 249
+          Height = 21
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+        end
+        object edHelpFile: TEdit
+          Left = 12
+          Top = 136
+          Width = 249
+          Height = 21
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+        end
+      end
+    end
+    object tshEditorExperts: TTabSheet
+      Caption = 'Editor Experts'
+      object gbxKeyboard: TGroupBox
+        Left = 3
+        Top = 9
+        Width = 455
+        Height = 301
+        Caption = 'Editor Experts'
+        TabOrder = 0
+        object btnConfigure: TButton
+          Left = 371
+          Top = 67
+          Width = 75
+          Height = 25
+          Caption = '&Configure'
+          Enabled = False
+          TabOrder = 1
+          OnClick = btnConfigureClick
+        end
+        object btnShortcut: TButton
+          Left = 371
+          Top = 99
+          Width = 75
+          Height = 25
+          Caption = '&Shortcut'
+          Enabled = False
+          TabOrder = 2
+          OnClick = btnShortcutClick
+        end
+        object meHelp: TMemo
+          Left = 8
+          Top = 183
+          Width = 437
+          Height = 111
+          TabStop = False
+          Color = clInfoBk
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clInfoText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          ScrollBars = ssVertical
+          TabOrder = 3
+        end
+        object chkDisableEditorExperts: TCheckBox
+          Left = 372
+          Top = 22
+          Width = 80
+          Height = 21
+          Caption = '&Disable all'
+          TabOrder = 0
+          OnClick = chkDisableEditorExpertsClick
+        end
+        object lvEditorExperts: TListView
+          Left = 8
+          Top = 22
+          Width = 357
+          Height = 155
+          ColumnClick = False
+          Columns = <
+            item
+              Caption = 'Expert'
+              Width = 233
+            end
+            item
+              Caption = 'Shortcut Key'
+              Width = 120
+            end>
+          ReadOnly = True
+          HideSelection = False
+          RowSelect = True
+          OnChange = lvEditorExpertsChange
+          TabOrder = 4
+          ViewStyle = vsReport
+        end
+      end
+    end
+    object tshIDE: TTabSheet
+      Caption = 'IDE'
+      object gbxIDEMenu: TGroupBox
+        Left = 8
+        Top = 83
+        Width = 265
+        Height = 110
+        Caption = '&Menu'
+        TabOrder = 1
+        object chkShowWindowsMenu: TCheckBox
+          Left = 8
+          Top = 18
+          Width = 253
+          Height = 17
+          Caption = 'Add a Windows menu'
+          TabOrder = 0
+        end
+        object chkShowAPIMenu: TCheckBox
+          Left = 8
+          Top = 34
+          Width = 253
+          Height = 17
+          Caption = 'Show Windows API help menu item (Delphi 3)'
+          TabOrder = 1
+        end
+        object chkShowCPUMenu: TCheckBox
+          Left = 8
+          Top = 50
+          Width = 253
+          Height = 17
+          Caption = 'Show CPU view menu item (Delphi 3)'
+          TabOrder = 2
+        end
+        object chkShowAttachToMenu: TCheckBox
+          Left = 8
+          Top = 66
+          Width = 253
+          Height = 17
+          Caption = 'Show Attach to Process menu item (Delphi 4)'
+          TabOrder = 3
+        end
+        object chkAlphabetizeMenu: TCheckBox
+          Left = 8
+          Top = 82
+          Width = 253
+          Height = 17
+          Caption = 'Alphabetize the GExperts menu items'
+          TabOrder = 4
+        end
+      end
+      object gbxFonts: TGroupBox
+        Left = 8
+        Top = 207
+        Width = 265
+        Height = 74
+        Caption = 'Custom &Fonts'
+        TabOrder = 2
+        object btnOIFont: TButton
+          Left = 11
+          Top = 20
+          Width = 113
+          Height = 25
+          Caption = 'Object Inspector...'
+          TabOrder = 0
+          OnClick = btnFontClick
+        end
+        object btnCPFont: TButton
+          Left = 139
+          Top = 20
+          Width = 113
+          Height = 25
+          Caption = 'Component Palette...'
+          TabOrder = 2
+          OnClick = btnFontClick
+        end
+        object chkOIFontEnabled: TCheckBox
+          Left = 40
+          Top = 48
+          Width = 57
+          Height = 17
+          Caption = 'Enable'
+          TabOrder = 1
+          OnClick = chkFontEnabledClick
+        end
+        object chkCPFontEnabled: TCheckBox
+          Left = 168
+          Top = 48
+          Width = 61
+          Height = 17
+          Caption = 'Enable'
+          TabOrder = 3
+          OnClick = chkFontEnabledClick
+        end
+      end
+      object chkDisableIDEEnhancements: TCheckBox
+        Left = 280
+        Top = 12
+        Width = 181
+        Height = 17
+        Caption = '&Disable all IDE enhancements'
+        TabOrder = 3
+        OnClick = chkDisableIDEEnhancementsClick
+      end
+      object gbxFileSaving: TGroupBox
+        Left = 280
+        Top = 83
+        Width = 173
+        Height = 110
+        Caption = 'File &Saving'
+        TabOrder = 4
+        object lblEvery: TLabel
+          Left = 33
+          Top = 44
+          Width = 27
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Every'
+        end
+        object lblMinutes: TLabel
+          Left = 112
+          Top = 44
+          Width = 42
+          Height = 13
+          Caption = 'minute(s)'
+        end
+        object spnMinutes: TSpinIntEdit
+          Left = 64
+          Top = 40
+          Width = 45
+          Height = 21
+          Value = 1
+          TabOrder = 1
+        end
+        object chkAutoSave: TCheckBox
+          Left = 12
+          Top = 20
+          Width = 153
+          Height = 17
+          Caption = 'Enable auto save of files'
+          TabOrder = 0
+          OnClick = chkAutoSaveClick
+        end
+        object chkDfmAsText: TCheckBox
+          Left = 12
+          Top = 74
+          Width = 157
+          Height = 17
+          Caption = 'Save DFMs as TXT'
+          TabOrder = 2
+        end
+      end
+      object gbxTabDockHost: TGroupBox
+        Left = 8
+        Top = 8
+        Width = 265
+        Height = 57
+        Caption = 'Tab Dock &Hosts (Delphi 4+)'
+        TabOrder = 0
+        object chkMultiLineTabDockHost: TCheckBox
+          Left = 8
+          Top = 16
+          Width = 249
+          Height = 17
+          Caption = 'Enable multiline tabs for IDE dock hosts'
+          TabOrder = 0
+          OnClick = chkMultiLineTabDockHostClick
+        end
+        object chkDefaultMultiLineTabDockHost: TCheckBox
+          Left = 24
+          Top = 35
+          Width = 233
+          Height = 17
+          Caption = 'Default to multiline tabs'
+          TabOrder = 1
+        end
+      end
+    end
+    object tshPalette: TTabSheet
+      Caption = 'Palette'
+      object gbxCompPalette: TGroupBox
+        Left = 8
+        Top = 8
+        Width = 265
+        Height = 153
+        Caption = 'Component &Palette'
+        TabOrder = 0
+        object chkCPMultiLine: TCheckBox
+          Left = 8
+          Top = 22
+          Width = 240
+          Height = 17
+          Caption = 'Multi-line tabs'
+          TabOrder = 0
+          OnClick = chkCPMultiLineClick
+        end
+        object chkCPAsButtons: TCheckBox
+          Left = 8
+          Top = 73
+          Width = 240
+          Height = 17
+          Caption = 'Show tabs as buttons'
+          TabOrder = 3
+          OnClick = chkCPAsButtonsClick
+        end
+        object chkCPTabsInPopup: TCheckBox
+          Left = 8
+          Top = 108
+          Width = 240
+          Height = 17
+          Caption = 'Add component tab names to popup menu'
+          TabOrder = 5
+          OnClick = chkCPTabsInPopupClick
+        end
+        object chkCPFlat: TCheckBox
+          Left = 24
+          Top = 90
+          Width = 225
+          Height = 17
+          Caption = 'Flat buttons (Delphi 4+)'
+          TabOrder = 4
+        end
+        object chkCPTabsInPopupAlphaSort: TCheckBox
+          Left = 24
+          Top = 125
+          Width = 225
+          Height = 19
+          Caption = 'Show tab names in alphabetical order'
+          TabOrder = 6
+        end
+        object chkCPScrollOpposite: TCheckBox
+          Left = 24
+          Top = 39
+          Width = 224
+          Height = 17
+          Caption = 'Scroll &opposite'
+          TabOrder = 1
+        end
+        object chkCPRaggedRight: TCheckBox
+          Left = 24
+          Top = 56
+          Width = 224
+          Height = 17
+          Caption = 'Ragged &right'
+          TabOrder = 2
+        end
+      end
+    end
+    object tshEditor: TTabSheet
+      Caption = 'Code Editor'
+      object gbxEditor: TGroupBox
+        Left = 8
+        Top = 6
+        Width = 201
+        Height = 99
+        Caption = 'Editor Ta&bs'
+        TabOrder = 0
+        object chkMultiLine: TCheckBox
+          Left = 8
+          Top = 21
+          Width = 177
+          Height = 17
+          Caption = 'Multiline editor tabs (Delphi 3)'
+          TabOrder = 0
+        end
+        object chkHotTrack: TCheckBox
+          Left = 8
+          Top = 37
+          Width = 169
+          Height = 17
+          Caption = 'Hot tracking'
+          TabOrder = 1
+        end
+        object chkButtons: TCheckBox
+          Left = 8
+          Top = 53
+          Width = 169
+          Height = 17
+          Caption = 'Button style'
+          TabOrder = 2
+          OnClick = chkButtonsClick
+        end
+        object chkEditTabButtonsFlat: TCheckBox
+          Left = 24
+          Top = 72
+          Width = 161
+          Height = 17
+          Caption = 'Flat buttons (Delphi 4+)'
+          Enabled = False
+          TabOrder = 3
+        end
+      end
+      object gbxEditMenu: TGroupBox
+        Left = 216
+        Top = 118
+        Width = 241
+        Height = 63
+        Caption = 'Editor &Menus'
+        TabOrder = 3
+        object chkLocalEditMenus: TCheckBox
+          Left = 8
+          Top = 21
+          Width = 200
+          Height = 17
+          Caption = 'Add Cut, Copy, and Paste to popup'
+          TabOrder = 0
+          OnClick = chkLocalEditMenusClick
+        end
+        object chkLocalEditMenusTop: TCheckBox
+          Left = 24
+          Top = 37
+          Width = 209
+          Height = 17
+          Caption = 'Insert menus at top of popup (Delphi 3)'
+          TabOrder = 1
+        end
+      end
+      object gbxToolbar: TGroupBox
+        Left = 8
+        Top = 118
+        Width = 201
+        Height = 139
+        Caption = 'Editor &Toolbar'
+        TabOrder = 1
+        object chkEditorToolbar: TCheckBox
+          Left = 8
+          Top = 21
+          Width = 145
+          Height = 17
+          Caption = 'Enable editor toolbar'
+          TabOrder = 0
+          OnClick = chkEditorToolbarClick
+        end
+        object rgAlign: TRadioGroup
+          Left = 24
+          Top = 40
+          Width = 169
+          Height = 89
+          Caption = 'Align'
+          Items.Strings = (
+            'Top'
+            'Bottom'
+            'Left'
+            'Right')
+          TabOrder = 1
+        end
+      end
+      object chkDisableEDTEnhancements: TCheckBox
+        Left = 216
+        Top = 11
+        Width = 200
+        Height = 17
+        Caption = '&Disable all editor enhancements'
+        TabOrder = 2
+        OnClick = chkDisableEDTEnhancementsClick
+      end
+      object chkEditorFontControl: TCheckBox
+        Left = 220
+        Top = 191
+        Width = 185
+        Height = 17
+        Caption = 'Add editor font control to toolbar ?'
+        TabOrder = 4
+        Visible = False
+      end
+    end
+    object tshToolBar: TTabSheet
+      Caption = 'Toolbar Buttons'
+      object lblCategories: TLabel
+        Left = 5
+        Top = 12
+        Width = 50
+        Height = 13
+        Caption = '&Categories'
+        FocusControl = lbCategory
+      end
+      object lblAvailable: TLabel
+        Left = 91
+        Top = 12
+        Width = 82
+        Height = 13
+        Caption = '&Available Buttons'
+        FocusControl = lbAvailable
+      end
+      object sbAdd: TSpeedButton
+        Left = 261
+        Top = 132
+        Width = 25
+        Height = 25
+        Glyph.Data = {
+          DE000000424DDE0000000000000076000000280000000D0000000D0000000100
+          0400000000006800000000000000000000001000000010000000000000000000
+          BF0000BF000000BFBF00BF000000BF00BF00BFBF0000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777777777777
+          7000777777077777700077777700777770007777770607777000770000066077
+          7000770666666607700077066666666070007706666666077000770000066077
+          7000777777060777700077777700777770007777770777777000777777777777
+          7000}
+        OnClick = sbAddClick
+      end
+      object sbRemove: TSpeedButton
+        Left = 261
+        Top = 164
+        Width = 25
+        Height = 25
+        Glyph.Data = {
+          DE000000424DDE0000000000000076000000280000000D0000000D0000000100
+          0400000000006800000000000000000000001000000010000000000000000000
+          BF0000BF000000BFBF00BF000000BF00BF00BFBF0000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777777777777
+          7000777777077777700077777007777770007777060777777000777066000007
+          7000770666666607700070666666660770007706666666077000777066000007
+          7000777706077777700077777007777770007777770777777000777777777777
+          7000}
+        OnClick = sbRemoveClick
+      end
+      object lblSelected: TLabel
+        Left = 291
+        Top = 12
+        Width = 81
+        Height = 13
+        Caption = '&Selected Buttons'
+        FocusControl = lbSelected
+      end
+      object lbCategory: TListBox
+        Left = 4
+        Top = 30
+        Width = 81
+        Height = 279
+        ItemHeight = 13
+        TabOrder = 0
+        OnClick = lbCategoryClick
+      end
+      object lbAvailable: TListBox
+        Left = 88
+        Top = 30
+        Width = 169
+        Height = 279
+        DragMode = dmAutomatic
+        ItemHeight = 22
+        Style = lbOwnerDrawFixed
+        TabOrder = 1
+        OnDragDrop = lbAvailableDragDrop
+        OnDragOver = lbAvailableDragOver
+        OnDrawItem = lbButtonGenericDrawItem
+      end
+      object lbSelected: TListBox
+        Left = 290
+        Top = 30
+        Width = 167
+        Height = 253
+        DragMode = dmAutomatic
+        ItemHeight = 22
+        Style = lbOwnerDrawFixed
+        TabOrder = 2
+        OnDragDrop = lbSelectedDragDrop
+        OnDragOver = lbSelectedDragOver
+        OnDrawItem = lbButtonGenericDrawItem
+        OnKeyDown = lbSelectedKeyDown
+      end
+      object btnSeparator: TButton
+        Left = 291
+        Top = 285
+        Width = 166
+        Height = 25
+        Caption = 'Add Se&parator'
+        TabOrder = 3
+        OnClick = btnSeparatorClick
+      end
+    end
+  end
+  object btnCancel: TButton
+    Left = 323
+    Top = 350
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 2
+  end
+  object dlgHelpFile: TOpenDialog
+    DefaultExt = '.hlp'
+    Filter = 'Help Files (*.hlp)|*.hlp'
+    Options = [ofPathMustExist, ofFileMustExist]
+    Title = 'Select Help File'
+    Left = 6
+    Top = 348
+  end
+  object dlgFont: TFontDialog
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    MinFontSize = 6
+    MaxFontSize = 24
+    Options = []
+    Left = 36
+    Top = 348
+  end
+end

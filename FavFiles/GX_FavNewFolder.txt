@@ -1,0 +1,82 @@
+object fmFavNewFolder: TfmFavNewFolder
+  Left = 266
+  Top = 185
+  BorderStyle = bsDialog
+  Caption = 'New Folder'
+  ClientHeight = 127
+  ClientWidth = 280
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object gbxNewFolder: TGroupBox
+    Left = 8
+    Top = 8
+    Width = 265
+    Height = 81
+    Caption = 'New Folder'
+    TabOrder = 0
+    object lblFolderName: TLabel
+      Left = 8
+      Top = 28
+      Width = 58
+      Height = 13
+      Caption = 'Folder &name'
+      FocusControl = edtFolderName
+    end
+    object lblFolderType: TLabel
+      Left = 8
+      Top = 52
+      Width = 52
+      Height = 13
+      Caption = 'Folder &type'
+      FocusControl = cbxFolderType
+    end
+    object edtFolderName: TEdit
+      Left = 80
+      Top = 24
+      Width = 177
+      Height = 21
+      TabOrder = 0
+      OnChange = edtFolderNameChange
+    end
+    object cbxFolderType: TComboBox
+      Left = 80
+      Top = 48
+      Width = 177
+      Height = 24
+      Style = csOwnerDrawVariable
+      ItemHeight = 18
+      TabOrder = 1
+      OnDrawItem = cbxFolderTypeDrawItem
+      OnMeasureItem = cbxFolderTypeMeasureItem
+    end
+  end
+  object btnCancel: TButton
+    Left = 200
+    Top = 96
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 1
+  end
+  object btnOK: TButton
+    Left = 120
+    Top = 96
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    Enabled = False
+    ModalResult = 1
+    TabOrder = 2
+  end
+end

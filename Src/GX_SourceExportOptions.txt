@@ -1,0 +1,121 @@
+object fmSourceExportOptions: TfmSourceExportOptions
+  Left = 241
+  Top = 144
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Source Export Configuration'
+  ClientHeight = 372
+  ClientWidth = 410
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblElement: TLabel
+    Left = 194
+    Top = 12
+    Width = 38
+    Height = 13
+    Caption = 'Element'
+  end
+  object btnCancel: TButton
+    Left = 327
+    Top = 339
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 5
+  end
+  object btnOK: TButton
+    Left = 247
+    Top = 339
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 4
+  end
+  object rbxCopySettings: TRadioGroup
+    Left = 8
+    Top = 8
+    Width = 169
+    Height = 81
+    Caption = ' Default Clipboard Copy Format '
+    Items.Strings = (
+      'Copy as Text/RTF/HTML'
+      'Copy as HTML fragment'
+      'Copy as RTF fragment')
+    TabOrder = 0
+  end
+  object cbxAttributes: TComboBox
+    Left = 240
+    Top = 8
+    Width = 160
+    Height = 21
+    Style = csDropDownList
+    ItemHeight = 13
+    TabOrder = 1
+    OnChange = cbxAttributesChange
+  end
+  object gbxAttributes: TGroupBox
+    Left = 193
+    Top = 32
+    Width = 208
+    Height = 121
+    Caption = ' Element Attributes '
+    TabOrder = 2
+    object chkBold: TCheckBox
+      Left = 120
+      Top = 16
+      Width = 81
+      Height = 17
+      Caption = '&Bold'
+      TabOrder = 0
+      OnClick = AttributeChange
+    end
+    object chkItalic: TCheckBox
+      Left = 120
+      Top = 32
+      Width = 81
+      Height = 17
+      Caption = '&Italic'
+      TabOrder = 1
+      OnClick = AttributeChange
+    end
+    object chkUnderline: TCheckBox
+      Left = 120
+      Top = 48
+      Width = 81
+      Height = 17
+      Caption = '&Underline'
+      TabOrder = 2
+      OnClick = AttributeChange
+    end
+    object chkStrikeOut: TCheckBox
+      Left = 120
+      Top = 64
+      Width = 81
+      Height = 17
+      Caption = '&Strike out'
+      TabOrder = 3
+      OnClick = AttributeChange
+    end
+  end
+  object btnLoadIde: TButton
+    Left = 8
+    Top = 128
+    Width = 101
+    Height = 25
+    Caption = '&Load IDE Settings'
+    TabOrder = 3
+    OnClick = btnLoadIdeClick
+  end
+end

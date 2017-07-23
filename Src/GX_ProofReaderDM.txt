@@ -1,0 +1,77 @@
+object dmProofReader: TdmProofReader
+  Left = 285
+  Top = 161
+  Height = 161
+  Width = 248
+  object Database: TDatabase
+    DatabaseName = 'ACData'
+    DriverName = 'STANDARD'
+    LoginPrompt = False
+    Params.Strings = (
+      'PATH='
+      'DEFAULT DRIVER=PARADOX'
+      'ENABLE BCD=FALSE')
+    SessionName = 'Default'
+    Left = 24
+    Top = 12
+  end
+  object Session: TSession
+    KeepConnections = False
+    SQLHourGlass = False
+    Left = 24
+    Top = 60
+  end
+  object tReplacement: TTable
+    BeforePost = tReplacementBeforePost
+    OnNewRecord = tReplacementNewRecord
+    DatabaseName = 'ACData'
+    TableName = 'Replacement'
+    Left = 96
+    Top = 12
+    object tReplacementLanguage: TSmallintField
+      FieldName = 'Language'
+    end
+    object tReplacementTyped: TStringField
+      DisplayLabel = 'Watch For'
+      FieldName = 'Typed'
+      OnSetText = tReplacementTypedSetText
+    end
+    object tReplacementWhereReplace: TSmallintField
+      DisplayLabel = 'Where?'
+      DisplayWidth = 12
+      FieldName = 'WhereReplace'
+      OnGetText = tReplacementWhereReplaceGetText
+      OnSetText = tReplacementWhereReplaceSetText
+    end
+    object tReplacementReplace: TStringField
+      DisplayLabel = 'Replace With'
+      FieldName = 'Replace'
+    end
+  end
+  object dsReplacement: TDataSource
+    DataSet = tReplacement
+    Left = 96
+    Top = 60
+  end
+  object tDictionary: TTable
+    OnNewRecord = tReplacementNewRecord
+    DatabaseName = 'ACData'
+    TableName = 'Dictionary'
+    Left = 176
+    Top = 12
+    object tDictionaryLanguage: TSmallintField
+      FieldName = 'Language'
+    end
+    object tDictionaryWord: TStringField
+      DisplayLabel = 'Dictionary Words'
+      DisplayWidth = 30
+      FieldName = 'Word'
+      Size = 30
+    end
+  end
+  object dsDictionary: TDataSource
+    DataSet = tDictionary
+    Left = 176
+    Top = 60
+  end
+end

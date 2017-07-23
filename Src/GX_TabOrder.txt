@@ -1,0 +1,66 @@
+object fmTabOrder: TfmTabOrder
+  Left = 369
+  Top = 198
+  ActiveControl = btnOK
+  BorderStyle = bsDialog
+  Caption = 'Set Tab Order'
+  ClientHeight = 265
+  ClientWidth = 295
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clBlack
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnKeyUp = FormKeyUp
+  PixelsPerInch = 96
+  TextHeight = 13
+  object gbxComponents: TGroupBox
+    Left = 8
+    Top = 8
+    Width = 205
+    Height = 249
+    Caption = 'Selected Components'
+    TabOrder = 0
+    object lbxComps: TListBox
+      Left = 7
+      Top = 18
+      Width = 190
+      Height = 223
+      ItemHeight = 13
+      TabOrder = 0
+    end
+  end
+  object btnOK: TButton
+    Left = 220
+    Top = 14
+    Width = 69
+    Height = 23
+    Caption = 'OK'
+    Default = True
+    TabOrder = 1
+    OnClick = btnOKClick
+  end
+  object btnClose: TButton
+    Left = 220
+    Top = 43
+    Width = 69
+    Height = 23
+    Cancel = True
+    Caption = 'Cancel'
+    TabOrder = 2
+    OnClick = btnCloseClick
+  end
+  object btnHelp: TButton
+    Left = 220
+    Top = 80
+    Width = 69
+    Height = 23
+    Caption = '&Help'
+    TabOrder = 3
+    OnClick = btnHelpClick
+  end
+end

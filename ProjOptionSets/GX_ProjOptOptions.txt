@@ -1,0 +1,66 @@
+object fmProjOptOptions: TfmProjOptOptions
+  Left = 379
+  Top = 317
+  BorderStyle = bsDialog
+  Caption = 'Project Option Sets Options'
+  ClientHeight = 77
+  ClientWidth = 271
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblStoragePath: TLabel
+    Left = 3
+    Top = 4
+    Width = 62
+    Height = 13
+    Caption = 'Storage Path'
+  end
+  object sbnBrowse: TSpeedButton
+    Left = 241
+    Top = 18
+    Width = 25
+    Height = 25
+    Glyph.Data = {
+      EE000000424DEE000000000000007600000028000000100000000F0000000100
+      0400000000007800000000000000000000001000000010000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00CCCCCCCCCCCC
+      CCCC0000000000000CCC00777777777770CC0F0B7B7B7B7B70CC0007B7B7B7B7
+      B70C0F007B7B7B7B7B0C00F0B7B7B7B7B7B00F0F00000000000000F0F0F0F0F0
+      F0CC0F0F0F0F0F0F00CC00F0F0F000000CCCC00F0F00CCCCCCCCCC00000CCCCC
+      CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC}
+    OnClick = sbnBrowseClick
+  end
+  object edtPath: TEdit
+    Left = 3
+    Top = 20
+    Width = 237
+    Height = 21
+    TabOrder = 0
+  end
+  object btnOK: TButton
+    Left = 110
+    Top = 48
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+  end
+  object btnCancel: TButton
+    Left = 192
+    Top = 48
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 2
+  end
+end

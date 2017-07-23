@@ -1,0 +1,73 @@
+inherited fmCPULabels: TfmCPULabels
+  Caption = 'CPU Label Editor'
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lvwLabels: TListView
+    Left = 0
+    Top = 0
+    Width = 402
+    Height = 251
+    Align = alClient
+    Columns = <
+      item
+        AutoSize = True
+        Caption = 'Address'
+      end
+      item
+        AutoSize = True
+        Caption = 'Label'
+      end>
+    HotTrackStyles = []
+    PopupMenu = pmuLabels
+    TabOrder = 0
+    ViewStyle = vsReport
+    OnSelectItem = lvwLabelsSelectItem
+  end
+  object pmuLabels: TPopupMenu
+    Left = 12
+    Top = 32
+    object mitEditLabel: TMenuItem
+      Caption = '&Edit Label'
+      Enabled = False
+      OnClick = mitEditLabelClick
+    end
+    object mitAdd: TMenuItem
+      Caption = '&Add...'
+      OnClick = mitAddClick
+    end
+    object mitDelete: TMenuItem
+      Caption = '&Delete'
+      Enabled = False
+      OnClick = mitDeleteClick
+    end
+    object mitClear: TMenuItem
+      Caption = '&Clear'
+      OnClick = mitClearClick
+    end
+    object mitSep1: TMenuItem
+      Caption = '-'
+    end
+    object mitOpen: TMenuItem
+      Caption = '&Open...'
+      OnClick = mitOpenClick
+    end
+    object mitSave: TMenuItem
+      Caption = '&Save'
+      OnClick = mitSaveClick
+    end
+    object mitSaveAs: TMenuItem
+      Caption = '&Save As...'
+      OnClick = mitSaveAsClick
+    end
+  end
+  object dlgOpen: TOpenDialog
+    Filter = 'CPU Labels (*.cpu)|*.cpu|All Files (*.*)|*.*'
+    Left = 44
+    Top = 32
+  end
+  object dlgSave: TSaveDialog
+    Filter = 'CPU Labels (*.cpu)|*.cpu|All Files (*.*)|*.*'
+    Left = 76
+    Top = 32
+  end
+end
