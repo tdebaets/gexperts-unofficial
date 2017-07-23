@@ -1,0 +1,97 @@
+object fmAlign: TfmAlign
+  Left = 255
+  Top = 212
+  Width = 179
+  Height = 343
+  Caption = 'Alignment List'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = True
+  OnActivate = FormActivate
+  OnDestroy = FormDestroy
+  OnKeyPress = FormKeyPress
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 275
+    Width = 171
+    Height = 41
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 0
+    object btOk: TButton
+      Left = 1
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object btnCancel: TButton
+      Left = 85
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 171
+    Height = 23
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 1
+    object lblNote: TLabel
+      Left = 10
+      Top = 5
+      Width = 158
+      Height = 13
+      Caption = 'Characters on which to align lines'
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 23
+    Width = 171
+    Height = 252
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 2
+    object edtAlignChars: TEdit
+      Left = 24
+      Top = 203
+      Width = 121
+      Height = 21
+      TabOrder = 0
+    end
+    object lsbAlignList: TListBox
+      Left = 0
+      Top = 0
+      Width = 171
+      Height = 198
+      Align = alTop
+      ItemHeight = 13
+      TabOrder = 1
+    end
+    object btnAdd: TButton
+      Left = 48
+      Top = 227
+      Width = 75
+      Height = 25
+      Caption = '&Add'
+      TabOrder = 2
+    end
+  end
+end

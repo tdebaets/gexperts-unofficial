@@ -1,0 +1,100 @@
+object fmBackupOptions: TfmBackupOptions
+  Left = 373
+  Top = 167
+  BorderStyle = bsDialog
+  Caption = 'Backup Project Options'
+  ClientHeight = 238
+  ClientWidth = 267
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  Position = poScreenCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object GroupBox1: TGroupBox
+    Left = 8
+    Top = 8
+    Width = 252
+    Height = 193
+    Caption = 'Backup Options'
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 32
+      Top = 70
+      Width = 46
+      Height = 13
+      Caption = '&Password'
+      FocusControl = edPassword
+    end
+    object cbIncludeDir: TCheckBox
+      Left = 8
+      Top = 24
+      Width = 225
+      Height = 17
+      Caption = '&Include directory names in backup'
+      TabOrder = 0
+    end
+    object cbPassword: TCheckBox
+      Left = 8
+      Top = 48
+      Width = 217
+      Height = 17
+      Caption = '&Encrypt archive'
+      TabOrder = 1
+      OnClick = cbPasswordClick
+    end
+    object edPassword: TEdit
+      Left = 88
+      Top = 66
+      Width = 153
+      Height = 21
+      Color = clBtnFace
+      Enabled = False
+      TabOrder = 2
+    end
+    object rgScope: TRadioGroup
+      Left = 8
+      Top = 124
+      Width = 233
+      Height = 57
+      Caption = 'Sc&ope (Delphi 4+)'
+      Items.Strings = (
+        'Active project'
+        'Project group')
+      TabOrder = 4
+    end
+    object cbSearchLibraryPath: TCheckBox
+      Left = 8
+      Top = 96
+      Width = 233
+      Height = 17
+      Caption = '&Search library path for included files'
+      Enabled = False
+      TabOrder = 3
+    end
+  end
+  object btnOK: TButton
+    Left = 104
+    Top = 208
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+  end
+  object btnCancel: TButton
+    Left = 184
+    Top = 208
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 2
+  end
+end

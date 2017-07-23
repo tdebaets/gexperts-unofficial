@@ -1,0 +1,120 @@
+object fmClassProp: TfmClassProp
+  Left = 227
+  Top = 125
+  ActiveControl = btnOK
+  BorderStyle = bsDialog
+  Caption = 'Class Properties'
+  ClientHeight = 263
+  ClientWidth = 286
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pgeProperties: TPageControl
+    Left = 8
+    Top = 8
+    Width = 273
+    Height = 217
+    ActivePage = tabProps
+    TabOrder = 0
+    TabStop = False
+    object tabProps: TTabSheet
+      Caption = 'Properties'
+      object lblClassName: TLabel
+        Left = 4
+        Top = 16
+        Width = 54
+        Height = 13
+        Caption = 'Class name'
+      end
+      object lblDerivedFrom: TLabel
+        Left = 4
+        Top = 40
+        Width = 60
+        Height = 13
+        Caption = 'Derived from'
+      end
+      object lblFileName: TLabel
+        Left = 4
+        Top = 104
+        Width = 45
+        Height = 13
+        Caption = 'File name'
+      end
+      object lblLineNumber: TLabel
+        Left = 4
+        Top = 160
+        Width = 58
+        Height = 13
+        Caption = 'Line number'
+      end
+      object lblUnit: TLabel
+        Left = 4
+        Top = 84
+        Width = 19
+        Height = 13
+        Caption = 'Unit'
+      end
+      object edtClassName: TEdit
+        Left = 77
+        Top = 12
+        Width = 183
+        Height = 21
+        Color = clBtnFace
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object edtDerivedFrom: TEdit
+        Left = 77
+        Top = 36
+        Width = 183
+        Height = 21
+        Color = clBtnFace
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object edtLineNo: TEdit
+        Left = 77
+        Top = 156
+        Width = 183
+        Height = 21
+        Color = clBtnFace
+        ReadOnly = True
+        TabOrder = 4
+      end
+      object mmoFileName: TMemo
+        Left = 77
+        Top = 104
+        Width = 183
+        Height = 49
+        Color = clBtnFace
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object edtUnit: TEdit
+        Left = 77
+        Top = 80
+        Width = 183
+        Height = 21
+        Color = clBtnFace
+        ReadOnly = True
+        TabOrder = 2
+      end
+    end
+  end
+  object btnOK: TButton
+    Left = 206
+    Top = 232
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+  end
+end

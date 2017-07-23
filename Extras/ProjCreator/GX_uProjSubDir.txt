@@ -1,0 +1,232 @@
+object fmProjSubDir: TfmProjSubDir
+  Left = 501
+  Top = 150
+  ActiveControl = btnCreate
+  BorderStyle = bsDialog
+  Caption = 'Project Creator'
+  ClientHeight = 401
+  ClientWidth = 404
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = True
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object gbxSubDir: TGroupBox
+    Left = 8
+    Top = 128
+    Width = 390
+    Height = 153
+    Caption = 'Create the Following &Subdirectories'
+    TabOrder = 1
+    object clbSubDir: TCheckListBox
+      Left = 8
+      Top = 16
+      Width = 273
+      Height = 129
+      OnClickCheck = clbSubDirClickCheck
+      Columns = 3
+      ItemHeight = 13
+      Sorted = True
+      TabOrder = 0
+      OnClick = clbSubDirClick
+      OnEnter = clbSubDirClick
+      OnKeyPress = clbSubDirKeyPress
+    end
+    object btnAddSubDir: TButton
+      Left = 300
+      Top = 16
+      Width = 75
+      Height = 25
+      Hint = 'Add a Subdirectory'
+      Caption = '&Add'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnClick = btnAddSubDirClick
+    end
+    object btnRemoveSubDir: TButton
+      Left = 300
+      Top = 48
+      Width = 75
+      Height = 25
+      Hint = 'Remove a Subdirectory'
+      Caption = 'Re&move'
+      Enabled = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = btnRemoveSubDirClick
+    end
+    object btnSave: TButton
+      Left = 300
+      Top = 80
+      Width = 75
+      Height = 25
+      Hint = 'Save current Subdirectories to Registry'
+      Caption = '&Save'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnClick = btnSaveClick
+    end
+  end
+  object gbxDirectories: TGroupBox
+    Left = 8
+    Top = 8
+    Width = 390
+    Height = 113
+    Caption = 'Project  &Directory'
+    TabOrder = 0
+    object lbDirs: TListBox
+      Left = 8
+      Top = 21
+      Width = 273
+      Height = 80
+      ItemHeight = 13
+      MultiSelect = True
+      Style = lbOwnerDrawFixed
+      TabOrder = 0
+      OnClick = lbDirsClick
+      OnDblClick = btnEditDirClick
+      OnDrawItem = lbDirsDrawItem
+      OnKeyPress = lbDirsKeyPress
+    end
+    object btnSelectDir: TButton
+      Left = 300
+      Top = 13
+      Width = 75
+      Height = 25
+      Hint = 'Select a Directory for the Project'
+      Caption = 'Se&lect'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnClick = btnSelectDirClick
+    end
+    object btnRemoveDir: TButton
+      Left = 300
+      Top = 77
+      Width = 75
+      Height = 25
+      Hint = 'Remove the Name of the Subdirectory'
+      Caption = '&Remove'
+      Enabled = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = btnRemoveDirClick
+    end
+    object btnEditDir: TButton
+      Left = 300
+      Top = 45
+      Width = 75
+      Height = 25
+      Hint = 'Edit the Name of the Subdirectory'
+      Caption = '&Edit'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnClick = btnEditDirClick
+    end
+  end
+  object btnCancel: TButton
+    Left = 308
+    Top = 328
+    Width = 75
+    Height = 25
+    Hint = 'Cancel Operation'
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
+  end
+  object btnCreate: TButton
+    Left = 308
+    Top = 296
+    Width = 75
+    Height = 25
+    Hint = 'Create Project with selected Subdirectories'
+    Caption = 'Create'
+    Default = True
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+    OnClick = btnCreateClick
+  end
+  object btnHelp: TButton
+    Left = 308
+    Top = 360
+    Width = 75
+    Height = 25
+    Hint = 'Help'
+    Caption = '&Help'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 4
+    OnClick = btnHelpClick
+  end
+  object gbxPersonal: TGroupBox
+    Left = 8
+    Top = 288
+    Width = 281
+    Height = 105
+    Caption = 'Personal Info'
+    TabOrder = 5
+    object lblAuthor: TLabel
+      Left = 24
+      Top = 24
+      Width = 31
+      Height = 13
+      Caption = '&Author'
+      FocusControl = edAuthor
+    end
+    object lblCompany: TLabel
+      Left = 11
+      Top = 52
+      Width = 44
+      Height = 13
+      Caption = 'Co&mpany'
+      FocusControl = edCompany
+    end
+    object lblCopyright: TLabel
+      Left = 11
+      Top = 80
+      Width = 44
+      Height = 13
+      Caption = 'Co&pyright'
+      FocusControl = edCopyright
+    end
+    object edAuthor: TEdit
+      Left = 61
+      Top = 20
+      Width = 200
+      Height = 21
+      TabOrder = 0
+    end
+    object edCompany: TEdit
+      Left = 61
+      Top = 48
+      Width = 200
+      Height = 21
+      TabOrder = 1
+    end
+    object edCopyright: TEdit
+      Left = 61
+      Top = 76
+      Width = 200
+      Height = 21
+      TabOrder = 2
+      Text = '1999, '
+    end
+  end
+end

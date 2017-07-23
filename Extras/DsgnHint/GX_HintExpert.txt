@@ -1,0 +1,37 @@
+object fmHintWindow: TfmHintWindow
+  Left = 338
+  Top = 283
+  BorderIcons = []
+  BorderStyle = bsNone
+  ClientHeight = 84
+  ClientWidth = 207
+  Color = clInfoBk
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clInfoText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = True
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnMouseMove = FormMouseMove
+  OnPaint = FormPaint
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 500
+    OnTimer = Timer1Timer
+    Left = 48
+    Top = 32
+  end
+  object Timer2: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = Timer2Timer
+    Left = 88
+    Top = 32
+  end
+end

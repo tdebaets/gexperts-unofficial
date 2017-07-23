@@ -1,0 +1,279 @@
+object fmMessageDialog: TfmMessageDialog
+  Left = 226
+  Top = 127
+  BorderStyle = bsDialog
+  Caption = 'Message Dialog'
+  ClientHeight = 334
+  ClientWidth = 429
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblMessage: TLabel
+    Left = 13
+    Top = 9
+    Width = 43
+    Height = 13
+    Alignment = taRightJustify
+    Caption = '&Message'
+    FocusControl = meCaption
+  end
+  object lblHelpContext: TLabel
+    Left = 336
+    Top = 104
+    Width = 64
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Help Conte&xt:'
+    FocusControl = edHelpContext
+  end
+  object btnHelp: TButton
+    Left = 336
+    Top = 304
+    Width = 85
+    Height = 25
+    Caption = '&Help'
+    TabOrder = 8
+    OnClick = btnHelpClick
+  end
+  object btnTest: TButton
+    Left = 336
+    Top = 240
+    Width = 85
+    Height = 25
+    Caption = '&Test'
+    TabOrder = 6
+    OnClick = btnTestClick
+  end
+  object gbButtons: TGroupBox
+    Left = 8
+    Top = 240
+    Width = 313
+    Height = 89
+    Caption = 'Dialog &Buttons'
+    TabOrder = 2
+    object cbYes: TCheckBox
+      Left = 8
+      Top = 17
+      Width = 89
+      Height = 17
+      Caption = 'mbYes'
+      TabOrder = 0
+    end
+    object cbNo: TCheckBox
+      Left = 8
+      Top = 33
+      Width = 89
+      Height = 17
+      Caption = 'mbNo'
+      TabOrder = 1
+    end
+    object cbOK: TCheckBox
+      Left = 8
+      Top = 49
+      Width = 89
+      Height = 17
+      Caption = 'mbOK'
+      TabOrder = 2
+    end
+    object cbCancel: TCheckBox
+      Left = 8
+      Top = 65
+      Width = 89
+      Height = 17
+      Caption = 'mbCancel'
+      TabOrder = 3
+    end
+    object cbAbort: TCheckBox
+      Left = 109
+      Top = 17
+      Width = 92
+      Height = 17
+      Caption = 'mbAbort'
+      TabOrder = 4
+    end
+    object cbretry: TCheckBox
+      Left = 109
+      Top = 33
+      Width = 92
+      Height = 17
+      Caption = 'mbRetry'
+      TabOrder = 5
+    end
+    object cbIgnore: TCheckBox
+      Left = 109
+      Top = 49
+      Width = 92
+      Height = 17
+      Caption = 'mbIgnore'
+      TabOrder = 6
+    end
+    object cbAll: TCheckBox
+      Left = 208
+      Top = 17
+      Width = 97
+      Height = 17
+      Caption = 'mbAll'
+      TabOrder = 7
+    end
+    object cbNoToAll: TCheckBox
+      Left = 208
+      Top = 33
+      Width = 97
+      Height = 17
+      Caption = 'mbNoToAll'
+      TabOrder = 8
+    end
+    object cbYesToAll: TCheckBox
+      Left = 208
+      Top = 49
+      Width = 97
+      Height = 17
+      Caption = 'mbYesToAll'
+      TabOrder = 9
+    end
+    object cbHelp: TCheckBox
+      Left = 208
+      Top = 65
+      Width = 97
+      Height = 17
+      Caption = 'mbHelp'
+      TabOrder = 10
+    end
+  end
+  object gbTypes: TGroupBox
+    Left = 8
+    Top = 96
+    Width = 313
+    Height = 137
+    Caption = 'Dialog Type'
+    TabOrder = 1
+    object imWarning: TImage
+      Left = 8
+      Top = 24
+      Width = 32
+      Height = 32
+    end
+    object imInformation: TImage
+      Left = 168
+      Top = 24
+      Width = 32
+      Height = 32
+    end
+    object imError: TImage
+      Left = 8
+      Top = 64
+      Width = 32
+      Height = 32
+    end
+    object imConfirmation: TImage
+      Left = 168
+      Top = 64
+      Width = 32
+      Height = 32
+    end
+    object rbWarning: TRadioButton
+      Left = 48
+      Top = 32
+      Width = 97
+      Height = 17
+      Caption = 'mt&Warning'
+      Checked = True
+      TabOrder = 0
+      TabStop = True
+    end
+    object rbInformation: TRadioButton
+      Left = 208
+      Top = 32
+      Width = 97
+      Height = 17
+      Caption = 'mt&Information'
+      TabOrder = 3
+    end
+    object rbConfirmation: TRadioButton
+      Left = 208
+      Top = 72
+      Width = 97
+      Height = 17
+      Caption = 'mtCo&nfirmation'
+      TabOrder = 4
+    end
+    object rbError: TRadioButton
+      Left = 48
+      Top = 72
+      Width = 89
+      Height = 17
+      Caption = 'mt&Error'
+      TabOrder = 1
+    end
+    object rbCustom: TRadioButton
+      Left = 48
+      Top = 112
+      Width = 105
+      Height = 17
+      Caption = 'mt&Custom'
+      TabOrder = 2
+    end
+  end
+  object meCaption: TMemo
+    Left = 64
+    Top = 8
+    Width = 361
+    Height = 82
+    ScrollBars = ssVertical
+    TabOrder = 0
+    OnKeyDown = meCaptionKeyDown
+  end
+  object btnOK: TButton
+    Left = 336
+    Top = 176
+    Width = 85
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    TabOrder = 4
+    OnClick = btnOKClick
+  end
+  object btnCancel: TButton
+    Left = 336
+    Top = 208
+    Width = 85
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 5
+  end
+  object btnDefaults: TButton
+    Left = 336
+    Top = 272
+    Width = 85
+    Height = 25
+    Hint = 'Set settings as defaults'
+    Caption = 'Save &Defaults'
+    TabOrder = 7
+    OnClick = btnDefaultsClick
+  end
+  object edHelpContext: TSpinIntEdit
+    Left = 336
+    Top = 120
+    Width = 81
+    Height = 21
+    Maximum = 32767
+    Value = 0
+    TabOrder = 3
+  end
+  object ilImages: TImageList
+    Height = 32
+    Width = 32
+    Left = 16
+    Top = 40
+  end
+end

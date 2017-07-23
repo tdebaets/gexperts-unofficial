@@ -1,0 +1,65 @@
+object ByPixelDialog: TByPixelDialog
+  Left = 413
+  Top = 220
+  BorderStyle = bsDialog
+  Caption = 'Space By Pixel Expert Dialog'
+  ClientHeight = 110
+  ClientWidth = 271
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = True
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object PixelByLabel: TLabel
+    Left = 120
+    Top = 24
+    Width = 42
+    Height = 13
+    Caption = 'Pixels By'
+  end
+  object OkButton: TButton
+    Left = 52
+    Top = 77
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 2
+  end
+  object CancelButton: TButton
+    Left = 132
+    Top = 77
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 3
+  end
+  object SpacingDirectionRadioGroup: TRadioGroup
+    Left = 12
+    Top = 10
+    Width = 85
+    Height = 55
+    Caption = 'Orientation'
+    ItemIndex = 0
+    Items.Strings = (
+      '&Horizontal'
+      '&Vertical')
+    TabOrder = 0
+  end
+  object PixelByEdit: TEdit
+    Left = 120
+    Top = 42
+    Width = 121
+    Height = 21
+    TabOrder = 1
+    Text = '8'
+  end
+end

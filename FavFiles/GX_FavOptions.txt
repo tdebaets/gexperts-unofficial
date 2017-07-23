@@ -1,0 +1,119 @@
+object fmFavOptions: TfmFavOptions
+  Left = 219
+  Top = 166
+  BorderStyle = bsDialog
+  Caption = 'Favorite Files Options'
+  ClientHeight = 190
+  ClientWidth = 289
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object gbxFavOptions: TGroupBox
+    Left = 8
+    Top = 8
+    Width = 273
+    Height = 145
+    Caption = 'Favorite Files Options'
+    TabOrder = 0
+    object lblSaveFile: TLabel
+      Left = 9
+      Top = 99
+      Width = 41
+      Height = 13
+      Caption = 'Save file'
+    end
+    object sbnSaveFile: TSpeedButton
+      Left = 243
+      Top = 117
+      Width = 21
+      Height = 21
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        0400000000000001000000000000000000001000000010000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+        5555555555555555555555555555555555555555555555555555555555555555
+        555555555555555555555555555555555555555FFFFFFFFFF555550000000000
+        55555577777777775F55500B8B8B8B8B05555775F555555575F550F0B8B8B8B8
+        B05557F75F555555575F50BF0B8B8B8B8B0557F575FFFFFFFF7F50FBF0000000
+        000557F557777777777550BFBFBFBFB0555557F555555557F55550FBFBFBFBF0
+        555557F555555FF7555550BFBFBF00055555575F555577755555550BFBF05555
+        55555575FFF75555555555700007555555555557777555555555555555555555
+        5555555555555555555555555555555555555555555555555555}
+      NumGlyphs = 2
+      OnClick = sbnSaveFileClick
+    end
+    object chkConfirmFolderDelete: TCheckBox
+      Left = 10
+      Top = 21
+      Width = 257
+      Height = 17
+      Caption = 'Confirm on folder delete'
+      TabOrder = 0
+    end
+    object chkExpandAllOnLoad: TCheckBox
+      Left = 10
+      Top = 39
+      Width = 257
+      Height = 17
+      Caption = 'Expand all on load'
+      TabOrder = 1
+    end
+    object edtSaveFile: TEdit
+      Left = 8
+      Top = 116
+      Width = 234
+      Height = 21
+      TabOrder = 4
+    end
+    object chkHideOnExecute: TCheckBox
+      Left = 10
+      Top = 58
+      Width = 257
+      Height = 17
+      Caption = 'Hide window when executing a file'
+      TabOrder = 2
+    end
+    object chkShowPreview: TCheckBox
+      Left = 10
+      Top = 76
+      Width = 257
+      Height = 17
+      Caption = 'Show file preview pane'
+      TabOrder = 3
+    end
+  end
+  object btnOK: TButton
+    Left = 127
+    Top = 159
+    Width = 74
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+  end
+  object btnCancel: TButton
+    Left = 207
+    Top = 159
+    Width = 74
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 2
+  end
+  object dlgSaveFile: TSaveDialog
+    DefaultExt = '.FAV'
+    Filter = 'Favorite Files (*.fav)|*.fav|All Files (*.*)|*.*'
+    Title = 'Save Favorite As'
+    Left = 8
+    Top = 158
+  end
+end

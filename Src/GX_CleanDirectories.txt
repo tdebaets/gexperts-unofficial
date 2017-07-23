@@ -1,0 +1,159 @@
+object fmCleanDirectories: TfmCleanDirectories
+  Left = 282
+  Top = 149
+  ActiveControl = btnClean
+  BorderStyle = bsDialog
+  Caption = 'Clean Directories'
+  ClientHeight = 403
+  ClientWidth = 417
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object laStatus: TLabel
+    Left = 64
+    Top = 163
+    Width = 348
+    Height = 13
+    AutoSize = False
+    Caption = 'laStatus'
+  end
+  object lCleaning: TLabel
+    Left = 8
+    Top = 163
+    Width = 44
+    Height = 13
+    Caption = 'Cleaning:'
+    Visible = False
+  end
+  object gbxExtensions: TGroupBox
+    Left = 8
+    Top = 180
+    Width = 403
+    Height = 186
+    Caption = ' Remove the Following &Types of Files '
+    TabOrder = 1
+    object clbExtensions: TCheckListBox
+      Left = 8
+      Top = 16
+      Width = 308
+      Height = 162
+      OnClickCheck = clbExtensionsClickCheck
+      Columns = 3
+      ItemHeight = 13
+      Sorted = True
+      TabOrder = 0
+      OnClick = clbExtensionsClick
+      OnKeyPress = clbExtensionsKeyPress
+    end
+    object btnAddExt: TButton
+      Left = 323
+      Top = 16
+      Width = 70
+      Height = 25
+      Caption = 'A&dd'
+      TabOrder = 1
+      OnClick = btnAddExtClick
+    end
+    object btnRemoveExt: TButton
+      Left = 323
+      Top = 48
+      Width = 70
+      Height = 25
+      Caption = 'Re&move'
+      Enabled = False
+      TabOrder = 2
+      OnClick = btnRemoveExtClick
+    end
+  end
+  object gbxDirectories: TGroupBox
+    Left = 8
+    Top = 5
+    Width = 403
+    Height = 152
+    Caption = ' Clean &Directories '
+    TabOrder = 0
+    object laRecursingNote: TLabel
+      Left = 8
+      Top = 132
+      Width = 248
+      Height = 13
+      Caption = 'Note: checked directories will be cleaned recursively'
+    end
+    object btnAdd: TButton
+      Left = 323
+      Top = 16
+      Width = 70
+      Height = 25
+      Caption = '&Add'
+      TabOrder = 1
+      OnClick = btnAddClick
+    end
+    object btnRemove: TButton
+      Left = 323
+      Top = 48
+      Width = 70
+      Height = 25
+      Caption = '&Remove'
+      Enabled = False
+      TabOrder = 2
+      OnClick = btnRemoveClick
+    end
+    object clbDirs: TCheckListBox
+      Left = 8
+      Top = 16
+      Width = 308
+      Height = 112
+      ItemHeight = 13
+      TabOrder = 0
+      OnClick = clbDirsClick
+      OnDrawItem = clbDirsDrawItem
+      OnKeyPress = clbDirsKeyPress
+    end
+  end
+  object btnCancel: TButton
+    Left = 255
+    Top = 373
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 4
+  end
+  object btnClean: TButton
+    Left = 174
+    Top = 373
+    Width = 75
+    Height = 25
+    Caption = 'Clean'
+    Default = True
+    TabOrder = 3
+    OnClick = btnCleanClick
+  end
+  object btnHelp: TButton
+    Left = 336
+    Top = 373
+    Width = 75
+    Height = 25
+    Caption = '&Help'
+    TabOrder = 5
+    OnClick = btnHelpClick
+  end
+  object chkReportErrors: TCheckBox
+    Left = 8
+    Top = 372
+    Width = 113
+    Height = 17
+    Caption = 'Re&port errors'
+    State = cbChecked
+    TabOrder = 2
+  end
+end

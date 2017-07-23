@@ -1,0 +1,253 @@
+inherited fmProjOptionSets: TfmProjOptionSets
+  Left = 399
+  Top = 185
+  Width = 459
+  Height = 357
+  Caption = 'Project Option Sets'
+  Position = poScreenCenter
+  OnHide = FormHide
+  OnResize = FormResize
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object splLeftRight: TSplitter
+    Left = 200
+    Top = 0
+    Width = 3
+    Height = 328
+    Cursor = crHSplit
+    Beveled = True
+    OnCanResize = splLeftRightCanResize
+    OnMoved = splLeftRightMoved
+  end
+  object pnlLeft: TPanel
+    Left = 0
+    Top = 0
+    Width = 200
+    Height = 328
+    Align = alLeft
+    BevelOuter = bvNone
+    BorderWidth = 2
+    FullRepaint = False
+    TabOrder = 0
+    object grpSets: TGroupBox
+      Left = 2
+      Top = 2
+      Width = 196
+      Height = 324
+      Align = alClient
+      Caption = 'Option Sets'
+      TabOrder = 0
+      object pnlOSInner: TPanel
+        Left = 2
+        Top = 15
+        Width = 192
+        Height = 307
+        Align = alClient
+        BevelOuter = bvNone
+        BorderWidth = 4
+        FullRepaint = False
+        TabOrder = 0
+        object lstSets: TListBox
+          Left = 8
+          Top = 8
+          Width = 116
+          Height = 294
+          Anchors = [akLeft, akTop, akRight, akBottom]
+          ItemHeight = 13
+          TabOrder = 0
+          OnClick = lstSetsClick
+        end
+        object btnAdd: TButton
+          Left = 128
+          Top = 8
+          Width = 60
+          Height = 25
+          Anchors = [akTop, akRight]
+          Caption = '&Add'
+          TabOrder = 1
+          OnClick = btnAddClick
+        end
+        object btnDelete: TButton
+          Left = 128
+          Top = 36
+          Width = 60
+          Height = 25
+          Anchors = [akTop, akRight]
+          Caption = '&Delete'
+          TabOrder = 2
+          OnClick = btnDeleteClick
+        end
+        object btnSave: TButton
+          Left = 128
+          Top = 64
+          Width = 60
+          Height = 25
+          Anchors = [akTop, akRight]
+          Caption = '&Save'
+          TabOrder = 3
+          OnClick = btnSaveClick
+        end
+        object btnApply: TButton
+          Left = 128
+          Top = 92
+          Width = 60
+          Height = 25
+          Anchors = [akTop, akRight]
+          Caption = 'A&pply'
+          TabOrder = 4
+          OnClick = btnApplyClick
+        end
+        object btnHelp: TButton
+          Left = 128
+          Top = 129
+          Width = 60
+          Height = 25
+          Anchors = [akTop, akRight]
+          Caption = '&Help'
+          TabOrder = 5
+          OnClick = btnHelpClick
+        end
+      end
+    end
+  end
+  object pnlRight: TPanel
+    Left = 203
+    Top = 0
+    Width = 248
+    Height = 328
+    Align = alClient
+    BevelOuter = bvNone
+    Caption = 'pnlRight'
+    FullRepaint = False
+    TabOrder = 1
+    object pcSettings: TPageControl
+      Left = 0
+      Top = 0
+      Width = 248
+      Height = 328
+      ActivePage = tsProjectSettings
+      Align = alClient
+      TabOrder = 0
+      object tsProjectSettings: TTabSheet
+        Caption = 'Project Settings'
+        object lblProjectSettings: TLabel
+          Left = 56
+          Top = 96
+          Width = 3
+          Height = 13
+          Visible = False
+        end
+        object pnlFilterComboHost: TPanel
+          Left = 0
+          Top = 272
+          Width = 240
+          Height = 28
+          Align = alBottom
+          BevelOuter = bvNone
+          Caption = 'pnlFilterComboHost'
+          FullRepaint = False
+          TabOrder = 0
+          object cbFilter: TComboBox
+            Left = 2
+            Top = 3
+            Width = 236
+            Height = 21
+            Style = csDropDownList
+            Anchors = [akLeft, akTop, akRight]
+            ItemHeight = 13
+            TabOrder = 0
+            OnChange = cbFilterChange
+          end
+        end
+        object pnlCheckListHost: TPanel
+          Left = 0
+          Top = 0
+          Width = 240
+          Height = 272
+          Align = alClient
+          BevelOuter = bvNone
+          Caption = 'TCheckListBox Created At Runtime'
+          FullRepaint = False
+          ParentShowHint = False
+          ShowHint = False
+          TabOrder = 1
+        end
+      end
+      object tsEnvironmentSettings: TTabSheet
+        Caption = 'Environment Settings'
+        ImageIndex = 1
+        ParentShowHint = False
+        ShowHint = False
+        object lblCheckListNot: TLabel
+          Left = 5
+          Top = 24
+          Width = 167
+          Height = 13
+          Caption = 'TCheckListBox Created At Runtime'
+          Visible = False
+        end
+      end
+    end
+  end
+  object pmuPrjOptions: TPopupMenu
+    OnPopup = pmuPrjOptionsPopup
+    Left = 390
+    Top = 43
+    object mniModifyPrjOptionValues: TMenuItem
+      Caption = '&Modify Option Values...'
+    end
+    object N3: TMenuItem
+      Caption = '-'
+    end
+    object mniPrjClearAll: TMenuItem
+      Caption = 'Clear All'
+      OnClick = mniPrjClearAllClick
+    end
+    object mniPrjCheckAll: TMenuItem
+      Caption = 'Check All'
+      OnClick = mniPrjCheckAllClick
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object mniPrjSortByName: TMenuItem
+      Caption = 'Sort by Name'
+      Checked = True
+      GroupIndex = 1
+      RadioItem = True
+      OnClick = mniPrjSortByCheckmarkClick
+    end
+    object mniPrjSortByCheckmark: TMenuItem
+      Caption = 'Sort by Checkmark'
+      GroupIndex = 1
+      RadioItem = True
+      OnClick = mniPrjSortByCheckmarkClick
+    end
+    object N2: TMenuItem
+      Caption = '-'
+      GroupIndex = 1
+    end
+    object mniPrjAscending: TMenuItem
+      Caption = 'Ascending'
+      Checked = True
+      GroupIndex = 2
+      RadioItem = True
+      OnClick = mniPrjDescendingClick
+    end
+    object mniPrjDescending: TMenuItem
+      Caption = 'Descending'
+      GroupIndex = 2
+      RadioItem = True
+      OnClick = mniPrjDescendingClick
+    end
+  end
+  object pmuEnvOptions: TPopupMenu
+    Left = 391
+    Top = 104
+    object mniModifyEnvOptionValues: TMenuItem
+      Caption = '&Modify option values...'
+      OnClick = mniModifyEnvOptionValuesClick
+    end
+  end
+end

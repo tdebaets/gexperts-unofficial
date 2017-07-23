@@ -1,0 +1,67 @@
+object fmCompsToCode: TfmCompsToCode
+  Left = 419
+  Top = 285
+  BorderStyle = bsDialog
+  Caption = 'Components to Code'
+  ClientHeight = 200
+  ClientWidth = 238
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object btnOK: TButton
+    Left = 40
+    Top = 163
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 0
+  end
+  object btnCancel: TButton
+    Left = 123
+    Top = 163
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 1
+  end
+  object rgpBinProps: TRadioGroup
+    Left = 7
+    Top = 8
+    Width = 223
+    Height = 81
+    Caption = ' Binary Properties '
+    ItemIndex = 1
+    Items.Strings = (
+      '&Skip'
+      'Generate &commented code'
+      'Generate &uncommented code')
+    TabOrder = 2
+  end
+  object gbxGenerated: TGroupBox
+    Left = 7
+    Top = 96
+    Width = 223
+    Height = 53
+    Caption = ' Generated Source '
+    TabOrder = 3
+    object chkPrepend: TCheckBox
+      Left = 11
+      Top = 24
+      Width = 198
+      Height = 17
+      Caption = '&Prepend original component source'
+      State = cbChecked
+      TabOrder = 0
+    end
+  end
+end

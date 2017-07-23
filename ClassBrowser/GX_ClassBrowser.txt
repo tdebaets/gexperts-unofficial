@@ -1,0 +1,614 @@
+object fmClassBrowser: TfmClassBrowser
+  Left = 286
+  Top = 240
+  Width = 544
+  Height = 375
+  Caption = 'Class Browser'
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Icon.Data = {
+    0000010001002020000000000000A80800001600000028000000200000004000
+    0000010008000000000080040000000000000000000000010000000000000000
+    0000000080000080000000808000800000008000800080800000C0C0C000C0DC
+    C000F0CAA600CCFFFF0099FFFF0066FFFF0033FFFF00FFCCFF00CCCCFF0099CC
+    FF0066CCFF0033CCFF0000CCFF00FF99FF00CC99FF009999FF006699FF003399
+    FF000099FF00FF66FF00CC66FF009966FF006666FF003366FF000066FF00FF33
+    FF00CC33FF009933FF006633FF003333FF000033FF00CC00FF009900FF006600
+    FF003300FF00FFFFCC00CCFFCC0099FFCC0066FFCC0066FFCC0033FFCC0000FF
+    CC00FFCCCC00CCCCCC0099CCCC0066CCCC0033CCCC0000CCCC00FF99CC00CC99
+    CC009999CC006699CC003399CC000099CC00FF66CC00CC66CC009966CC006666
+    CC003366CC000066CC00FF33CC00CC33CC009933CC006633CC003333CC000033
+    CC00FF00CC00CC00CC009900CC006600CC003300CC000000CC00FFFF9900CCFF
+    990099FF990066FF990033FF990000FF9900FFCC9900CCCC990099CC990066CC
+    990033CC990000CC9900FF999900CC9999009999990066999900339999000099
+    9900FF669900CC66990099669900666699003366990000669900FF339900CC33
+    990099339900663399003333990000339900FF009900CC009900990099006600
+    99003300990000009900FFFF6600CCFF660099FF660066FF660033FF660000FF
+    6600FFCC6600CCCC660099CC660066CC660033CC660000CC6600FF996600CC99
+    660099996600669966003399660000996600FF666600CC666600996666006666
+    66003366660000666600FF336600CC3366009933660066336600333366000033
+    6600FF006600CC00660099006600660066003300660000006600FFFF3300CCFF
+    330099FF330066FF330033FF330000FF3300FFCC3300CCCC330099CC330066CC
+    330033CC330000CC3300FF993300CC9933009999330066993300339933000099
+    3300FF663300CC66330099663300666633003366330000663300FF333300CC33
+    330099333300663333003333330000333300FF003300CC003300990033006600
+    33003300330000003300CCFF000099FF000066FF000033FF0000FFCC0000CCCC
+    000099CC000066CC000033CC000000CC0000FF990000CC990000999900006699
+    00003399000000990000FF660000CC6600009966000066660000006600003366
+    0000FF330000CC33000099330000663300003333000000330000CC0000009900
+    000066000000330000000000DD000000BB000000AA0000008800000077000000
+    5500000044000000220000DD000000BB000000AA000000880000007700000055
+    00000044000000220000DDDDDD00555555007777770077777700444444002222
+    22001111110077000000550000004400000022000000F0FBFF00A4A0A0008080
+    80000000FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF000000
+    000000000000000000000000EDEDEDED000000EDEDED00000000000000000000
+    00000000000000000000EDEDFFFF00004040DD00EDEDED000000000000000000
+    0000000000000000EDEDFFFF000040404040DD7200EDEDED0000000000000000
+    000000000000000000000000404040404040DDDD7200EDEDED00000000000000
+    000000000000EDEDEDED0000000040404040DDDD72DD00EDEDED000000000000
+    00000000000000EDEDED0040404000004040DDDD72DDDD00EDEDED0000000000
+    000000000000FF00EDED0040404040400000DDDD72DDDD7200EDEDED00000000
+    0000000000FF0AFF00ED00404040404040400000DDDDDD7200ED000000000000
+    0000000000FF0AFFFF000040404040404040DDDD0000DD720000000000000000
+    00000000FFFF0A0A0AFF004040404040FFFF16DD72DD00DD0000000000000000
+    000000000B0B0A0A0A0A00404040FFFF16161616DD72DD000000000000000000
+    000000FF0B0B0A0A0A0A0040FFFF16161616161616DD72DD0000000000000000
+    000000FF0B0B0A0A0A0A0A0016161616161616161616DD720000000000000000
+    0000FF0C0B0B0A89890A0A0A0016161616161616161616DD0000000000000000
+    0000FF0C0B0B0A89890A0A0A0A00161616161616161616160000000000000000
+    00FFFF0C0B0B898989890A0A0A0A001616161616161600000000000000000000
+    00FBFB0C0B0B895E5E3333330A000000161616160000B2000000000000000000
+    FFFBFB0C8989898989330A0A0A005C5C00160000B2B2B2000000000000000000
+    FFFBFB0C8989898989330A0A005C5C5C5C005C5CB2B2B20000000000000000FF
+    FBFBFB0C89895E3333330A0A005C5C5C5C5C5C5CB2B2B2000000000000000000
+    FFFBFB0C0B0B8933330A0A00005C5C5C5C5C5C5CB2B2B2000000000000000000
+    00FBFB0C0B0B8933330A0A00005C5C5C5C5CFFFFB2B2B2000000000000000000
+    0000FF0B0B0B0A33330A0000005C5C5CFFFF31313131B2000000000000000000
+    000000FF0B0B0A0A0A0A0000005CFFFFB2B2B2B2B2B231000000000000000000
+    000000000B0B0A0A0A00000000FF31EC00000000B20000000000000000000000
+    0000000000FF0A0A0A00000000003100ECECEFEC000000000000000000000000
+    000000000000FF0A000000000000F1EFF7F7F7ECEF0000000000000000000000
+    000000000000000A000000000000F0F7EBEB075DEF0000000000000000000000
+    0000000000000000000000000000F1EBFFFFEBF7EC0000000000000000000000
+    0000000000000000000000000000F0EBFFFFEBF7EF0000000000000000000000
+    000000000000000000000000000000F0EB075DEFF10000000000000000000000
+    00000000000000000000000000000000F1F100EF00000000000000000000FFFC
+    00FFFFF0007FFFC0003FFC00001FF300000FEF000007DE000003DC00000FDC00
+    001FD800001FD800001FD000001FE000000FE000000FE0000017C0000037C000
+    003B8000003B8000003B0000003B8000003BC0000037E0040037F004000FF80C
+    003FFC0E01FFFE1F00FFFF1F00FFFFBF00FFFFFF00FFFFFF81FFFFFFC3FF0000}
+  Menu = MainMenu1
+  OnActivate = FormActivate
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Splitter1: TSplitter
+    Left = 140
+    Top = 30
+    Width = 3
+    Height = 278
+    Cursor = crHSplit
+  end
+  object pnlToolbar: TPanel
+    Left = 0
+    Top = 0
+    Width = 536
+    Height = 30
+    Align = alTop
+    BevelOuter = bvNone
+    FullRepaint = False
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+    object sbAdd: TSpeedButton
+      Left = 4
+      Top = 2
+      Width = 25
+      Height = 25
+      Hint = 'Add (Ctrl+A)'
+      Flat = True
+      Glyph.Data = {
+        76010000424D7601000000000000760000002800000020000000100000000100
+        0400000000000001000000000000000000001000000010000000000000000000
+        800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF0033333333B333
+        333B33FF33337F3333F73BB3777BB7777BB3377FFFF77FFFF77333B000000000
+        0B3333777777777777333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+        07333337F33333337F333330FFFFFFFF07333337F33333337F333330FFFFFFFF
+        07333FF7F33333337FFFBBB0FFFFFFFF0BB37777F3333333777F3BB0FFFFFFFF
+        0BBB3777F3333FFF77773330FFFF000003333337F333777773333330FFFF0FF0
+        33333337F3337F37F3333330FFFF0F0B33333337F3337F77FF333330FFFF003B
+        B3333337FFFF77377FF333B000000333BB33337777777F3377FF3BB3333BB333
+        3BB33773333773333773B333333B3333333B7333333733333337}
+      NumGlyphs = 2
+      OnClick = sbAddClick
+    end
+    object sbRemove: TSpeedButton
+      Left = 30
+      Top = 2
+      Width = 25
+      Height = 25
+      Hint = 'Delete (Ctrl+Del)'
+      Enabled = False
+      Flat = True
+      Glyph.Data = {
+        F6000000424DF600000000000000760000002800000010000000100000000100
+        0400000000008000000000000000000000001000000010000000000000000000
+        80000080000000808000800000008000800080800000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+        3333333333333333333333033333333330333000333333333333300003333333
+        0333330003333330333333300033330033333333000330033333333330000033
+        3333333333000333333333333000003333333333000330033333330000333300
+        3333300003333330033330003333333330333333333333333333}
+      OnClick = sbRemoveClick
+    end
+    object sbRefresh: TSpeedButton
+      Left = 60
+      Top = 2
+      Width = 25
+      Height = 25
+      Hint = 'Refresh'
+      Flat = True
+      Glyph.Data = {
+        66010000424D6601000000000000760000002800000014000000140000000100
+        040000000000F000000000000000000000001000000010000000000000000000
+        BF0000BF000000BFBF00BF000000BF00BF00BFBF0000C0C0C000808080000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00777777777777
+        7777777700007777777778888887777700007777777000003888777700007777
+        770BBBB03088877700007777770BBBB0308887770000777770BBBB0333088777
+        0000777770BBBB03330887770000777770000003330887770000777777778033
+        3308877700007777777000333308877700007777770BB0333308877700007777
+        70BBBB0333088777000077770BBBBBB03308877700007770BBBBBBBB03088777
+        0000777000BBBB00030887770000777770BBBB033308777700007777770BBBB0
+        3087777700007777770BBBB03077777700007777777000003777777700007777
+        77777777777777770000}
+      OnClick = Refresh1Click
+    end
+    object sbFind: TSpeedButton
+      Left = 90
+      Top = 2
+      Width = 25
+      Height = 25
+      Hint = 'Find'
+      Flat = True
+      Glyph.Data = {
+        06020000424D0602000000000000760000002800000028000000140000000100
+        0400000000009001000000000000000000001000000010000000000000000000
+        8000008000000080800080000000800080008080000080808000C0C0C0000000
+        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF003333333FFFFF
+        FFF00000333333333333333777773333333BFBFBFBF0FFF03333333333333337
+        FFF73333333FFFFFFF000000333333333333337777773333333BFBFBF0FBFBFB
+        333333333FFFF733FFFF3333333F00000FF000003333333377777FF777773333
+        333B0FFF0000FFF0333333337FFF7777FFF73333333F00000FF000003333333F
+        777773F777773333330BFBFBF0FBFBFB3333337FF333373FFFFF33333010FFFF
+        FF00000033333777FF3333777777333330170BFBFBF0FFF0333337777FF33337
+        FFF73333301170FFFFF0000033333777778F3337777333330711190BFBFBFBFB
+        333377777378F3333333333308819990FFFFFFFF3333733733378F3333333330
+        88FF9999033333333337333333FF7333333333088FFFF0003333333333733333
+        F777333333333088FFF003333333333337333337733333333333088FFF033333
+        333333337F33337333333333333308FFF09333333333333378F3373333333333
+        333330FF0933333333333333378F733333333333333333003333333333333333
+        33773333333333333333}
+      NumGlyphs = 2
+      OnClick = sbFindClick
+    end
+    object Panel3: TPanel
+      Left = 291
+      Top = 0
+      Width = 245
+      Height = 30
+      Align = alRight
+      BevelOuter = bvNone
+      TabOrder = 0
+      object sbConstant: TSpeedButton
+        Left = 0
+        Top = 2
+        Width = 25
+        Height = 25
+        Hint = 'Constants'
+        AllowAllUp = True
+        GroupIndex = 10
+        Down = True
+        Flat = True
+        OnClick = NewFilter
+      end
+      object sbMethod: TSpeedButton
+        Tag = 1
+        Left = 25
+        Top = 2
+        Width = 25
+        Height = 25
+        Hint = 'Methods'
+        AllowAllUp = True
+        GroupIndex = 11
+        Down = True
+        Flat = True
+        OnClick = NewFilter
+      end
+      object sbType: TSpeedButton
+        Tag = 2
+        Left = 50
+        Top = 2
+        Width = 25
+        Height = 25
+        Hint = 'Types'
+        AllowAllUp = True
+        GroupIndex = 12
+        Down = True
+        Flat = True
+        OnClick = NewFilter
+      end
+      object sbVariable: TSpeedButton
+        Left = 75
+        Top = 2
+        Width = 25
+        Height = 25
+        Hint = 'Variables'
+        AllowAllUp = True
+        GroupIndex = 13
+        Down = True
+        Flat = True
+        OnClick = NewFilter
+      end
+      object sbProperty: TSpeedButton
+        Tag = 4
+        Left = 100
+        Top = 2
+        Width = 25
+        Height = 25
+        Hint = 'Properties'
+        AllowAllUp = True
+        GroupIndex = 14
+        Down = True
+        Flat = True
+        OnClick = NewFilter
+      end
+      object sbPrivate: TSpeedButton
+        Left = 136
+        Top = 2
+        Width = 25
+        Height = 25
+        Hint = 'Private'
+        AllowAllUp = True
+        GroupIndex = 20
+        Down = True
+        Flat = True
+        OnClick = NewFilter
+      end
+      object sbProtected: TSpeedButton
+        Tag = 1
+        Left = 161
+        Top = 2
+        Width = 25
+        Height = 25
+        Hint = 'Protected'
+        AllowAllUp = True
+        GroupIndex = 21
+        Down = True
+        Flat = True
+        OnClick = NewFilter
+      end
+      object sbPublic: TSpeedButton
+        Tag = 2
+        Left = 186
+        Top = 2
+        Width = 25
+        Height = 25
+        Hint = 'Public'
+        AllowAllUp = True
+        GroupIndex = 22
+        Down = True
+        Flat = True
+        OnClick = NewFilter
+      end
+      object sbPublished: TSpeedButton
+        Tag = 3
+        Left = 211
+        Top = 2
+        Width = 25
+        Height = 25
+        Hint = 'Published'
+        AllowAllUp = True
+        GroupIndex = 23
+        Down = True
+        Flat = True
+        OnClick = NewFilter
+      end
+    end
+  end
+  object StatusBar: TStatusBar
+    Left = 0
+    Top = 308
+    Width = 536
+    Height = 19
+    Panels = <>
+    SimplePanel = True
+  end
+  object pnlData: TPanel
+    Left = 143
+    Top = 30
+    Width = 393
+    Height = 278
+    Align = alClient
+    BevelOuter = bvNone
+    FullRepaint = False
+    TabOrder = 3
+    OnResize = pnlDataResize
+    object pcMain: TPageControl
+      Left = 0
+      Top = 0
+      Width = 393
+      Height = 278
+      ActivePage = tshMembers
+      Align = alClient
+      TabOrder = 0
+      OnChange = pcMainChange
+      object tshMembers: TTabSheet
+        Caption = 'Members'
+        object Splitter2: TSplitter
+          Left = 0
+          Top = 186
+          Width = 385
+          Height = 4
+          Cursor = crVSplit
+          Align = alBottom
+        end
+        object pnlMethod: TPanel
+          Left = 0
+          Top = 190
+          Width = 385
+          Height = 60
+          Align = alBottom
+          BevelOuter = bvNone
+          FullRepaint = False
+          Caption = 'this editor is created at runtime'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Courier New'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          TabStop = True
+        end
+        object lvInfo: TListView
+          Left = 0
+          Top = 0
+          Width = 385
+          Height = 186
+          Align = alClient
+          ColumnClick = False
+          OnDblClick = Goto1Click
+          Columns = <
+            item
+              Caption = 'Vi'
+              Width = 26
+            end
+            item
+              Caption = 'Ty'
+              Width = 26
+            end
+            item
+              Caption = 'Vr'
+              Width = 26
+            end
+            item
+              Caption = 'Ab'
+              Width = 26
+            end
+            item
+              Caption = 'Ov'
+              Width = 26
+            end
+            item
+              Caption = 'Name'
+              Width = 174
+            end>
+          ReadOnly = True
+          HideSelection = False
+          RowSelect = True
+          OnChange = lvInfoChange
+          PopupMenu = pmInfo
+          TabOrder = 1
+          ViewStyle = vsReport
+          SmallImages = ilClasses
+        end
+      end
+      object tshInherit: TTabSheet
+        Caption = 'Inheritance'
+        object scInherit: TScrollBox
+          Left = 0
+          Top = 0
+          Width = 385
+          Height = 250
+          Align = alClient
+          Color = clWindow
+          ParentColor = False
+          TabOrder = 0
+        end
+      end
+      object tshCode: TTabSheet
+        Caption = 'Interface Code'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Courier New'
+        Font.Style = []
+        ParentFont = False
+      end
+    end
+  end
+  object tvBrowse: TFastSortTreeView
+    Left = 0
+    Top = 30
+    Width = 140
+    Height = 278
+    ReadOnly = True
+    HideSelection = False
+    Indent = 19
+    OnChange = tvBrowseChange
+    Align = alLeft
+    TabOrder = 2
+    Images = ilFolder
+  end
+  object ilClasses: TImageList
+    BkColor = clBlue
+    Left = 153
+    Top = 75
+  end
+  object ilFolder: TImageList
+    Left = 40
+    Top = 40
+  end
+  object MainMenu1: TMainMenu
+    Left = 8
+    Top = 40
+    object File1: TMenuItem
+      Caption = '&File'
+      OnClick = File1Click
+      object Add1: TMenuItem
+        Caption = '&Add...'
+        ShortCut = 16449
+        OnClick = sbAddClick
+      end
+      object Remove1: TMenuItem
+        Caption = '&Remove'
+        ShortCut = 16430
+        OnClick = sbRemoveClick
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object Print1: TMenuItem
+        Caption = '&Print'
+        object ClassReport1: TMenuItem
+          Caption = '&Class Report...'
+          OnClick = ClassReport1Click
+        end
+        object ClassHierarchy1: TMenuItem
+          Caption = 'Class &Hierarchy...'
+          OnClick = ClassHierarchy1Click
+        end
+      end
+      object PrinterSetup1: TMenuItem
+        Caption = 'Printer &Setup...'
+        OnClick = PrinterSetup1Click
+      end
+      object N6: TMenuItem
+        Caption = '-'
+      end
+      object Exit1: TMenuItem
+        Caption = 'E&xit'
+        OnClick = Exit1Click
+      end
+    end
+    object Edit1: TMenuItem
+      Caption = '&Edit'
+      OnClick = Edit1Click
+      object Copy1: TMenuItem
+        Caption = '&Copy'
+        ShortCut = 16451
+        OnClick = Copy1Click
+      end
+    end
+    object View2: TMenuItem
+      Caption = '&View'
+      object View1: TMenuItem
+        Caption = '&View'
+        OnClick = View1Click
+        object List1: TMenuItem
+          Caption = '&List'
+          RadioItem = True
+          OnClick = List1Click
+        end
+        object Tree1: TMenuItem
+          Tag = 1
+          Caption = '&Tree'
+          RadioItem = True
+          OnClick = List1Click
+        end
+      end
+      object UnitNames1: TMenuItem
+        Caption = 'Unit Names'
+        OnClick = UnitNames1Click
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object Properties1: TMenuItem
+        Caption = '&Properties...'
+        OnClick = Properties1Click
+      end
+    end
+    object Options1: TMenuItem
+      Caption = '&Options'
+      object Options2: TMenuItem
+        Caption = '&Options...'
+        ShortCut = 16463
+        OnClick = Options2Click
+      end
+    end
+    object Help1: TMenuItem
+      Caption = '&Help'
+      object Help2: TMenuItem
+        Caption = '&Help'
+        OnClick = Help2Click
+      end
+      object Contents1: TMenuItem
+        Caption = '&Contents'
+        OnClick = Contents1Click
+      end
+      object N5: TMenuItem
+        Caption = '-'
+      end
+      object About1: TMenuItem
+        Caption = '&About'
+        OnClick = About1Click
+      end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
+    Left = 104
+    Top = 40
+    object GotoClass1: TMenuItem
+      Caption = 'Goto Class'
+      OnClick = GotoClass1Click
+    end
+    object Refresh1: TMenuItem
+      Caption = '&Refresh'
+      OnClick = Refresh1Click
+    end
+    object N3: TMenuItem
+      Caption = '-'
+    end
+    object Properties2: TMenuItem
+      Caption = '&Properties...'
+      OnClick = Properties2Click
+    end
+  end
+  object PrinterSetupDialog1: TPrinterSetupDialog
+    Left = 72
+    Top = 40
+  end
+  object pmInfo: TPopupMenu
+    OnPopup = pmInfoPopup
+    Left = 194
+    Top = 75
+    object Goto1: TMenuItem
+      Caption = '&Goto'
+      OnClick = Goto1Click
+    end
+    object N4: TMenuItem
+      Caption = '-'
+    end
+    object Properties3: TMenuItem
+      Caption = '&Properties...'
+      OnClick = Properties3Click
+    end
+  end
+end

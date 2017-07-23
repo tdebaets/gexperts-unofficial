@@ -1,0 +1,6 @@
+inherited fmIdeDockForm: TfmIdeDockForm
+  Left = 199
+  Top = 204
+  PixelsPerInch = 96
+  TextHeight = 13
+end

@@ -1,0 +1,305 @@
+object fmProofReaderConfig: TfmProofReaderConfig
+  Left = 369
+  Top = 178
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'Code Proofreader'
+  ClientHeight = 364
+  ClientWidth = 460
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Position = poScreenCenter
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblRules: TLabel
+    Left = 35
+    Top = 8
+    Width = 42
+    Height = 13
+    Alignment = taRightJustify
+    Caption = '&Rules for'
+    FocusControl = cbLanguage
+  end
+  object pcAPR: TPageControl
+    Tag = 1
+    Left = 3
+    Top = 30
+    Width = 453
+    Height = 295
+    ActivePage = tsReplacement
+    MultiLine = True
+    TabOrder = 2
+    OnChange = pcAPRChange
+    OnChanging = pcAPRChanging
+    object tsReplacement: TTabSheet
+      Caption = '&AutoCorrect'
+      object dbgReplacement: TDBGrid
+        Left = 4
+        Top = 31
+        Width = 436
+        Height = 229
+        DataSource = dmProofReader.dsReplacement
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        Columns = <
+          item
+            FieldName = 'Typed'
+            Width = 135
+          end
+          item
+            Alignment = taLeftJustify
+            FieldName = 'WhereReplace'
+            PickList.Strings = (
+              'Anywhere'
+              'At the begining of a word'
+              'At the end of a word'
+              'Whole word only')
+            Width = 129
+          end
+          item
+            FieldName = 'Replace'
+            Width = 147
+          end>
+      end
+      object cbReplacerActive: TCheckBox
+        Left = 5
+        Top = 8
+        Width = 188
+        Height = 17
+        Caption = '&Enable AutoCorrect'
+        TabOrder = 0
+        OnClick = cbReplacerActiveClick
+      end
+    end
+    object tsDictionary: TTabSheet
+      Tag = 1
+      Caption = '&Dictionary'
+      object dbgDictionary: TDBGrid
+        Left = 4
+        Top = 5
+        Width = 185
+        Height = 255
+        DataSource = dmProofReader.dsDictionary
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        Columns = <
+          item
+            FieldName = 'Word'
+            Title.Alignment = taCenter
+            Width = 162
+          end>
+      end
+      object gbReplaceIf: TGroupBox
+        Left = 199
+        Top = 56
+        Width = 237
+        Height = 149
+        Caption = 'Replace When'
+        TabOrder = 2
+        object cbOtherLetter: TCheckBox
+          Left = 8
+          Top = 40
+          Width = 220
+          Height = 17
+          Caption = 'One character is incorrect'
+          TabOrder = 1
+          OnClick = cbOtherLetterClick
+        end
+        object cbNoLetter: TCheckBox
+          Left = 8
+          Top = 84
+          Width = 220
+          Height = 17
+          Caption = 'One character is missing'
+          TabOrder = 2
+        end
+        object cbMoreLetter: TCheckBox
+          Left = 8
+          Top = 104
+          Width = 220
+          Height = 17
+          Caption = 'An extra character is inserted'
+          TabOrder = 3
+        end
+        object cbCaseDiffer: TCheckBox
+          Left = 8
+          Top = 20
+          Width = 220
+          Height = 17
+          Caption = 'Word case is different'
+          TabOrder = 0
+        end
+        object cbMixed: TCheckBox
+          Left = 8
+          Top = 124
+          Width = 220
+          Height = 17
+          Caption = 'Two characters are switched'
+          TabOrder = 4
+        end
+        object cbNearbyLetter: TCheckBox
+          Left = 21
+          Top = 62
+          Width = 212
+          Height = 17
+          Caption = 'Character must be nearby correct key'
+          TabOrder = 5
+        end
+      end
+      object cbNoFirstOther: TCheckBox
+        Left = 201
+        Top = 210
+        Width = 235
+        Height = 17
+        Caption = 'Don'#39't replace if the first character is incorrect'
+        TabOrder = 3
+      end
+      object cbEnableDictionary: TCheckBox
+        Tag = 2
+        Left = 200
+        Top = 12
+        Width = 240
+        Height = 17
+        Caption = 'Enable dictionary replacement'
+        State = cbChecked
+        TabOrder = 1
+        OnClick = cbEnableDicitionaryClick
+      end
+      object btnImport: TButton
+        Left = 320
+        Top = 235
+        Width = 113
+        Height = 25
+        Caption = '&Import Wordlist...'
+        TabOrder = 5
+        OnClick = btnImportClick
+      end
+      object btnExport: TButton
+        Left = 200
+        Top = 235
+        Width = 113
+        Height = 25
+        Caption = '&Export Wordlist...'
+        TabOrder = 4
+        OnClick = btnExportClick
+      end
+      object cbEnableCompiler: TCheckBox
+        Left = 200
+        Top = 34
+        Width = 240
+        Height = 17
+        Caption = 'Enable compiler replacement'
+        TabOrder = 6
+        OnClick = cbEnableCompilerClick
+      end
+    end
+    object tsHistory: TTabSheet
+      Tag = 2
+      Caption = '&Correction History'
+      object btnDisable: TButton
+        Left = 304
+        Top = 2
+        Width = 135
+        Height = 25
+        Caption = 'Di&sable Correction Rule'
+        TabOrder = 0
+        OnClick = btnDisableClick
+      end
+      object grdHistory: TStringGrid
+        Left = 4
+        Top = 31
+        Width = 436
+        Height = 229
+        ColCount = 2
+        DefaultRowHeight = 18
+        FixedCols = 0
+        RowCount = 2
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goRowSizing, goColSizing, goRowMoving, goTabs, goRowSelect, goThumbTracking]
+        ScrollBars = ssVertical
+        TabOrder = 1
+        ColWidths = (
+          331
+          76)
+      end
+    end
+  end
+  object cbLanguage: TComboBox
+    Left = 84
+    Top = 5
+    Width = 165
+    Height = 21
+    Style = csDropDownList
+    DropDownCount = 7
+    ItemHeight = 13
+    TabOrder = 0
+    OnChange = cbLanguageChange
+  end
+  object cbBeep: TCheckBox
+    Left = 284
+    Top = 8
+    Width = 165
+    Height = 17
+    Caption = '&Beep when correcting'
+    TabOrder = 1
+  end
+  object btnOK: TButton
+    Left = 204
+    Top = 332
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 3
+    OnClick = btnOKClick
+  end
+  object btnCancel: TButton
+    Left = 290
+    Top = 332
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 4
+    OnClick = btnCancelClick
+  end
+  object btnHelp: TButton
+    Left = 376
+    Top = 332
+    Width = 75
+    Height = 25
+    Caption = '&Help'
+    TabOrder = 5
+    OnClick = btnHelpClick
+  end
+  object dlgGetWordlist: TOpenDialog
+    DefaultExt = 'txt'
+    Filter = 'Text Files (*.txt)|*.txt|All Files (*.*)|*.*'
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist]
+    Title = 'Select a word list file (one word per line)'
+    Left = 124
+    Top = 174
+  end
+  object dlgPutWordlist: TSaveDialog
+    DefaultExt = 'txt'
+    Filter = 'Text Files (*.txt)|*.txt|All Files (*.*)|*.*'
+    Title = 'Select a file write word list to'
+    Left = 124
+    Top = 118
+  end
+end

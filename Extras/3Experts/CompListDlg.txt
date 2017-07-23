@@ -1,0 +1,170 @@
+object SelCompListDlg: TSelCompListDlg
+  Left = 622
+  Top = 166
+  BorderStyle = bsDialog
+  Caption = 'Selected Components'
+  ClientHeight = 300
+  ClientWidth = 345
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object SrcLabel: TLabel
+    Left = 8
+    Top = 8
+    Width = 145
+    Height = 16
+    AutoSize = False
+    Caption = 'Available Componets'
+  end
+  object DstLabel: TLabel
+    Left = 192
+    Top = 8
+    Width = 145
+    Height = 16
+    AutoSize = False
+    Caption = 'Selected Componets'
+  end
+  object IncludeBtn: TSpeedButton
+    Left = 160
+    Top = 32
+    Width = 24
+    Height = 24
+    Caption = '>'
+    OnClick = IncludeBtnClick
+  end
+  object IncAllBtn: TSpeedButton
+    Left = 160
+    Top = 64
+    Width = 24
+    Height = 24
+    Caption = '>>'
+    OnClick = IncAllBtnClick
+  end
+  object ExcludeBtn: TSpeedButton
+    Left = 160
+    Top = 96
+    Width = 24
+    Height = 24
+    Caption = '<'
+    Enabled = False
+    OnClick = ExcludeBtnClick
+  end
+  object ExAllBtn: TSpeedButton
+    Left = 160
+    Top = 128
+    Width = 24
+    Height = 24
+    Caption = '<<'
+    Enabled = False
+    OnClick = ExcAllBtnClick
+  end
+  object Label1: TLabel
+    Left = 8
+    Top = 221
+    Width = 30
+    Height = 13
+    Caption = 'Indent'
+  end
+  object Label2: TLabel
+    Left = 8
+    Top = 252
+    Width = 26
+    Height = 13
+    Caption = 'Prefix'
+  end
+  object Label3: TLabel
+    Left = 8
+    Top = 276
+    Width = 26
+    Height = 13
+    Caption = 'Suffix'
+  end
+  object CopyToClipBoardBtn: TButton
+    Left = 216
+    Top = 236
+    Width = 128
+    Height = 25
+    Caption = 'Copy To ClipBoard'
+    Default = True
+    ModalResult = 1
+    TabOrder = 6
+    OnClick = CopyToClipBoardBtnClick
+  end
+  object CancelBtn: TButton
+    Left = 269
+    Top = 268
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 7
+  end
+  object SrcList: TListBox
+    Left = 8
+    Top = 24
+    Width = 144
+    Height = 185
+    ItemHeight = 13
+    MultiSelect = True
+    Sorted = True
+    TabOrder = 0
+  end
+  object DstList: TListBox
+    Left = 192
+    Top = 24
+    Width = 144
+    Height = 185
+    ItemHeight = 13
+    MultiSelect = True
+    TabOrder = 1
+  end
+  object IndentSpinEdit: TSpinEdit
+    Left = 56
+    Top = 216
+    Width = 49
+    Height = 22
+    Increment = 2
+    MaxValue = 20
+    MinValue = 0
+    TabOrder = 2
+    Value = 2
+  end
+  object PrefixComboBox: TComboBox
+    Left = 56
+    Top = 248
+    Width = 145
+    Height = 21
+    ItemHeight = 13
+    Items.Strings = (
+      'Self.')
+    TabOrder = 3
+  end
+  object SuffixComboBox: TComboBox
+    Left = 56
+    Top = 272
+    Width = 145
+    Height = 21
+    ItemHeight = 13
+    Items.Strings = (
+      '.FieldByName('#39#39').AsString'
+      '.FieldByName('#39#39').AsInteger'
+      '.FieldByName('#39#39').AsCurrency'
+      '.ReadOnly :='
+      '.Enabled :=')
+    TabOrder = 4
+  end
+  object IndentFirstLineCheckBox: TCheckBox
+    Left = 216
+    Top = 216
+    Width = 97
+    Height = 17
+    Caption = 'Indent First Line'
+    TabOrder = 5
+  end
+end

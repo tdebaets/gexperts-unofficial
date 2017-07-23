@@ -1,0 +1,15 @@
+object fmFakeIdeDockForm: TfmFakeIdeDockForm
+  Left = 221
+  Top = 238
+  Width = 410
+  Height = 280
+  HorzScrollBar.Increment = 17
+  VertScrollBar.Increment = 7
+  BorderStyle = bsSizeToolWin
+  Caption = 'DockableForm'
+  ParentFont = True
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+end
