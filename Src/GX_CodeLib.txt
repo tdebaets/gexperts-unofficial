@@ -1,9 +1,10 @@
 object fmCodeLib: TfmCodeLib
-  Left = 233
-  Top = 133
+  Left = 301
+  Top = 255
   Width = 544
   Height = 417
   Caption = 'Code Librarian'
+  Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -81,6 +82,7 @@ object fmCodeLib: TfmCodeLib
     0001000000010000000100000001000000010000000100000003000000070000
     000F0000001F0000000F0000000F0000000F0000000F0000001F0000003F}
   Menu = MainMenu1
+  OldCreateOrder = True
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnHide = FormHide
@@ -91,13 +93,13 @@ object fmCodeLib: TfmCodeLib
     Left = 169
     Top = 30
     Width = 3
-    Height = 316
+    Height = 306
     Cursor = crHSplit
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 346
-    Width = 536
+    Top = 336
+    Width = 528
     Height = 23
     Panels = <
       item
@@ -124,7 +126,7 @@ object fmCodeLib: TfmCodeLib
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 536
+    Width = 528
     Height = 30
     Align = alTop
     BevelOuter = bvNone
@@ -408,8 +410,8 @@ object fmCodeLib: TfmCodeLib
   object pnlView: TPanel
     Left = 172
     Top = 30
-    Width = 364
-    Height = 316
+    Width = 356
+    Height = 306
     Align = alClient
     BevelOuter = bvLowered
     Caption = 'this editor is created at runtime'
@@ -425,24 +427,24 @@ object fmCodeLib: TfmCodeLib
     Left = 0
     Top = 30
     Width = 169
-    Height = 316
+    Height = 306
+    Align = alLeft
     DragMode = dmAutomatic
     HideSelection = False
+    Images = ilTreeView
     Indent = 19
-    OnEdited = tvTopicsEdited
-    OnChanging = tvTopicsChanging
-    OnChange = tvTopicsChange
-    Align = alLeft
+    PopupMenu = pmTopics
     SortType = stText
     TabOrder = 2
+    OnChange = tvTopicsChange
+    OnChanging = tvTopicsChanging
+    OnDblClick = tvTopicsDblClick
     OnDragDrop = tvTopicsDragDrop
     OnDragOver = tvTopicsDragOver
-    OnStartDrag = tvTopicsStartDrag
+    OnEdited = tvTopicsEdited
     OnEndDrag = tvTopicsEndDrag
-    OnDblClick = tvTopicsDblClick
     OnKeyUp = tvTopicsKeyUp
-    PopupMenu = pmTopics
-    Images = ilTreeView
+    OnStartDrag = tvTopicsStartDrag
   end
   object MainMenu1: TMainMenu
     Left = 64
@@ -586,7 +588,7 @@ object fmCodeLib: TfmCodeLib
         Caption = '-'
       end
       object About1: TMenuItem
-        Caption = '&About GExperts...'
+        Caption = '&About GExperts-unofficial...'
         OnClick = About1Click
       end
     end

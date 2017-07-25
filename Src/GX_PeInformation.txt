@@ -83,7 +83,7 @@ inherited fmPeInformation: TfmPeInformation
   object pnToolBar: TPanel
     Left = 0
     Top = 0
-    Width = 446
+    Width = 438
     Height = 27
     Align = alTop
     BevelOuter = bvNone
@@ -184,8 +184,8 @@ inherited fmPeInformation: TfmPeInformation
   object pcMain: TPageControl
     Left = 0
     Top = 27
-    Width = 446
-    Height = 223
+    Width = 438
+    Height = 213
     ActivePage = tshMSDOS
     Align = alClient
     HotTrack = True
@@ -197,8 +197,8 @@ inherited fmPeInformation: TfmPeInformation
       object lvMSDOS: TListView
         Left = 0
         Top = 0
-        Width = 438
-        Height = 195
+        Width = 430
+        Height = 185
         Align = alClient
         Columns = <
           item
@@ -210,6 +210,7 @@ inherited fmPeInformation: TfmPeInformation
             Width = 210
           end>
         ColumnClick = False
+        HotTrackStyles = []
         ReadOnly = True
         RowSelect = True
         ParentShowHint = False
@@ -236,6 +237,7 @@ inherited fmPeInformation: TfmPeInformation
             Width = 210
           end>
         ColumnClick = False
+        HotTrackStyles = []
         ReadOnly = True
         RowSelect = True
         TabOrder = 0
@@ -260,6 +262,7 @@ inherited fmPeInformation: TfmPeInformation
             Width = 210
           end>
         ColumnClick = False
+        HotTrackStyles = []
         ReadOnly = True
         RowSelect = True
         TabOrder = 0
@@ -287,6 +290,7 @@ inherited fmPeInformation: TfmPeInformation
             Width = 100
           end>
         ColumnClick = False
+        HotTrackStyles = []
         ReadOnly = True
         RowSelect = True
         TabOrder = 0
@@ -309,6 +313,7 @@ inherited fmPeInformation: TfmPeInformation
             Width = 120
           end>
         ColumnClick = False
+        HotTrackStyles = []
         ReadOnly = True
         RowSelect = True
         TabOrder = 1
@@ -337,6 +342,7 @@ inherited fmPeInformation: TfmPeInformation
             Width = 100
           end>
         ColumnClick = False
+        HotTrackStyles = []
         ReadOnly = True
         RowSelect = True
         TabOrder = 0
@@ -415,7 +421,7 @@ inherited fmPeInformation: TfmPeInformation
         Caption = '-'
       end
       object About1: TMenuItem
-        Caption = '&About GExperts...'
+        Caption = '&About GExperts-unofficial...'
         OnClick = About1Click
       end
     end

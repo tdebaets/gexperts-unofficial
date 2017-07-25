@@ -2,14 +2,16 @@ object fmConfiguration: TfmConfiguration
   Left = 320
   Top = 134
   BorderStyle = bsDialog
-  Caption = 'GExperts Configuration'
+  Caption = 'GExperts-unofficial Configuration'
   ClientHeight = 380
   ClientWidth = 485
+  Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  OldCreateOrder = True
   Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
@@ -301,7 +303,6 @@ object fmConfiguration: TfmConfiguration
           Top = 22
           Width = 357
           Height = 155
-          ColumnClick = False
           Columns = <
             item
               Caption = 'Expert'
@@ -311,12 +312,14 @@ object fmConfiguration: TfmConfiguration
               Caption = 'Shortcut Key'
               Width = 120
             end>
-          ReadOnly = True
+          ColumnClick = False
           HideSelection = False
+          HotTrackStyles = []
+          ReadOnly = True
           RowSelect = True
-          OnChange = lvEditorExpertsChange
           TabOrder = 4
           ViewStyle = vsReport
+          OnChange = lvEditorExpertsChange
         end
       end
     end

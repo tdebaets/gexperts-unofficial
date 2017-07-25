@@ -28,6 +28,7 @@ type
     pnlContributors: TPanel;
     lbxContributors: TListBox;
     lblAlpha: TLabel;
+    Label1: TLabel;
     procedure btnEmailClick(Sender: TObject);
     procedure lblWebPageClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

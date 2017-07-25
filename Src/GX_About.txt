@@ -4,9 +4,10 @@ object fmAbout: TfmAbout
   HorzScrollBar.Visible = False
   ActiveControl = btnClose
   BorderStyle = bsDialog
-  Caption = 'About GExperts'
+  Caption = 'About GExperts-unofficial'
   ClientHeight = 272
   ClientWidth = 566
+  Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -84,6 +85,7 @@ object fmAbout: TfmAbout
     0003F800000FFC00003FFE0000FFFF0001FFFF8001FFFFC001FFFFE000FFFFF0
     007FFFF0003FFFF8001FFFFC001FFFFE001FFFFE041FFFFE063FFFFF0FFF}
   KeyPreview = True
+  OldCreateOrder = True
   Position = poScreenCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -95,7 +97,7 @@ object fmAbout: TfmAbout
     Height = 16
     Alignment = taCenter
     AutoSize = False
-    Caption = 'GExperts'
+    Caption = 'GExperts-unofficial'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
@@ -233,11 +235,18 @@ object fmAbout: TfmAbout
     Height = 13
     Caption = '(in alphabetical order)'
   end
+  object Label1: TLabel
+    Left = 233
+    Top = 212
+    Width = 249
+    Height = 13
+    Caption = 'Unofficial fork with custom changes by Tim De Baets'
+  end
   object pnlContributors: TPanel
     Left = 352
     Top = 137
     Width = 209
-    Height = 86
+    Height = 72
     BevelOuter = bvNone
     Enabled = False
     TabOrder = 3
@@ -245,7 +254,7 @@ object fmAbout: TfmAbout
       Left = 0
       Top = 0
       Width = 209
-      Height = 86
+      Height = 72
       TabStop = False
       Align = alClient
       BorderStyle = bsNone

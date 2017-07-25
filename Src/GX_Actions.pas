@@ -57,8 +57,8 @@ uses
 
 // Hard-coded action captions
 resourcestring
-  SGxConfigMenu = 'GExperts &Configuration...';
-  SGxAboutMenu = 'About GE&xperts...';
+  SGxConfigMenu = 'GExperts-unofficial &Configuration...';
+  SGxAboutMenu = 'About GE&xperts-unofficial...';
 
 var
   PrivateGXActionManager: TGXActionManager;
