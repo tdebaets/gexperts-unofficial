@@ -4,4 +4,5 @@ Compared to the original source, the following custom changes were made. See the
 
 * Added postclone.bat script.
 * Added compiler settings (search path, output directories) to Delphi 4 project to allow a quick initial compilation.
-* Renamed the project to **GExperts Unofficial** because the license instructs custom versions of GExperts to be distributed under a clearly distinctive name.
+* Renamed the project to `GExperts-unofficial` because the license instructs custom versions of GExperts to be distributed under a clearly distinctive name.
+* Made the `Multiline editor tabs` enhancement work for Delphi 4.
