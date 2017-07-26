@@ -584,7 +584,7 @@ object fmConfiguration: TfmConfiguration
           Top = 21
           Width = 177
           Height = 17
-          Caption = 'Multiline editor tabs (Delphi 3)'
+          Caption = 'Multiline editor tabs'
           TabOrder = 0
         end
         object chkHotTrack: TCheckBox

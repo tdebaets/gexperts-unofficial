@@ -1018,10 +1018,6 @@ end;
 
 procedure TfmConfiguration.DisableUnsupportedEditorItems;
 begin
-  {$IFDEF GX_VER120_up}
-  chkMultiLine.Enabled := False;
-  {$ENDIF GX_VER120_up}
-
   {$IFDEF GX_VER130_up}
   // Delphi 5+ provide these local edit menu items by default
   chkLocalEditMenus.Enabled := False;

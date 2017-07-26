@@ -12,7 +12,7 @@ interface
 
 uses
   Classes, SysUtils, Windows, Controls,
-  ExtCtrls, Menus,
+  ExtCtrls, Menus, ComCtrls,
   GX_EditorEnhancements;
 
 const
@@ -24,6 +24,14 @@ type
 
   TGXToolBar = class(TPanel)
   private
+    // MultiLine editor tab support
+    FTabCtrlHeight: SmallInt;
+    FTabCtrlPanel: TPanel;
+    FTabPanel: TPanel;
+    FTabControl: TTabControl;
+    FBToolBar: TToolBar;
+    FCodePanel: TPanel;
+
     FUnitList: TStringList;
     FToolBarConfigPopup: TPopupMenu;
     FBtnPopup: TPopupMenu;
@@ -48,6 +56,11 @@ type
     procedure ClearEditorTabControlStyles;
 
     procedure ClearUnitList;
+
+    procedure MultiLineTabResize(Sender: TObject);
+    procedure GetEditorComponents;
+    procedure AddMultiLineTabs;
+    procedure RemoveMultiLineTabs;
   private
     FEditMgr: TEditorEnhancements;
     procedure ExecuteKeyboardExpert(Sender: TObject);
@@ -77,13 +90,23 @@ implementation
 
 uses
   Buttons, Dialogs, CommCtrl, StdCtrls,
-  Forms, Messages, ComCtrls,
+  Forms, Messages,
   {$IFDEF GX_HasActionSupport} ActnList, {$ENDIF GX_HasActionSupport}
   {$IFDEF GX_UseNativeToolsApi} ToolsAPI, {$ENDIF GX_UseNativeToolsApi}
   ToolIntf, ExptIntf, EditIntf,
   EIManager, EIPanel, EINotifiers,
   {$IFOPT D+} GX_DbugIntf, {$ENDIF D+}
   GX_ToolBarButtons, GX_GenFunc, GX_EditReader, GX_Actions;
+
+const
+  // MultiLine editor tab support: Component name constants
+  ToolBarName = 'ToolBar1';
+  TabControlPanelName = 'TabControlPanel';
+  TabControlName = 'TabControl';
+  // modified for Delphi 4
+  //CodePanelName = 'CodePanel';
+  CodePanelName = 'EditorPanel';
+  TabPanelName = 'TabPanel'; // don't use for Delphi 4, there it's named 'Panel4'
 
 {$IFDEF GX_BCB}
 var
@@ -100,6 +123,8 @@ end;
 constructor TGXToolBar.CreateManaged(AOwner: TComponent; EditorEnh: TEditorEnhancements);
 begin
   inherited Create(AOwner);
+
+  GetEditorComponents;
 
   FEditMgr := EditorEnh;
 
@@ -417,75 +442,156 @@ begin
   end;
 end;
 
-procedure TGXToolBar.ApplyEditorTabControlStyles;
-
-  procedure SetStyle(TabControl: TTabControl; Enable: Boolean; NewStyle: SmallInt);
-  var
-    Style: LongInt;
-  begin
-    Style := GetWindowLong(TabControl.Handle, GWL_STYLE);
-    if Enable then
-      Style := Style or NewStyle
-    else
-      Style := Style and not NewStyle;
-    SetWindowLong(TabControl.Handle, GWL_STYLE, Style);
-  end;
-
+// Get the components of the editor that need resizing.
+// Call this every time the components are needed.
+procedure TGXToolBar.GetEditorComponents;
 var
-  TabControl: TTabControl;
+  TabComponent: TComponent;
 begin
-  {$IFOPT D+}SendDebug('Applying editor tab control settings');{$ENDIF D+}
-  if FEditMgr = nil then
+  if not Assigned(Owner) then
     Exit;
-  TabControl := Owner.FindComponent('TabControl') as TTabControl;
-  if TabControl <> nil then
-  begin
-    SetStyle(TabControl, FEditMgr.MultiLine, TCS_MULTILINE);
-    {$IFNDEF GX_VER120_up}
-    SetStyle(TabControl, FEditMgr.HotTrack, TCS_HOTTRACK);
-    {$ELSE}
-    TabControl.HotTrack := FEditMgr.HotTrack;
-    {$ENDIF GX_VER120_up}
-
-    {$IFDEF GX_VER120_up}
-    if FEditMgr.Buttons then
-    begin
-      if FEditMgr.ButtonsFlat then
-        TabControl.Style := tsFlatButtons
-      else
-        TabControl.Style := tsButtons;
-    end
-    else
-      TabControl.Style := tsTabs;
-    {$ELSE}
-    SetStyle(TabControl, FEditMgr.Buttons, TCS_BUTTONS);
-    {$ENDIF GX_VER120_up}
+  {$IFOPT D+}SendDebug('Getting Editor Components'); {$ENDIF}
+  if not Assigned(FBToolBar) then
+     FBToolBar := Owner.FindComponent(ToolBarName) as TToolBar;
+  if not Assigned(FTabControl) then begin
+     TabComponent := Owner.FindComponent(TabControlName);
+     if TabComponent is TTabControl then
+       FTabControl := TabComponent as TTabControl;
   end;
-  {$IFOPT D+}SendDebug('Done applying editor tab control settings');{$ENDIF D+}
+  if not Assigned(FTabCtrlPanel) then
+     FTabCtrlPanel := Owner.FindComponent(TabControlPanelName) as TPanel;
+  if Assigned(FTabCtrlPanel) then
+  begin
+    // Set TabCtrlPanel.Height only on first call to get orginal height
+    // of TabCtrlPanel.  This value may not be available in .Create
+    if FTabCtrlHeight = 0 then
+      FTabCtrlHeight := FTabCtrlPanel.Height;
+    if not (FTabCtrlPanel.Align = alTop) then
+      FTabCtrlPanel.Align := alTop;
+  end;
+  if not Assigned(FTabPanel) then begin
+    FTabPanel := Owner.FindComponent(TabPanelName) as TPanel;
+    // The following was added to the original source for Delphi 4 support.
+    // There, the TabPanel is named 'Panel4', so we get it through another way.
+    if not Assigned(FTabPanel) and Assigned(FTabControl) then
+      FTabPanel := FTabControl.Parent as TPanel;
+  end;
+  if not Assigned(FCodePanel) then
+     FCodePanel := Owner.FindComponent(CodePanelName) as TPanel;
+  if Assigned(FCodePanel) then
+     if not (FCodePanel.Align = alClient) then
+       FCodePanel.Align := alClient;
 end;
 
-procedure TGXToolBar.ClearEditorTabControlStyles;
-var
-  TabControl: TTabControl;
-  Style: Longint;
+procedure TGXToolBar.RemoveMultiLineTabs;
 begin
-  TabControl := TTabControl(Owner.FindComponent('TabControl'));
-  if TabControl <> nil then
+  {$IFOPT D+} SendDebug('Removing multiline editor tabs'); {$ENDIF}
+  GetEditorComponents;
+  if Assigned(FTabControl) and Assigned(FBToolBar) then
   begin
-    TabControl.MultiLine := False;
-    TabControl.HotTrack := False;
-    if TabControl.HandleAllocated then
+    FTabControl.OnResize := nil;
+    FTabControl.MultiLine := False;
+    MultiLineTabResize(FTabControl);
+  end;
+end;
+
+procedure TGXToolBar.AddMultiLineTabs;
+begin
+  {$IFOPT D+}SendDebug('Adding multiline editor tabs'); {$ENDIF}
+  GetEditorComponents;
+  if Assigned(FTabControl) and Assigned(FBToolBar) then
+  begin
+    FTabControl.MultiLine := True;
+    FTabControl.OnResize  := MultiLineTabResize;
+    MultiLineTabResize(FTabControl);
+  end;
+end;
+
+procedure TGXToolBar.MultiLineTabResize(Sender: TObject);
+var
+  Adjust: Integer;
+  RowCount: Integer;
+begin
+  {$IFOPT D+}SendDebug('Resizing editor: Adjusting multiline editor tabs'); {$ENDIF}
+  GetEditorComponents;
+  if Assigned(FTabCtrlPanel) and Assigned(FTabControl) and Assigned(FBToolBar) and Assigned(FTabPanel) then
+  begin
+    if FTabControl.Style = tsTabs then
+      Adjust := 6  // Adjustment for normal style tabs
+    else
+      Adjust := 3; // Adjustment for button style tabs
+
+    // Since Delphi 4's TTabControl doesn't have a RowCount property yet, we get
+    // it via the Windows API.
+    RowCount := TabCtrl_GetRowCount(FTabControl.Handle);
+    
+    // If called while the window is closing, TabControl.RowCount will cause AVs
+    FTabCtrlPanel.Height := (FTabCtrlHeight * RowCount) - (Adjust * (RowCount - 1));
+    FTabCtrlPanel.Top := 0;
+    FTabCtrlPanel.Left := 0;
+
+    FTabPanel.Height := FTabCtrlPanel.Height;
+    FTabPanel.Top := 0;
+    FTabPanel.Left := 0;
+
+    FTabControl.Height := FTabCtrlPanel.Height;
+    FTabControl.Top := 0;
+    FTabControl.Left := 0;
+
+    FBToolBar.Wrapable := False;
+  end;
+end;
+
+// The complete implementation of this procedure has been replaced with the one
+// from the latest GExperts source code
+procedure TGXToolBar.ApplyEditorTabControlStyles;
+var
+  LocalEditorEnhancements: TEditorEnhancements;
+begin
+  if IsStandAlone then
+    Exit;
+  {$IFOPT D+} SendDebug('Applying editor tab control settings'); {$ENDIF}
+  LocalEditorEnhancements := EditorEnhancements;
+
+  GetEditorComponents;
+  if Assigned(FTabControl) then
+  begin
+    //Turn MultiLine tabs on and off based on EditorEnhancements MultiLine
+    FTabControl.MultiLine := LocalEditorEnhancements.MultiLine;
+
+    if FTabControl.MultiLine then
+      AddMultiLineTabs
+    else
+      RemoveMultiLineTabs;
+
+    FTabControl.HotTrack := LocalEditorEnhancements.HotTrack;
+
+    if LocalEditorEnhancements.Buttons then
     begin
-      Style := GetWindowLong(TabControl.Handle, GWL_STYLE);
-      if Style = 0 then
-        RaiseLastWin32Error;
+      if LocalEditorEnhancements.ButtonsFlat then
+        FTabControl.Style := tsFlatButtons
+      else
+        FTabControl.Style := tsButtons;
+    end
+    else
+      FTabControl.Style := tsTabs;
+  end;
+  {$IFOPT D+} SendDebug('Done applying editor tab control settings'); {$ENDIF}
+end;
 
-      Style := Style and not TCS_BUTTONS;
-
-      // Set desired window style
-      if SetWindowLong(TabControl.Handle, GWL_STYLE, Style) = 0 then
-        RaiseLastWin32Error;
-    end;
+// The complete implementation of this procedure has been replaced with the one
+// from the latest GExperts source code
+procedure TGXToolBar.ClearEditorTabControlStyles;
+begin
+  GetEditorComponents;
+  if Assigned(FTabControl) then
+  begin
+    // Do not call RemoveMultiLineTabs here.  It will cause AVs
+    // when the window closes due to calls to MultiLineTabResize.
+    FTabControl.OnResize := nil;
+    FTabControl.MultiLine := False;
+    FTabControl.HotTrack := False;
+    FTabControl.Style := tsTabs;
   end;
 end;
 
