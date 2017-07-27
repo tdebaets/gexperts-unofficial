@@ -103,9 +103,11 @@ const
   ToolBarName = 'ToolBar1';
   TabControlPanelName = 'TabControlPanel';
   TabControlName = 'TabControl';
-  // modified for Delphi 4
-  //CodePanelName = 'CodePanel';
-  CodePanelName = 'EditorPanel';
+  {$IFDEF GX_VER130_up}
+  CodePanelName = 'CodePanel'; // Delphi 5+
+  {$ELSE}
+  CodePanelName = 'EditorPanel'; // added for Delphi 4
+  {$ENDIF GX_VER130_up}
   TabPanelName = 'TabPanel'; // don't use for Delphi 4, there it's named 'Panel4'
 
 {$IFDEF GX_BCB}
