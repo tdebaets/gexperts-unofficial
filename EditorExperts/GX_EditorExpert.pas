@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, Windows, Sysutils, Menus, Dialogs,
-  ToolIntf, ExptIntf, EditIntf;
+  ToolIntf, ExptIntf, EditIntf, EIManager;
 
 type
   TEditorExpert = class(TObject)
@@ -32,6 +32,11 @@ type
     property ButtonNo: Integer read FButtonNo;
     property Name: string read FName;
     property HasConfigOptions: Boolean read FHasConfigOptions;
+  end;
+
+  TEditorExpert2 = class(TEditorExpert)
+  public
+    function ExecuteKeyDown(Manager: TEIManager): Boolean; virtual;
   end;
 
   TEditorExpertClass = class of TEditorExpert;
@@ -134,6 +139,11 @@ end;
 function TEditorExpert.GetBaseRegistryKey: string;
 begin
   Result := ConfigInfo.RegKey + '\GExperts\EditorExperts'; // do not localize
+end;
+
+function TEditorExpert2.ExecuteKeyDown(Manager: TEIManager): Boolean;
+begin
+  Result := False; // default: not handled
 end;
 
 var

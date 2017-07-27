@@ -280,28 +280,27 @@ end;
 {$IFDEF GX_EII}
 procedure TGXKeyboardNotifier.BeforeEditorMessageProcess(Manager: TEIManager; OriginalMessage: TMessage; var Msg: TMessage);
 
-procedure CheckKey(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure CheckKey(Sender: TObject; var Key: Word; Shift: TShiftState;
+    KeyDown: Boolean);
   var
     SCut: TShortCut;
     i: Integer;
-    //nKey: Word;
+    Expert: TEditorExpert;
+    Handled: Boolean;
   begin
-    SCut := 0;
-    if (ssCtrl in Shift) then
-      SCut := SCut + $4000;
-    if (ssAlt in Shift) then
-      SCut := Scut + $8000;
-    {if (key >= 97) and (key <= 97 + 26) then
-      nkey := key - (97 - 67)
-    else
-      nkey := key;}
-    SCut := SCut + Key;
+    SCut := ShortCut(Key, Shift);
     for i := 0 to GExpertsInst.EditorExpertCount - 1 do
     begin
-      if GExpertsInst.EditorExpertList[i].ShortCut = SCut then
+      Expert := GExpertsInst.EditorExpertList[i];
+      if Expert.ShortCut = SCut then
       begin
-        GExpertsInst.EditorExpertList[i].Execute;
-        Key := 0;
+        Handled := False;
+        if KeyDown and (Expert is TEditorExpert2) then
+          Handled := (Expert as TEditorExpert2).ExecuteKeyDown(Manager)
+        else
+          Expert.Execute;
+        if not KeyDown or Handled then
+          Key := 0;
         Break;
       end;
     end;
@@ -309,9 +308,11 @@ procedure CheckKey(Sender: TObject; var Key: Word; Shift: TShiftState);
 
 begin
   case OriginalMessage.Msg of
-    CN_KEYUP:
+    CN_KEYDOWN, CN_KEYUP:
       begin
-        CheckKey(Manager, TWMKey(Msg).CharCode, KeyDataToShiftState(TWMkey(Msg).KeyData));
+        CheckKey(Manager, TWMKey(Msg).CharCode,
+            KeyDataToShiftState(TWMkey(Msg).KeyData),
+            (OriginalMessage.Msg = CN_KEYDOWN));
         if TWMKey(Msg).CharCode = 0 then
           Msg.Result := 1;
       end;

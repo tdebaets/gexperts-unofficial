@@ -130,7 +130,8 @@ uses
   GX_VerDepConst in 'Src\GX_VerDepConst.pas',
   GX_BaseModuleNotifiers in 'Src\GX_BaseModuleNotifiers.pas',
   GX_CompsToCode in 'Src\GX_CompsToCode.pas' {fmCompsToCode},
-  GX_MessageBox in 'Src\GX_MessageBox.pas' {fmGxMessageBox};
+  GX_MessageBox in 'Src\GX_MessageBox.pas' {fmGxMessageBox},
+  GX_TabIndentEditorExpert in 'EditorExperts\GX_TabIndentEditorExpert.pas';
 
 {$E dll}
 
