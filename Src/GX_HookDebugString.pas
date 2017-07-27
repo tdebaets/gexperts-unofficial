@@ -2,8 +2,6 @@ unit GX_HookDebugString;
 
 {$I GX_CondDefine.inc}
 
-{$IFNDEF GX_VER120_up} // Works in Delphi 3 & BCB3 only!
-
 {
 From Stefan Hoffmeister:
 
@@ -87,7 +85,7 @@ Erik S. Johansen
 interface
 
 uses
-  Classes, GX_Experts, ExptIntf, ToolIntf;
+  Classes, GX_Experts, ExptIntf, ToolIntf, Registry;
 
 type
   THookDebugExpert = class(TGX_Expert)
@@ -207,7 +205,7 @@ type
 var
   PreviousWaitForDebugEventCall: TWaitForDebugEvent = nil;
   OrigProc: Pointer = nil;
-  Thunk: PImageThunkData = nil;
+  pWaitDbgEventThunk: PImageThunkData = nil;
   hDebugger: Integer;
   ProcHandle: Integer = 0; // this does need to be global
 
@@ -225,7 +223,7 @@ end;
 function WaitDbgEvent(var lpde: TDebugEvent; dwTimeout: DWORD): BOOL; stdcall;
 var
   Buf: Pointer;
-  BytesRead: Integer;
+  BytesRead: Cardinal;
 begin
   Assert(@PreviousWaitForDebugEventCall <> nil);
 
@@ -274,75 +272,134 @@ begin
   end;
 end;
 
-procedure Init;
-const
-  DebuggerDllName = 'DFWDBK32.DLL';
-  KernelName = 'KERNEL32.DLL';
+function HookFunction(hLib: HMODULE; pFuncLibName, pFuncName: PChar;
+    pNewAddr: Pointer; var pOldAddr: Pointer;
+    var pThunk: PImageThunkData): Boolean;
 var
   OldProt: Integer;
   pImage: PImageNtHeaders;
-  ImpDesc: PImageImportDescriptor;
+  pImpDesc: PImageImportDescriptor;
   pName: PChar;
-  pThunk: PImageThunkData;
+  pOrigProc: Pointer;
 begin
-  IsMultiThread := True;
+  Result := True;
   try
-    hDebugger := LoadLibrary(DebuggerDllName);
-    if hDebugger <> 0 then
+    pImage := PImageNtHeaders(Cardinal(PImageDosHeader(hLib)^.E_lfanew) + hLib);
+    pImpDesc := Pointer(pImage.OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress + hLib);
+    pOrigProc := GetProcAddress(GetModuleHandle(pFuncLibName), pFuncName);
+    while pImpDesc.FirstThunk <> nil do
     begin
-      pImage := PImageNtHeaders(PImageDosHeader(hDebugger)^.E_lfanew + hDebugger);
-      ImpDesc := Pointer(pImage.OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress + hDebugger);
-      OrigProc := GetProcAddress(GetModuleHandle(KernelName), 'WaitForDebugEvent');
-      while ImpDesc.FirstThunk <> nil do
+      pName := Pointer(hLib + pImpDesc.Name);
+      if CompareText(StrPas(pName), pFuncLibName) = 0 then
       begin
-        pName := Pointer(hDebugger + ImpDesc.Name);
-        if CompareText(StrPas(pName), KernelName) = 0 then
+        pThunk := Pointer(hLib + Cardinal(pImpDesc.FirstThunk));
+        while pThunk.Ordinal <> 0 do
         begin
-          pThunk := Pointer(hDebugger + Integer(ImpDesc.FirstThunk));
-          while pThunk.Ordinal <> 0 do
+          if pThunk.AddressOfData = pOrigProc then
           begin
-            if pThunk.AddressOfData = OrigProc then
-            begin
-              Win32Check(VirtualProtect(@pThunk.AddressOfData, SizeOf(Pointer), PAGE_EXECUTE_READWRITE, @OldProt));
-              try
-                @PreviousWaitForDebugEventCall := pThunk.AddressOfData;
-                pThunk.AddressOfData := Pointer(@WaitDbgEvent);
-              finally
-                Win32Check(VirtualProtect(@pThunk.AddressOfData, SizeOf(Pointer), OldProt, @OldProt));
-              end;
-              Thunk := pThunk;
-              Exit;
+            Win32Check(VirtualProtect(@pThunk.AddressOfData, SizeOf(Pointer), PAGE_EXECUTE_READWRITE, @OldProt));
+            try
+              pOldAddr := pThunk.AddressOfData;
+              pThunk.AddressOfData := pNewAddr;
+            finally
+              Win32Check(VirtualProtect(@pThunk.AddressOfData, SizeOf(Pointer), OldProt, @OldProt));
             end;
-            Inc(pThunk);
+            Exit;
           end;
+          Inc(pThunk);
         end;
-        Inc(ImpDesc);
       end;
+      Inc(pImpDesc);
     end;
   except
     on E: Exception do
     begin
+      Result := False;
       OutException(E);
       { swallow }
     end;
   end;
 end;
 
-procedure Finish;
+procedure UnhookFunction(var pThunk: PImageThunkData; pOldAddr: Pointer);
 var
   OldProt: Integer;
 begin
-  if Thunk <> nil then
+  if pThunk <> nil then
   begin
-    Win32Check(VirtualProtect(@Thunk.AddressOfData, SizeOf(Pointer), PAGE_EXECUTE_READWRITE, @OldProt));
+    Win32Check(VirtualProtect(@pThunk.AddressOfData, SizeOf(Pointer), PAGE_EXECUTE_READWRITE, @OldProt));
     try
-      Thunk.AddressOfData := @PreviousWaitForDebugEventCall;
+      pThunk.AddressOfData := pOldAddr;
     finally
-      Win32Check(VirtualProtect(@Thunk.AddressOfData, SizeOf(Pointer), OldProt, @OldProt));
+      Win32Check(VirtualProtect(@pThunk.AddressOfData, SizeOf(Pointer), OldProt, @OldProt));
     end;
-    Thunk := nil;
-    OrigProc := nil;
+    pThunk := nil;
   end;
+end;
+
+function GetBorlandSharedFilesDir: String;
+const
+  BorlandSharedKey = 'Software\Borland\Borland Shared';
+  SharedFilesDirValue = 'SharedFilesDir';
+var
+  Reg: TRegistry;
+begin
+  Reg := TRegistry.Create;
+  try
+    // Under NT5+, we can't open HKLM in r/w mode (supported in D4+)
+    Reg.RootKey := HKEY_LOCAL_MACHINE;
+    {$IFDEF GX_VER125_up}
+    if Reg.OpenKeyReadOnly(BorlandSharedKey) then
+    {$ELSE not GX_VER125_up}
+    if Reg.OpenKey(BorlandSharedKey, False) then
+    {$ENDIF not GX_VER125_up}
+    begin
+      Result := Reg.ReadString(SharedFilesDirValue);
+      Assert(Length(Result) > 0, 'Bad shared files dir detected');
+      if Result[Length(Result)] = '\' then
+        Delete(Result, 1, 1)
+    end
+    else
+      Result := '';
+  finally
+    Reg.Free;
+  end;
+end;
+
+procedure Init;
+const
+  {$IFDEF GX_VER120_up}
+  // added for Delphi 4
+  DebuggerDllName = 'Debugger\bordbk40.dll';
+  {$ELSE}
+  DebuggerDllName = 'DFWDBK32.DLL';
+  {$ENDIF GX_VER120_up}
+  KernelName = 'KERNEL32.DLL';
+var
+  DebuggerDllPath: String;
+begin
+  IsMultiThread := True;
+  {$IFDEF GX_VER120_up}
+  // added for Delphi 4
+  DebuggerDllPath := GetBorlandSharedFilesDir;
+  if DebuggerDllPath = '' then
+    Exit;
+  DebuggerDllPath := DebuggerDllPath + '\' + DebuggerDllName;
+  {$ELSE}
+  DebuggerDllPath := DebuggerDllName;
+  {$ENDIF GX_VER120_up}
+  {$IFOPT D+}SendDebug('Debugger DLL Path: '+DebuggerDllPath);{$ENDIF}
+  hDebugger := LoadLibrary(PChar(DebuggerDllPath));
+  if hDebugger <> 0 then
+  begin
+    HookFunction(hDebugger, KernelName, 'WaitForDebugEvent', @WaitDbgEvent,
+        @PreviousWaitForDebugEventCall, pWaitDbgEventThunk);
+  end;
+end;
+
+procedure Finish;
+begin
+  UnhookFunction(pWaitDbgEventThunk, @PreviousWaitForDebugEventCall);
   // not really required, but it is cleaner
   if hDebugger <> 0 then
   begin
@@ -434,8 +491,5 @@ end;
 
 initialization
   RegisterGX_Expert(THookDebugExpert);
-{$ELSE GX_VER120_up}
-interface implementation
-{$ENDIF GX_VER120_up}
 
 end.
