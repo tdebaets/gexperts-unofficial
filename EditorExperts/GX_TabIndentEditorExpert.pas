@@ -121,8 +121,7 @@ procedure TGxAbstractTabEditorExpert.LoadSettings;
 begin
   with TRegIniFile.Create(BaseRegistryKey) do
   try
-    // TODO: the value name should probably be different for indent/unindent
-    ShortCut := ReadInteger('TabIndentEditorExpert', 'ShortCut', ShortCut);
+    ShortCut := ReadInteger(Self.ClassName, 'ShortCut', ShortCut);
   finally
     Free;
   end;
@@ -132,8 +131,7 @@ procedure TGxAbstractTabEditorExpert.SaveSettings;
 begin
   with TRegIniFile.Create(BaseRegistryKey) do
   try
-    // TODO: the value name should probably be different for indent/unindent
-    WriteInteger('TabIndentEditorExpert', 'ShortCut', ShortCut);
+    WriteInteger(Self.ClassName, 'ShortCut', ShortCut);
   finally
     Free;
   end;
