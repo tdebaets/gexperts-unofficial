@@ -144,6 +144,7 @@ uses
   GX_DbugIntf,
 {$ENDIF D+}
   GX_ProjDependProp, GX_GExperts, GX_ConfigurationInfo, GX_GenFunc,
+  GX_OtaUtils,
   TypInfo, CommCtrl;
 
 procedure TProjectNotifier.EventNotification(
@@ -235,7 +236,7 @@ var
 
 begin
   Result := True;
-  if FileName = ToolServices.GetProjectName then Exit;
+  //if FileName = ToolServices.GetProjectName then Exit;
   nUses := 0;
   UList := nil;
   //Parser := nil;
@@ -404,6 +405,11 @@ begin
   begin
     UInfo := TUnitInfo(FileList.Objects[i]);
     Result := UInfo.FileName;
+  end
+  else
+  begin
+    // TODO: there's probably a better way than to just append .pas
+    Result := GxOtaFindPathToFile(uName + '.pas');
   end;
 end;
 
@@ -651,24 +657,15 @@ end;
 
 procedure TfmProjDepend.OpenUnit(const UnitName: string);
 var
-  i: Integer;
   CurrentFileName: string;
 resourcestring
   SFileDoesNotExist = '%s does not exist';
-  SOpenError = 'This unit is not in the current project.'#13#10 +
-               'A later version of GExperts might be able to open units on the library path.';
 begin
-  i := FileList.IndexOf(UnitName);
-  if i >= 0 then
-  begin
-    CurrentFileName := TUnitInfo(FileList.Objects[i]).FileName;
-    if FileExists(CurrentFileName) then
-      ToolServices.OpenFile(CurrentFileName)
-    else
-      MessageDlg(Format(SFileDoesNotExist, [CurrentFileName]), mtError, [mbOK], 0);
-  end
+  CurrentFileName := GetFileName(UnitName);
+  if FileExists(CurrentFileName) then
+    ToolServices.OpenFile(CurrentFileName)
   else
-    MessageDlg(SOpenError, mtInformation, [mbOK], 0);
+    MessageDlg(Format(SFileDoesNotExist, [CurrentFileName]), mtError, [mbOK], 0);
 end;
 
 procedure TfmProjDepend.OpenUnit2Click(Sender: TObject);

@@ -131,7 +131,9 @@ uses
   GX_BaseModuleNotifiers in 'Src\GX_BaseModuleNotifiers.pas',
   GX_CompsToCode in 'Src\GX_CompsToCode.pas' {fmCompsToCode},
   GX_MessageBox in 'Src\GX_MessageBox.pas' {fmGxMessageBox},
-  GX_TabIndentEditorExpert in 'EditorExperts\GX_TabIndentEditorExpert.pas';
+  GX_TabIndentEditorExpert in 'EditorExperts\GX_TabIndentEditorExpert.pas',
+  GX_GenericUtils in 'Src\GX_GenericUtils.pas',
+  GX_OtaUtils in 'Src\GX_OtaUtils.pas';
 
 {$E dll}
 
