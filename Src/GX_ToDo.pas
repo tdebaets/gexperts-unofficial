@@ -113,6 +113,7 @@ type
     procedure UMResizeCols(var Msg: TMessage); message UM_RESIZECOLS;
     procedure EnqueueFile(Filename: string);
     procedure ClearQueuedFiles;
+    procedure EnqueueProjectUses;
   protected
     procedure EnumerateFilesByDirectory;
     procedure SaveSettings;
@@ -180,9 +181,9 @@ uses
   {$ENDIF D+}
   GX_GExperts, GX_ConfigurationInfo, GX_GenFunc,
   {$IFDEF GX_UseNativeToolsApi}
-  ToolsAPI,
+  ToolsAPI, GX_OtaUtils,
   {$ENDIF GX_UseNativeToolsApi}
-  GX_ToDoOptions, ClipBrd;
+  GX_ToDoOptions, ClipBrd, TypInfo;
 
 resourcestring
   SParsingError = 'A parsing error occurred in file %s.';
@@ -388,24 +389,28 @@ begin
   try
     Clear;
     ClearQueuedFiles;
-    case ToDoExpert.FScanType of
-      tstProject, tstOpenFiles:
-        begin
-        // scan project files
-          ToolServices.EnumProjectUnits(EnumUnits, Pointer(Self));
-        end;
-
-      tstDirectory:
-        begin
-          // if expert is instructed to process files by directory
-          if Trim(ToDoExpert.FDirToScan) <> '' then
-            EnumerateFilesByDirectory;
-        end;
-    end;
     // Since this edit reader is destroyed almost
     // immediately, do not call FreeFileData
     EditRead := TEditReader.Create('');
     try
+      // Collect files to scan
+      case ToDoExpert.FScanType of
+        tstProject, tstOpenFiles:
+          begin
+          // scan project files
+            ToolServices.EnumProjectUnits(EnumUnits, Pointer(Self));
+            if ToDoExpert.FScanType = tstProject then
+              EnqueueProjectUses;
+          end;
+
+        tstDirectory:
+          begin
+            // if expert is instructed to process files by directory
+            if Trim(ToDoExpert.FDirToScan) <> '' then
+              EnumerateFilesByDirectory;
+          end;
+      end;
+      // Now actually scan the collected files
       lvToDo.Items.BeginUpdate;
       try
         for i := 0 to FQueuedFileList.Count - 1 do
@@ -449,6 +454,88 @@ begin
   begin
     ReleaseString(FQueuedFileList.Objects[0]);
     FQueuedFileList.Delete(0);
+  end;
+end;
+
+procedure TfmToDo.EnqueueProjectUses;
+var
+  ProjectFilename: string;
+  MS: TMemoryStream;
+  Parser: TmwPasLex;
+  nUses: Integer;
+  UnitName, UnitFilename: string;
+begin
+  nUses := 0;
+  
+  // TODO: make optional
+  ProjectFilename := ToolServices.GetProjectName;
+  if Trim(ProjectFilename) = '' then
+    Exit;
+
+  // Based on code in GX_ProjDepend.LoadFileDepend
+  Assert(EditRead <> nil);
+  EditRead.FileName := ProjectFilename;
+  MS := TMemoryStream.Create;
+  try
+    EditRead.SaveToStream(MS);
+    Parser := TmwPasLex.Create;
+    try
+      Parser.Origin := MS.Memory;
+      {$IFOPT D+}SendDebug('First: '+Parser.Token+'('+GetEnumName(TypeInfo(TTokenKind), Integer(Parser.TokenID))+')');{$ENDIF}
+      while not (Parser.TokenID in [tkUnit, tkNull, tkLibrary, tkProgram]) do
+      begin
+        Parser.NextNoJunk;
+        {$IFOPT D+}SendDebug('Looking for Unit, found: '+Parser.Token);{$ENDIF}
+      end;
+      {$IFOPT D+}SendDebug('L/P/U Found: '+Parser.Token);{$ENDIF}
+      if Parser.TokenID in [tkUnit, tkLibrary, tkProgram] then
+      begin
+        Parser.NextNoJunk;
+        {$IFOPT D+}SendDebug('ID is: '+Parser.Token+'('+GetEnumName(TypeInfo(TTokenKind), Integer(Parser.TokenID))+')');{$ENDIF}
+        if Parser.TokenID <> tkIdentifier then
+          Exit;
+      end;
+      while Parser.TokenID <> tkNull do
+      begin
+        if Parser.TokenID = tkUses then
+        begin
+          Inc(nUses);
+          Parser.NextNoJunk;
+          while (Parser.TokenID <> tkSemiColon) and (Parser.TokenID <> tkNull) do
+          begin
+            UnitName := '';
+            if Parser.TokenID = tkIdentifier then
+              UnitName := Parser.Token;
+            if UnitName <> '' then
+              {$IFOPT D+}SendDebug('Unit found: '+UnitName);{$ENDIF}
+            Parser.NextNoJunk;
+            if Parser.TokenID = tkIn then
+            begin
+              // Units with 'in' were already collected in EnumUnits, so ignore those
+              UnitName := '';
+              while not (Parser.TokenID in [tkSemiColon, tkComma, tkNull]) do
+                Parser.NextNoJunk;
+            end;
+            if UnitName <> '' then
+            begin
+              // TODO: there's probably a better way than to just append .pas
+              UnitFilename := GxOtaFindPathToFile(UnitName + '.pas');
+              {$IFOPT D+}SendDebug('Unit filename: '+UnitFilename);{$ENDIF}
+              if (Trim(UnitFilename) <> '') and FileExists(UnitFilename) then
+                EnqueueFile(UnitFilename);
+            end;
+          end;
+        end;
+        // Don't scan entire unit (for now)
+        if nUses >= 2 then
+          Break;
+        Parser.NextNoJunk;
+      end;
+    finally
+      Parser.Free;
+    end;
+  finally
+    MS.Free;
   end;
 end;
 
