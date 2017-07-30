@@ -505,9 +505,10 @@ begin
           begin
             UnitName := '';
             if Parser.TokenID = tkIdentifier then
+            begin
+              {$IFOPT D+}SendDebug('Unit found: '+Parser.Token);{$ENDIF}
               UnitName := Parser.Token;
-            if UnitName <> '' then
-              {$IFOPT D+}SendDebug('Unit found: '+UnitName);{$ENDIF}
+            end;
             Parser.NextNoJunk;
             if Parser.TokenID = tkIn then
             begin
@@ -516,7 +517,7 @@ begin
               while not (Parser.TokenID in [tkSemiColon, tkComma, tkNull]) do
                 Parser.NextNoJunk;
             end;
-            if UnitName <> '' then
+            if Trim(UnitName) <> '' then
             begin
               // TODO: there's probably a better way than to just append .pas
               UnitFilename := GxOtaFindPathToFile(UnitName + '.pas');
