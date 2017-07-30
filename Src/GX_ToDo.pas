@@ -101,6 +101,9 @@ type
     procedure mitCopyToClipboardClick(Sender: TObject);
   private
     First: Boolean;
+    // Sorted list of all filenames to scan (in uppercase)
+    // The objects contain the filenames in original case (as string)
+    FQueuedFileList: TStringList;
     FDataList: TList;
     EditRead: TEditReader;
     Notifier: TToDoNotifier;
@@ -108,6 +111,8 @@ type
     FColumnIndex: Integer;
     function GetSelectedItem: TToDoInfo;
     procedure UMResizeCols(var Msg: TMessage); message UM_RESIZECOLS;
+    procedure EnqueueFile(Filename: string);
+    procedure ClearQueuedFiles;
   protected
     procedure EnumerateFilesByDirectory;
     procedure SaveSettings;
@@ -355,7 +360,7 @@ begin
       begin
         Exit;
       end;
-      Form.LoadFile(FileName);
+      Form.EnqueueFile(FileName);
     except
       on E: Exception do
       begin
@@ -376,31 +381,35 @@ end;
 
 procedure TfmToDo.sbRefreshClick(Sender: TObject);
 var
+  i: Integer;
   AListItem: TListItem;
 begin
   Screen.Cursor := crHourglass;
   try
     Clear;
+    ClearQueuedFiles;
+    case ToDoExpert.FScanType of
+      tstProject, tstOpenFiles:
+        begin
+        // scan project files
+          ToolServices.EnumProjectUnits(EnumUnits, Pointer(Self));
+        end;
+
+      tstDirectory:
+        begin
+          // if expert is instructed to process files by directory
+          if Trim(ToDoExpert.FDirToScan) <> '' then
+            EnumerateFilesByDirectory;
+        end;
+    end;
     // Since this edit reader is destroyed almost
     // immediately, do not call FreeFileData
     EditRead := TEditReader.Create('');
     try
       lvToDo.Items.BeginUpdate;
       try
-        case ToDoExpert.FScanType of
-          tstProject, tstOpenFiles:
-            begin
-            // scan project files
-              ToolServices.EnumProjectUnits(EnumUnits, Pointer(Self));
-            end;
-
-          tstDirectory:
-            begin
-              // if expert is instructed to process files by directory
-              if Trim(ToDoExpert.FDirToScan) <> '' then
-                EnumerateFilesByDirectory;
-            end;
-        end;
+        for i := 0 to FQueuedFileList.Count - 1 do
+          LoadFile(string(FQueuedFileList.Objects[i]));
       finally
         lvToDo.Items.EndUpdate;
       end;
@@ -428,6 +437,20 @@ begin
 end;
 
 {#todo3 another test}
+
+procedure TfmToDo.EnqueueFile(Filename: string);
+begin
+  FQueuedFileList.AddObject(UpperCase(Filename), RefString(Filename));
+end;
+
+procedure TfmTodo.ClearQueuedFiles;
+begin
+  while FQueuedFileList.Count > 0 do
+  begin
+    ReleaseString(FQueuedFileList.Objects[0]);
+    FQueuedFileList.Delete(0);
+  end;
+end;
 
 procedure TfmToDo.LoadFile(FileName: string);
 var
@@ -645,6 +668,9 @@ begin
     Notifier := nil;
   end;
   Clear;
+  ClearQueuedFiles;
+  FQueuedFileList.Free;
+  FQueuedFileList := nil;
   FDataList.Free;
   FDataList := nil;
   fmToDo := nil;
@@ -658,6 +684,9 @@ begin
   FDataList := TList.Create;
   ilToDo.ResourceLoad(rtBitmap, 'GX_TODO', clFuchsia);
   First := True;
+  FQueuedFileList := TStringList.Create;
+  FQueuedFileList.Duplicates := dupIgnore;
+  FQueuedFileList.Sorted := True;
   Notifier := TToDoNotifier.Create(Self);
   ToolServices.AddNotifier(Notifier);
   FColumnIndex := -1;
@@ -791,7 +820,7 @@ var
           if (Search.Attr and faDirectory) = 0 then
           begin
             try
-              LoadFile(Dir + Search.Name);
+              EnqueueFile(Dir + Search.Name);
             except
               on E: Exception do
               begin

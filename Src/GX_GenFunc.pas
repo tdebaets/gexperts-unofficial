@@ -162,6 +162,9 @@ procedure ProcessException(E: Exception);
 // This function will report the exception with the message (and E.Message)
 procedure ProcessExceptionMsg(E: Exception; const Msg: string);
 
+function RefString(const S: string): Pointer;
+procedure ReleaseString(P: Pointer);
+
 implementation
 
 uses
@@ -1604,6 +1607,26 @@ end;
 
 procedure ProcessException(E: Exception);
 begin
+end;
+
+// Save a reference to a string and return a raw pointer
+// to the string.
+function RefString(const S: string): Pointer;
+var
+  Local: string;
+begin
+  Local := S;                // Increment the reference count.
+  Result := Pointer(Local);  // Save the string pointer.
+  Pointer(Local) := nil;     // Prevent decrementing the ref count.
+end;
+
+// Release a string that was referenced with RefString.
+procedure ReleaseString(P: Pointer);
+var
+  Local: string;
+begin
+  Pointer(Local) := P;
+  // Delphi frees the string when Local goes out of scope.
 end;
 
 initialization
