@@ -139,6 +139,7 @@ type
   TToDoExpert = class(TGX_EnhExpert)
   private
     FScanType: TToDoScanType;
+    FScanProjUses: Boolean;
     FDirToScan: string;
     FRecurseDirScan: Boolean;
     FTokenList: TTokenList;
@@ -399,7 +400,7 @@ begin
           begin
           // scan project files
             ToolServices.EnumProjectUnits(EnumUnits, Pointer(Self));
-            if ToDoExpert.FScanType = tstProject then
+            if (ToDoExpert.FScanType = tstProject) and ToDoExpert.FScanProjUses then
               EnqueueProjectUses;
           end;
 
@@ -467,7 +468,6 @@ var
 begin
   nUses := 0;
   
-  // TODO: make optional
   ProjectFilename := ToolServices.GetProjectName;
   if Trim(ProjectFilename) = '' then
     Exit;
@@ -1190,6 +1190,7 @@ begin
         tstDirectory:
           Dlg.radScanDir.Checked := True;
       end;
+      Dlg.chkInclProjUses.Checked := FScanProjUses;
       Dlg.chkInclude.Checked := FRecurseDirScan;
       Dlg.cboDirectory.Text := FDirToScan;
       if Dlg.ShowModal = mrOK then
@@ -1206,6 +1207,7 @@ begin
           FScanType := tstOpenFiles
         else if Dlg.radScanDir.Checked then
           FScanType := tstDirectory;
+        FScanProjUses := Dlg.chkInclProjUses.Checked;
         FRecurseDirScan := Dlg.chkInclude.Checked;
         FDirToScan := Dlg.cboDirectory.Text;
         SaveSettings;
@@ -1300,6 +1302,7 @@ begin
     FAddMessage := ReadBool('ToDo', 'AddMessage', False);
     FHideOnGoto := ReadBool('ToDo', 'HideOnGoto', False);
     FScanType := TToDoScanType(ReadInteger('ToDo', 'ScanType', Ord(tstProject)));
+    FScanProjUses := ReadBool('ToDo', 'ScanProjUses', False);
     fDirToScan := ReadString('ToDo', 'DirToScan', '');
     fRecurseDirScan := ReadBool('ToDo', 'RecurseDirScan', False);
     if Active then
@@ -1321,6 +1324,7 @@ begin
     WriteBool('ToDo', 'AddMessage', FAddMessage);
     WriteBool('ToDo', 'HideOnGoto', FHideOnGoto);
     WriteInteger('ToDo', 'ScanType', Ord(FScanType));
+    WriteBool('ToDo', 'ScanProjUses', FScanProjUses);
     WriteString('ToDo', 'DirToScan', fDirToScan);
     WriteBool('ToDo', 'RecurseDirScan', fRecurseDirScan);
   finally

@@ -38,6 +38,7 @@ type
     radScanProj: TRadioButton;
     radScanOpen: TRadioButton;
     radScanDir: TRadioButton;
+    chkInclProjUses: TCheckBox;
     procedure btnInsertClick(Sender: TObject);
     procedure btnRemoveClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
@@ -50,6 +51,7 @@ type
     procedure btnBrowseClick(Sender: TObject);
   private
     procedure UpdateButtonState;
+    procedure ProjEnable(New: Boolean);
     procedure DirEnable(New: Boolean);
   end;
 
@@ -96,6 +98,11 @@ begin
   Temp := cboDirectory.Text;
   if GetDir(Self, Temp) then
     cboDirectory.Text := Temp;
+end;
+
+procedure TfmToDoOptions.ProjEnable(New: Boolean);
+begin
+  chkInclProjUses.Enabled := New;
 end;
 
 procedure TfmToDoOptions.DirEnable(New: Boolean);
@@ -212,11 +219,13 @@ end;
 
 procedure TfmToDoOptions.FormCreate(Sender: TObject);
 begin
+  ProjEnable(radScanProj.Checked);
   DirEnable(radScanDir.Checked);
 end;
 
 procedure TfmToDoOptions.radScanDirClick(Sender: TObject);
 begin
+  ProjEnable(radScanProj.Checked);
   DirEnable(radScanDir.Checked);
 end;
 

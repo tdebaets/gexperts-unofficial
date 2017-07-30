@@ -4,13 +4,15 @@ object fmToDoOptions: TfmToDoOptions
   ActiveControl = lstTokens
   BorderStyle = bsDialog
   Caption = 'To Do Options'
-  ClientHeight = 246
-  ClientWidth = 470
+  ClientHeight = 264
+  ClientWidth = 481
+  Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  OldCreateOrder = True
   Position = poScreenCenter
   OnCreate = FormCreate
   OnShow = FormShow
@@ -20,7 +22,7 @@ object fmToDoOptions: TfmToDoOptions
     Left = 4
     Top = 4
     Width = 233
-    Height = 238
+    Height = 256
     Caption = 'To Do Tokens'
     TabOrder = 0
     object lblPriority: TLabel
@@ -43,7 +45,7 @@ object fmToDoOptions: TfmToDoOptions
       Left = 8
       Top = 19
       Width = 118
-      Height = 210
+      Height = 228
       ItemHeight = 13
       Sorted = True
       TabOrder = 0
@@ -102,7 +104,7 @@ object fmToDoOptions: TfmToDoOptions
   end
   object btnOK: TButton
     Left = 279
-    Top = 217
+    Top = 235
     Width = 75
     Height = 25
     Caption = 'OK'
@@ -112,7 +114,7 @@ object fmToDoOptions: TfmToDoOptions
   end
   object btnCancel: TButton
     Left = 359
-    Top = 217
+    Top = 235
     Width = 75
     Height = 25
     Cancel = True
@@ -123,7 +125,7 @@ object fmToDoOptions: TfmToDoOptions
   object gbxOptions: TGroupBox
     Left = 241
     Top = 4
-    Width = 225
+    Width = 236
     Height = 81
     Caption = 'Options'
     TabOrder = 1
@@ -155,13 +157,13 @@ object fmToDoOptions: TfmToDoOptions
   object gbxSearchFiles: TGroupBox
     Left = 241
     Top = 88
-    Width = 225
-    Height = 121
+    Width = 236
+    Height = 139
     Caption = 'Search for To Do Tokens'
     TabOrder = 2
     object btnBrowse: TSpeedButton
       Left = 198
-      Top = 72
+      Top = 90
       Width = 21
       Height = 21
       Hint = 'Select Directory'
@@ -185,7 +187,7 @@ object fmToDoOptions: TfmToDoOptions
     end
     object chkInclude: TCheckBox
       Left = 14
-      Top = 95
+      Top = 113
       Width = 177
       Height = 17
       Caption = 'Include su&bdirectories'
@@ -193,7 +195,7 @@ object fmToDoOptions: TfmToDoOptions
     end
     object cboDirectory: TComboBox
       Left = 8
-      Top = 72
+      Top = 90
       Width = 192
       Height = 21
       ItemHeight = 13
@@ -212,7 +214,7 @@ object fmToDoOptions: TfmToDoOptions
     end
     object radScanOpen: TRadioButton
       Left = 8
-      Top = 36
+      Top = 54
       Width = 137
       Height = 17
       Caption = 'Scan &open project files'
@@ -222,13 +224,21 @@ object fmToDoOptions: TfmToDoOptions
     end
     object radScanDir: TRadioButton
       Left = 8
-      Top = 54
+      Top = 72
       Width = 97
       Height = 17
       Caption = 'Scan &directory'
       TabOrder = 2
       TabStop = True
       OnClick = radScanDirClick
+    end
+    object chkInclProjUses: TCheckBox
+      Left = 14
+      Top = 36
+      Width = 215
+      Height = 17
+      Caption = 'Include all units in project'#39's uses clause'
+      TabOrder = 5
     end
   end
 end
