@@ -356,20 +356,12 @@ begin
     if not IsKnownSourceFile(FileName) then
       Exit;
     Form := TfmToDo(Param);
-    try
-      if (ToDoExpert.fScanType = tstOpenFiles) and
-        (not ToolServices.IsFileOpen(FileName)) then
-      begin
-        Exit;
-      end;
-      Form.EnqueueFile(FileName);
-    except
-      on E: Exception do
-      begin
-        ProcessException(E);
-        MessageDlg(Format(SParsingError, [Filename]), mtError, [mbOK], 0);
-      end;
+    if (ToDoExpert.fScanType = tstOpenFiles) and
+      (not ToolServices.IsFileOpen(FileName)) then
+    begin
+      Exit;
     end;
+    Form.EnqueueFile(FileName);
   except
     on E: Exception do
     begin
@@ -384,6 +376,7 @@ end;
 procedure TfmToDo.sbRefreshClick(Sender: TObject);
 var
   i: Integer;
+  Filename: string;
   AListItem: TListItem;
 begin
   Screen.Cursor := crHourglass;
@@ -415,7 +408,18 @@ begin
       lvToDo.Items.BeginUpdate;
       try
         for i := 0 to FQueuedFileList.Count - 1 do
-          LoadFile(string(FQueuedFileList.Objects[i]));
+        begin
+          Filename := string(FQueuedFileList.Objects[i]);
+          try
+            LoadFile(Filename);
+          except
+            on E: Exception do
+            begin
+              ProcessException(E);
+              MessageDlg(Format(SParsingError, [Filename]), mtError, [mbOK], 0);
+            end;
+          end;
+        end;
       finally
         lvToDo.Items.EndUpdate;
       end;
@@ -907,15 +911,7 @@ var
         begin
           if (Search.Attr and faDirectory) = 0 then
           begin
-            try
-              EnqueueFile(Dir + Search.Name);
-            except
-              on E: Exception do
-              begin
-                ProcessException(E);
-                MessageDlg(SParsingError + Dir + Search.Name, mtError, [mbOK], 0);
-              end;
-            end;
+            EnqueueFile(Dir + Search.Name);
             Application.ProcessMessages;
           end;
           Result := FindNext(Search);
