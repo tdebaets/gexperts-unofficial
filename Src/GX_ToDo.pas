@@ -101,8 +101,8 @@ type
     procedure mitCopyToClipboardClick(Sender: TObject);
   private
     First: Boolean;
-    // Sorted list of all filenames to scan (in uppercase)
-    // The objects contain the filenames in original case (as string)
+    // Sorted list of all filenames to scan (in their original case -
+    // TStringList's string comparison is case insensitive anyway)
     FQueuedFileList: TStringList;
     FDataList: TList;
     EditRead: TEditReader;
@@ -111,15 +111,13 @@ type
     FColumnIndex: Integer;
     function GetSelectedItem: TToDoInfo;
     procedure UMResizeCols(var Msg: TMessage); message UM_RESIZECOLS;
-    procedure EnqueueFile(Filename: string);
-    procedure ClearQueuedFiles;
     procedure EnqueueProjectUses;
   protected
     procedure EnumerateFilesByDirectory;
     procedure SaveSettings;
     procedure LoadSettings;
   public
-    procedure LoadFile(FileName: string);
+    procedure LoadFile(const FileName: string);
     procedure Clear;
   end;
 
@@ -361,7 +359,7 @@ begin
     begin
       Exit;
     end;
-    Form.EnqueueFile(FileName);
+    Form.FQueuedFileList.Add(FileName);
   except
     on E: Exception do
     begin
@@ -382,7 +380,7 @@ begin
   Screen.Cursor := crHourglass;
   try
     Clear;
-    ClearQueuedFiles;
+    FQueuedFileList.Clear;
     // Since this edit reader is destroyed almost
     // immediately, do not call FreeFileData
     EditRead := TEditReader.Create('');
@@ -407,9 +405,9 @@ begin
       // Now actually scan the collected files
       lvToDo.Items.BeginUpdate;
       try
-        for i := 0 to FQueuedFileList.Count - 1 do
+        for i := FQueuedFileList.Count - 1 downto 0 do
         begin
-          Filename := string(FQueuedFileList.Objects[i]);
+          Filename := FQueuedFileList[i];
           try
             LoadFile(Filename);
           except
@@ -419,6 +417,7 @@ begin
               MessageDlg(Format(SParsingError, [Filename]), mtError, [mbOK], 0);
             end;
           end;
+          FQueuedFileList.Delete(i);
         end;
       finally
         lvToDo.Items.EndUpdate;
@@ -447,20 +446,6 @@ begin
 end;
 
 {#todo3 another test}
-
-procedure TfmToDo.EnqueueFile(Filename: string);
-begin
-  FQueuedFileList.AddObject(UpperCase(Filename), RefString(Filename));
-end;
-
-procedure TfmTodo.ClearQueuedFiles;
-begin
-  while FQueuedFileList.Count > 0 do
-  begin
-    ReleaseString(FQueuedFileList.Objects[0]);
-    FQueuedFileList.Delete(0);
-  end;
-end;
 
 procedure TfmToDo.EnqueueProjectUses;
 var
@@ -527,7 +512,7 @@ begin
               UnitFilename := GxOtaFindPathToFile(UnitName + '.pas');
               {$IFOPT D+}SendDebug('Unit filename: '+UnitFilename);{$ENDIF}
               if (Trim(UnitFilename) <> '') and FileExists(UnitFilename) then
-                EnqueueFile(UnitFilename);
+                FQueuedFileList.Add(UnitFilename);
             end;
           end;
         end;
@@ -544,7 +529,7 @@ begin
   end;
 end;
 
-procedure TfmToDo.LoadFile(FileName: string);
+procedure TfmToDo.LoadFile(const FileName: string);
 var
   Parser: TmwPasLex;
   EStream: TMemoryStream;
@@ -760,7 +745,6 @@ begin
     Notifier := nil;
   end;
   Clear;
-  ClearQueuedFiles;
   FQueuedFileList.Free;
   FQueuedFileList := nil;
   FDataList.Free;
@@ -911,7 +895,7 @@ var
         begin
           if (Search.Attr and faDirectory) = 0 then
           begin
-            EnqueueFile(Dir + Search.Name);
+            FQueuedFileList.Add(Dir + Search.Name);
             Application.ProcessMessages;
           end;
           Result := FindNext(Search);
