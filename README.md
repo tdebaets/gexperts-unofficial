@@ -31,3 +31,8 @@ Building
 --------
 
 Borland Delphi 4, including all four of its update packs, is required to build this project. Other versions of Delphi may or may not work but are unsupported.
+
+Installing
+----------
+
+There's no dedicated installer for this project, so it's recommended to install the original GExperts 1.01 for Delphi 4 first, which you can download [here](http://www.gexperts.org/download/#GX101) (`GX4-101.exe`). After installation, head to GExpert's installation folder (usually `C:\Program Files (x86)\GExperts`), and replace the `GExpert4.dll` file with the GExperts-unofficial one (which you can find, after successful compilation, in the `Output` folder of the repository).
