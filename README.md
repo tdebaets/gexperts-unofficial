@@ -10,3 +10,24 @@ Compared to the original source, the following custom changes were made. See the
 * New editor experts that allow using `Tab`/`Shift+Tab` for indenting/unindenting the selected block of code (in addition to the standard `Ctrl+Shift+I`/`Ctrl+Shift+U` shortcuts).
 * For units not part of the current project, the `Project Dependencies` expert resolves their filename on the library path.
 * Added an option to the `To Do List` expert to, when scanning units for TODOs, include **all** units in the project file's uses clause (rather than just the units that are explicitly part of the project).
+
+Obtaining the source code
+-------------------------
+
+First make sure that you have a recent version of the [Git client](https://git-scm.com/) (`git`) installed. Then open a Windows command prompt window (note that Git Bash isn't supported). In the command prompt, run these commands:
+```
+> git clone https://github.com/tdebaets/gexperts-unofficial.git gexperts-unofficial
+> cd gexperts-unofficial
+```
+
+Finally, run the `postclone.bat` script. This will take care of further setting up the repository, creating output directories etc.:
+```
+> postclone.bat
+```
+
+To keep your repository up-to-date, run the `git pull` command.
+
+Building
+--------
+
+Borland Delphi 4, including all four of its update packs, is required to build this project. Other versions of Delphi may or may not work but are unsupported.
