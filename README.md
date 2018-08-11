@@ -32,6 +32,8 @@ Building
 
 Borland Delphi 4, including all four of its update packs, is required to build this project. Other versions of Delphi may or may not work but are unsupported.
 
+There's no command-line compile script (yet?), so currently the only way to compile the project is to open it in the Delphi IDE and compile it there.
+
 Installing
 ----------
 
