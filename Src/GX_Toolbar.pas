@@ -11,7 +11,7 @@ unit GX_ToolBar;
 interface
 
 uses
-  Classes, SysUtils, Windows, Controls,
+  Classes, SysUtils, Windows, Controls, ActiveX, ShlObj,
   ExtCtrls, Menus, ComCtrls,
   GX_EditorEnhancements;
 
@@ -39,12 +39,16 @@ type
     FEditorLocalSeparatorMenu: TMenuItem;
     FEditorLocalOptionMenu: TMenuItem;
     FEditMenus: array[0..3] of TMenuItem;
+    FShowInExplorerSeparatorMenu: TMenuItem;
+    FShowInExplorerMenu: TMenuItem;
 
     procedure CreateToolBarConfigurationMenu;
     // OnClick handlers for two toolbar configuration
     // menu items we add
     procedure ConfigureToolBarButtonsClick(Sender: TObject);
     procedure GxEditorOptionsClick(Sender: TObject);
+
+    procedure GxShowInExplorerClick(Sender: TObject);
 
     procedure CreateEditorLocalMenuAdditions;
     procedure FreeEditorLocalMenuAdditions;
@@ -146,6 +150,8 @@ begin
   ShowHint := True;
   CreateToolBarButtons;
   CreateEditorLocalMenuAdditions;
+
+  CoInitialize(nil); // for SHOpenFolderAndSelectItems
 end;
 
 destructor TGXToolBar.Destroy;
@@ -188,6 +194,12 @@ begin
     else
     if Component = FEditorLocalOptionMenu then
       FEditorLocalOptionMenu := nil
+    else
+    if Component = FShowInExplorerSeparatorMenu then
+      FShowInExplorerSeparatorMenu := nil
+    else
+    if Component = FShowInExplorerMenu then
+      FShowInExplorerMenu := nil
     else
     begin
       for i := Low(FEditMenus) to High(FEditMenus) do
@@ -334,6 +346,7 @@ end;
 procedure TGXToolBar.CreateEditorLocalMenuAdditions;
 resourcestring
   SGxLocalEditorCaption = '&GExperts Editor Options...';
+  SGxShowInExplorerCaption = 'Show in &Explorer';
 var
   Menu: TMenuItem;
   Popup: TPopupMenu;
@@ -359,6 +372,24 @@ begin
       Menu.OnClick := GxEditorOptionsClick;
 
       FEditorLocalOptionMenu := Menu;
+
+      Menu := TMenuItem.Create(Self);
+      Menu.FreeNotification(Self);
+      Popup.Items.Add(Menu);
+
+      Menu.Caption := '-';
+      Menu.Name := 'GX_Separator2';
+      FShowInExplorerSeparatorMenu := Menu;
+
+      Menu := TMenuItem.Create(Self);
+      Menu.FreeNotification(Self);
+      Popup.Items.Add(Menu);
+
+      Menu.Caption := SGxShowInExplorerCaption;
+      Menu.Name := 'GX_ShowInExplorer';
+      Menu.OnClick := GxShowInExplorerClick;
+
+      FShowInExplorerMenu := Menu;
     end;
   except
     on E: Exception do
@@ -387,6 +418,20 @@ begin
       begin
         {$IFOPT D+}SendDebug('ToolBar: for some reason FEditorLocalSeparatorMenu = nil??');{$ENDIF D+}
       end;
+
+      if FShowInExplorerSeparatorMenu <> nil then
+        Popup.Items.Delete(FShowInExplorerSeparatorMenu.MenuIndex)
+      else
+      begin
+        {$IFOPT D+}SendDebug('ToolBar: for some reason FShowInExplorerSeparatorMenu = nil??');{$ENDIF D+}
+      end;
+
+      if FShowInExplorerMenu <> nil then
+        Popup.Items.Delete(FShowInExplorerMenu.MenuIndex)
+      else
+      begin
+        {$IFOPT D+}SendDebug('ToolBar: for some reason FShowInExplorerMenu = nil??');{$ENDIF D+}
+      end;
     end;
 
     FEditorLocalSeparatorMenu.Free;
@@ -394,6 +439,12 @@ begin
 
     FEditorLocalOptionMenu.Free;
     FEditorLocalOptionMenu := nil;
+
+    FShowInExplorerSeparatorMenu.Free;
+    FShowInExplorerSeparatorMenu := nil;
+
+    FShowInExplorerMenu.Free;
+    FShowInExplorerMenu := nil;
   except
     on E: Exception do
       ShowExceptionErrorMessage(E);
@@ -424,6 +475,53 @@ procedure TGXToolBar.ConfigureToolBarButtonsClick(Sender: TObject);
 begin
   if FEditMgr <> nil then
     FEditMgr.ShowConfigurationDialog('tshToolBar');
+end;
+
+type
+  PPItemIdList = ^PItemIdList;
+
+function SHOpenFolderAndSelectItems(pidlFolder: PItemIdList; cidl: uint;
+    apidl: PPItemIdList; dwFlags: DWORD): HResult; stdcall;
+    external 'shell32.dll';
+procedure ILFree(pidl: PItemIdList); stdcall; external 'shell32.dll';
+
+procedure TGXToolBar.GxShowInExplorerClick(Sender: TObject);
+var
+  FileName: WideString;
+  Desktop: IShellFolder;
+  pchEaten, dwAttributes: ULONG;
+  PIDL: PItemIDList;
+  hr: HResult;
+begin
+  Assert(ToolServices <> nil);
+  FileName := ToolServices.GetCurrentFile;
+  {$IFOPT D+}SendDebug('ToolBar: Preparing to show ''' + Filename + ''' in Explorer'); {$ENDIF}
+  PIDL := nil;
+  Desktop := nil;
+  hr := SHGetDesktopFolder(Desktop);
+  if not Succeeded(hr) then begin
+    {$IFOPT D+}SendDebug('ToolBar: SHGetDesktopFolder failed with ' + IntToHex(hr, 8)); {$ENDIF}
+    Exit;
+  end;
+  pchEaten := 0;
+  dwAttributes := 0;
+  if not Assigned(Desktop) then begin
+    {$IFOPT D+}SendDebug('ToolBar: Failed to retrieve desktop IShellFolder'); {$ENDIF}
+    Exit;
+  end;
+  hr := Desktop.ParseDisplayName(Handle, nil, PWideChar(FileName), pchEaten,
+      PIDL, dwAttributes);
+  if not Succeeded(hr) then begin
+    {$IFOPT D+}SendDebug('ToolBar: IShellFolder::ParseDisplayName failed with ' + IntToHex(hr, 8)); {$ENDIF}
+    Exit;
+  end;
+  try
+    hr := SHOpenFolderAndSelectItems(PIDL, 0, nil, 0);
+    {$IFOPT D+}SendDebug('ToolBar: SHOpenFolderAndSelectItems returned ' + IntToHex(hr, 8)); {$ENDIF}
+  finally
+    ILFree(PIDL);
+    PIDL := nil;
+  end;
 end;
 
 procedure TGXToolBar.SetEditorControls;
