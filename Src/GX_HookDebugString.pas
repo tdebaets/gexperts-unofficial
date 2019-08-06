@@ -111,7 +111,7 @@ uses
 {.$IFOPT D+}
   GX_DbugIntf,
 {.$ENDIF D+}
-  SysUtils, Windows, Dialogs, GX_GExperts, GX_ConfigurationInfo;
+  SysUtils, Windows, Dialogs, GX_GExperts, GX_ConfigurationInfo, GX_GenFunc;
 
 const
   IMAGE_DIRECTORY_ENTRY_EXPORT = 0; { Export Directory }
@@ -208,6 +208,18 @@ var
   pWaitDbgEventThunk: PImageThunkData = nil;
   hDebugger: Integer;
   ProcHandle: Integer = 0; // this does need to be global
+  HookLoadDllEvent: Boolean = False;
+
+procedure LoadDebugSettings;
+begin
+  Assert(ConfigInfo <> nil);
+  with TRegIniFile.Create(ConfigInfo.RegKey + '\GExperts') do
+  try
+    HookLoadDllEvent := ReadBool('HookDebugString', 'HookLoadDllEvent', False);
+  finally
+    Free;
+  end;
+end;
 
 procedure OutStr(const Msg: string);
 begin
@@ -224,6 +236,8 @@ function WaitDbgEvent(var lpde: TDebugEvent; dwTimeout: DWORD): BOOL; stdcall;
 var
   Buf: Pointer;
   BytesRead: Cardinal;
+  Path: WideString;
+  Filename: String;
 begin
   Assert(@PreviousWaitForDebugEventCall <> nil);
 
@@ -233,10 +247,37 @@ begin
     try
       case lpde.dwDebugEventCode of
         CREATE_PROCESS_DEBUG_EVENT:
-          ProcHandle := lpde.CreateProcessInfo.hProcess;
+          begin
+            LoadDebugSettings;
+            ProcHandle := lpde.CreateProcessInfo.hProcess;
+          end;
 
         EXIT_PROCESS_DEBUG_EVENT:
           ProcHandle := 0;
+
+        LOAD_DLL_DEBUG_EVENT:
+          // Workaround for access violations in bordbk40.dll when initiating
+          // debugging in Delphi 4 (most likely caused by Symantec Endpoint
+          // Protection software). These access violations appear to be
+          // intermittent and don't always occur immediately, but as soon as they
+          // start occurring they persist until the next reboot. They always
+          // occur on LOAD_DLL_DEBUG_EVENT of msctf.dll, so as a workaround, we
+          // process such events ourselves and prevent these events from being
+          // seen by bordbk40.
+          if HookLoadDllEvent and (lpde.LoadDll.hFile <> 0) then
+          begin
+            {$IFOPT D+}SendDebug('LOAD_DLL_DEBUG_EVENT: ' + IntToStr(lpde.LoadDll.hFile)); {$ENDIF}
+            if GetPathFromHandle(lpde.LoadDll.hFile, Path) then begin
+              Filename := ExtractFileName(Path);
+              if CompareText(Filename, 'msctf.dll') = 0 then begin
+                {$IFOPT D+}SendDebug('Closing handle to module ' + Filename); {$ENDIF}
+                // Keep the event, but zero out hFile - this appears to suffice
+                // to prevent the access violations.
+                CloseHandle(lpde.LoadDll.hFile);
+                lpde.LoadDll.hFile := 0;
+              end;
+            end;
+          end;
 
         OUTPUT_DEBUG_STRING_EVENT:
           begin

@@ -132,6 +132,7 @@ function ExtractUpperFileExt(const FileName: string): string;
 function BooleanText(B: Boolean): string;
 {$ENDIF D+}
 function DLLName: string;
+function GetPathFromHandle(hObject: THandle; var Path: WideString): Boolean;
 function GetCurrentEditWindowNumber(AFilename: string; var WindowCaption: string): Integer;
 function GetCurrentEditView(EditorIntf: TIEditorInterface): Integer;
 
@@ -168,7 +169,7 @@ uses
   {$IFOPT D+}
   GX_DbugIntf,
   {$ENDIF D+}
-  DdeMan, BrowseDr, ShellApi, // Errors here mean \GXSource\Comps is not on your library path
+  DdeMan, BrowseDr, ShellApi, NativeApi, // Errors here mean \GXSource\Comps is not on your library path
   {$IFNDEF GX_NOBDE}
   DB, DBTables, BDE,
   {$ENDIF GX_NOBDE}
@@ -1241,6 +1242,49 @@ var
 begin
   GetModuleFileName(HINSTANCE, Buf, SizeOf(Buf) - 1);
   Result := StrPas(Buf);
+end;
+
+var
+  xNtQueryObject: function(ObjectHandle: THandle;
+      ObjectInformationClass: OBJECT_INFORMATION_CLASS;
+      ObjectInformation: Pointer; ObjectInformationLength: ULONG;
+      ReturnLength: PULONG): NTSTATUS; stdcall = nil;
+
+function GetPathFromHandle(hObject: THandle; var Path: WideString): Boolean;
+var
+  Status: NTSTATUS;
+  InitialBuffer: OBJECT_NAME_INFORMATION;
+  NameInfo: POBJECT_NAME_INFORMATION;
+  Size: Cardinal;
+begin
+  Result := False;
+  Path := '';
+  if not Assigned(@xNtQueryObject) then
+    @xNtQueryObject := GetProcAddress(GetModuleHandle(ntdll), 'NtQueryObject');
+  if not Assigned(@xNtQueryObject) then
+    Exit;
+  FillChar(InitialBuffer, SizeOf(InitialBuffer), 0);
+  NameInfo := @InitialBuffer;
+  Size := SizeOf(InitialBuffer);
+  // Query the name information a first time to get the size of the name.
+  Status := xNtQueryObject(hObject, ObjectNameInformation, NameInfo, Size, @Size);
+  if Size > 0 then begin
+    GetMem(NameInfo, Size);
+    try
+      FillChar(NameInfo^, Size, 0);
+      // Query the name information a second time to get the name of the
+      // object referenced by the handle.
+      Status := xNtQueryObject(hObject, ObjectNameInformation, NameInfo,
+          Size, @Size);
+      if NT_SUCCESS(Status) then begin
+        Path := NameInfo.ObjectName.Buffer;
+        SetLength(Path, NameInfo.ObjectName.Length div SizeOf(WideChar));
+      end;
+    finally
+      FreeMem(NameInfo);
+    end;
+  end;
+  Result := NT_SUCCESS(Status);
 end;
 
 function GetCurrentEditWindowNumber(AFilename: string; var WindowCaption:string): Integer;
