@@ -11,7 +11,7 @@ Compared to the original source, the following custom changes were made. See the
 * For units not part of the current project, the `Project Dependencies` expert resolves their filename on the library path.
 * Added an option to the `To Do List` expert to, when scanning units for TODOs, include **all** units in the project file's uses clause (rather than just the units that are explicitly part of the project).
 * New `Show in Explorer`command when right-clicking in Delphi's Code Editor, to select the current file in Windows File Explorer.
-* Fix for access violations in `bordbk40.dll` on Windows 10 while the project being debugged is launching (disabled by default, requires a registry edit to enable).
+* Fix for access violations in `bordbk40.dll` on Windows 10 during debugging (disabled by default, requires a registry edit to enable). This fix is implemented as an additional feature of the `Send OutputDebugString To GExperts` expert.
 
 Obtaining the source code
 -------------------------
