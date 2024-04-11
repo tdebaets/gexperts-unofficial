@@ -306,6 +306,36 @@ procedure CheckKey(Sender: TObject; var Key: Word; Shift: TShiftState;
     end;
   end;
 
+procedure HandleMouseWheel;
+  var
+    ScrollType: Cardinal;
+  begin
+    if not Assigned(Manager.EditControl) then
+      Exit;
+    // Note: GetScrollPos/SetScrollPos only changes the position of the scrollbar
+    // and not of the edit control itself.
+    if OriginalMessage.Msg = WM_MOUSEWHEEL then
+    begin
+      if TWMMouseWheel(OriginalMessage).WheelDelta > 0 then
+        ScrollType := SB_LINEUP
+      else
+        ScrollType := SB_LINEDOWN;
+      SendMessage(Manager.EditControl.Handle, WM_VSCROLL, ScrollType, 0);
+      Msg.Msg := WM_NULL; // prevent the message from being handled again
+    end
+    else if OriginalMessage.Msg = WM_MOUSEHWHEEL then
+    begin
+      // TWMMouseWheel here isn't a typo, there's no such thing as a
+      // TWMMouseHWheel and we can just use the 'vertical' struct here too.
+      if TWMMouseWheel(OriginalMessage).WheelDelta > 0 then
+        ScrollType := SB_LINERIGHT
+      else
+        ScrollType := SB_LINELEFT;
+      SendMessage(Manager.EditControl.Handle, WM_HSCROLL, ScrollType, 0);
+      Msg.Msg := WM_NULL; // prevent the message from being handled again
+    end;
+  end;
+
 begin
   case OriginalMessage.Msg of
     CN_KEYDOWN, CN_KEYUP:
@@ -316,6 +346,8 @@ begin
         if TWMKey(Msg).CharCode = 0 then
           Msg.Result := 1;
       end;
+    WM_MOUSEWHEEL, WM_MOUSEHWHEEL:
+      HandleMouseWheel;
   end;
 end;
 {$ENDIF GX_EII}

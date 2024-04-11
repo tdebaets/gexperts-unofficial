@@ -46,6 +46,9 @@ const // Not defined in Delphi 3
   TVS_NOTOOLTIPS = $80;
 {$ENDIF VER100}
 
+const // Not defined in Delphi 4
+  WM_MOUSEHWHEEL = $20E;
+
 type
   TUnitInfo = class(TObject)
   public
