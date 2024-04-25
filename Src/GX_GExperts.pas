@@ -72,6 +72,11 @@ type
 
   {$IFDEF GX_EII}
   TGXKeyboardNotifier = class(TEIKeyboardNotifier)
+  private
+    FWheelScrollChars: Cardinal;
+    FWheelScrollLines: Cardinal;
+  public
+    constructor Create;
     procedure BeforeEditorMessageProcess(Manager: TEIManager; OriginalMessage: TMessage;
       var Msg: TMessage); override;
   end;
@@ -278,6 +283,15 @@ begin
 end;
 
 {$IFDEF GX_EII}
+constructor TGXKeyboardNotifier.Create;
+begin
+  inherited;
+  FWheelScrollChars := DEFAULT_WHEELSCROLLCHARS;
+  FWheelScrollLines := DEFAULT_WHEELSCROLLLINES;
+  SystemParametersInfo(SPI_GETWHEELSCROLLCHARS, 0, @FWheelScrollChars, 0);
+  SystemParametersInfo(SPI_GETWHEELSCROLLLINES, 0, @FWheelScrollLines, 0);
+end;
+
 procedure TGXKeyboardNotifier.BeforeEditorMessageProcess(Manager: TEIManager; OriginalMessage: TMessage; var Msg: TMessage);
 
 procedure CheckKey(Sender: TObject; var Key: Word; Shift: TShiftState;
@@ -309,6 +323,7 @@ procedure CheckKey(Sender: TObject; var Key: Word; Shift: TShiftState;
 procedure HandleMouseWheel;
   var
     ScrollType: Cardinal;
+    i: Integer;
   begin
     if not Assigned(Manager.EditControl) then
       Exit;
@@ -320,7 +335,13 @@ procedure HandleMouseWheel;
         ScrollType := SB_LINEUP
       else
         ScrollType := SB_LINEDOWN;
-      SendMessage(Manager.EditControl.Handle, WM_VSCROLL, ScrollType, 0);
+      // Can't use Mouse.WheelScrollLines here because that's always 0 on newer
+      // models of the Lenovo Thinkpad, because
+      // GetSystemMetrics(SM_MOUSEWHEELPRESENT) returns FALSE there (see
+      // TMouse.GetNativeData). We need to do the same for FWheelScrollChars
+      // anyway (since there's no native Delphi support for that metric).
+      for i := 1 to FWheelScrollLines do
+        SendMessage(Manager.EditControl.Handle, WM_VSCROLL, ScrollType, 0);
       Msg.Msg := WM_NULL; // prevent the message from being handled again
     end
     else if OriginalMessage.Msg = WM_MOUSEHWHEEL then
@@ -331,7 +352,8 @@ procedure HandleMouseWheel;
         ScrollType := SB_LINERIGHT
       else
         ScrollType := SB_LINELEFT;
-      SendMessage(Manager.EditControl.Handle, WM_HSCROLL, ScrollType, 0);
+      for i := 1 to FWheelScrollChars do
+        SendMessage(Manager.EditControl.Handle, WM_HSCROLL, ScrollType, 0);
       Msg.Msg := WM_NULL; // prevent the message from being handled again
     end;
   end;

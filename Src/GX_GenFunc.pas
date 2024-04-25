@@ -49,6 +49,13 @@ const // Not defined in Delphi 3
 const // Not defined in Delphi 4
   WM_MOUSEHWHEEL = $20E;
 
+const // Not defined in Delphi 4
+  SPI_GETWHEELSCROLLCHARS = $6C;
+  
+const
+  DEFAULT_WHEELSCROLLCHARS = 3;
+  DEFAULT_WHEELSCROLLLINES = 3;
+
 type
   TUnitInfo = class(TObject)
   public
