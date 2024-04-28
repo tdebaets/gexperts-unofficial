@@ -4,7 +4,7 @@ setlocal
 
 echo Setting up repository...
 
-git config pull.rebase preserve
+git config pull.rebase merges
 if errorlevel 1 goto failed
 
 echo Creating directories...
