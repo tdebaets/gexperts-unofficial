@@ -9,7 +9,7 @@ Compared to the original source, the following custom changes were made. See the
 * Made the `Send OutputDebugString To GExperts` expert work in Delphi 4.
 * New editor experts that allow using `Tab`/`Shift+Tab` for indenting/unindenting the selected block of code (in addition to the standard `Ctrl+Shift+I`/`Ctrl+Shift+U` shortcuts).
 * For units not part of the current project, the `Project Dependencies` expert resolves their filename on the library path.
-* Added an option to the `To Do List` expert to, when scanning units for TODOs, include **all** units in the project file's uses clause (rather than just the units that are explicitly part of the project).
+* Added an option to the `To Do List` expert to, when scanning units for TODOs, include **all** units of the project file's `uses` clause (rather than just the units that are explicitly part of the project).
 * New `Show in Explorer`command when right-clicking in Delphi's Code Editor, to select the current file in Windows File Explorer.
 * Fix for access violations in `bordbk40.dll` on Windows 10 during debugging (disabled by default, requires a registry edit to enable). This fix is implemented as an additional feature of the `Send OutputDebugString To GExperts` expert.
 
